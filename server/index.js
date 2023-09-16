@@ -60,6 +60,19 @@ app.put("/update",(req,res)=>{
     );
 });
 
+app.delete("/elimiarEmpleado/:idPrueba",(req,res)=>{
+    const idPrueba = req.params.idPrueba
+    db.query('DELETE FROM empleados WHERE idPrueba = ?',[idPrueba],
+        (err,result) =>{
+            if(err){
+                console.log("El Error",err);
+            }else{
+                res.send(result);
+            }
+        }
+    );
+});
+
 app.listen(3001,()=>{
     console.log("Corriendo en el puerto 3001")
 });

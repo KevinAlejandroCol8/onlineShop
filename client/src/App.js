@@ -5,13 +5,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
 
+  /*Cmapos de la base de datos*/
   const [nombre, setNombre] = useState("");
-  const [edad, setedad] = useState(0);
+  const [edad, setedad] = useState("");
   const [pais, setpais] = useState("");
   const [cargo, setCargo] = useState("");
   const [anios, setAnios] = useState("");
+  const [idPrueba, setidPrueba] = useState("");
+  /*Fin campos*/
+  /*Lista elementos a mostrar*/
   const [empleadosList, setEmpleados] = useState([]); //Lista
-  const [editar,setEditar] = useState(false)
+  /*Fin lista a mostrar*/
+  const [editar, setEditar] = useState(false)
 
   /*const mostrarDatos = () =>{
     alert(nombre);
@@ -26,8 +31,38 @@ function App() {
       anios: anios
     }).then(() => {
       getEmpleados();
+      limpiar();
       alert("Empleado Registrado");
     })
+  }
+
+  const update = () => {
+    axios.put("http://localhost:3001/update", {
+      nombre: nombre,
+      edad: edad,
+      pais: pais,
+      cargo: cargo,
+      anios: anios,
+      idPrueba: idPrueba
+    }).then(() => {
+      getEmpleados();
+      limpiar();
+    })
+  }
+
+  const eliminar = (idPrueba) => {
+    axios.delete(`http://localhost:3001/elimiarEmpleado/${idPrueba}`).then(() => {
+      getEmpleados();
+    })
+  }
+
+  const limpiar = () =>{
+    setNombre("");
+    setedad("");
+    setpais("");
+    setCargo("");
+    setAnios("");
+    setidPrueba("");
   }
 
   const getEmpleados = () => {
@@ -36,8 +71,14 @@ function App() {
     })
   }
 
-  const editarList = (val) =>{
+  const editarList = (val) => {
     setEditar(true);
+    setNombre(val.nombre);
+    setedad(val.edad);
+    setpais(val.pais);
+    setCargo(val.cargo);
+    setAnios(val.anios);
+    setidPrueba(val.idPrueba);
   }
   //getEmpleados();
 
@@ -55,7 +96,7 @@ function App() {
               onChange={(event) => {
                 setNombre(event.target.value);
               }}
-              type="text" className="form-control" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" />
+              type="text" value={nombre} className="form-control" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" />
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Edad</span>
@@ -63,7 +104,7 @@ function App() {
               onChange={(event) => {
                 setedad(event.target.value);
               }}
-              type="text" className="form-control" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1" />
+              type="text" value={edad} className="form-control" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1" />
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">País</span>
@@ -71,7 +112,7 @@ function App() {
               onChange={(event) => {
                 setpais(event.target.value);
               }}
-              type="text" className="form-control" placeholder="País" aria-label="País" aria-describedby="basic-addon1" />
+              type="text" value={pais} className="form-control" placeholder="País" aria-label="País" aria-describedby="basic-addon1" />
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Cargo</span>
@@ -79,7 +120,7 @@ function App() {
               onChange={(event) => {
                 setCargo(event.target.value);
               }}
-              type="text" className="form-control" placeholder="Cargo" aria-label="Cargo" aria-describedby="basic-addon1" />
+              type="text" value={cargo} className="form-control" placeholder="Cargo" aria-label="Cargo" aria-describedby="basic-addon1" />
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Años</span>
@@ -87,11 +128,19 @@ function App() {
               onChange={(event) => {
                 setAnios(event.target.value);
               }}
-              type="text" className="form-control" placeholder="Años" aria-label="Años" aria-describedby="basic-addon1" />
+              type="text" value={anios} className="form-control" placeholder="Años" aria-label="Años" aria-describedby="basic-addon1" />
           </div>
         </div>
         <div className="card-footer text-muted">
-          <button className='btn btn-success' onClick={add}>Guardar</button>
+          {
+            editar===true?
+            <div>
+              <button className='btn btn-warning m-2' onClick={update}>Actualizar</button> 
+              <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button> 
+            </div>
+            :<button className='btn btn-success' onClick={add}>Guardar</button>
+          }
+          
         </div>
       </div>
       <table className="table table-striped">
@@ -112,14 +161,22 @@ function App() {
               return <tr key={val.idPrueba}>
                 <th scope="row">{val.idPrueba}</th>
                 <td>{val.nombre}</td>
-                <td>Ot{val.edad}to</td>
+                <td>{val.edad}</td>
                 <td>{val.pais}</td>
                 <td>{val.cargo}</td>
                 <td>{val.anios}</td>
                 <td>
                   <div className="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" className="btn btn-warning">Editar</button>
-                    <button type="button" className="btn btn-danger">Eliminar</button>
+                    <button 
+                      onClick={()=>{
+                        editarList(val);
+                      }}
+                      type="button" className="btn btn-warning">Editar</button>
+                    <button 
+                      onClick={()=>{
+                        eliminar(val.idPrueba);
+                      }}
+                    type="button" className="btn btn-danger">Eliminar</button>
                   </div>
                 </td>
               </tr>
@@ -127,7 +184,7 @@ function App() {
           }
         </tbody>
       </table>
-      <button className='btn btn-success' onClick={getEmpleados}>Lista</button>
+      <button className='btn btn-success' onClick={getEmpleados}>Lista</button>      
     </div>
   );
 }
