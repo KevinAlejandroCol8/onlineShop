@@ -22,7 +22,7 @@ const Dashboard = () => {
   }*/
 
   const add = () => {
-    axios.post("http://localhost:3001/create", {
+    axios.post("http://localhost:3001/usuarios/create", {
       nombre: nombre,
       edad: edad,
       pais: pais,
@@ -36,7 +36,7 @@ const Dashboard = () => {
   }
 
   const update = () => {
-    axios.put("http://localhost:3001/update", {
+    axios.put("http://localhost:3001/usuarios/update", {
       nombre: nombre,
       edad: edad,
       pais: pais,
@@ -50,7 +50,7 @@ const Dashboard = () => {
   }
 
   const eliminar = (idPrueba) => {
-    axios.delete(`http://localhost:3001/elimiarEmpleado/${idPrueba}`).then(() => {
+    axios.delete(`http://localhost:3001/usuarios/elimiarEmpleado/${idPrueba}`).then(() => {
       getEmpleados();
     })
   }
@@ -65,7 +65,7 @@ const Dashboard = () => {
   }
 
   const getEmpleados = () => {
-    axios.get("http://localhost:3001/empleados").then((response) => {
+    axios.get("http://localhost:3001/usuarios/empleados").then((response) => {
       setEmpleados(response.data);
     })
   }
