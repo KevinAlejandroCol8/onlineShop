@@ -3,6 +3,9 @@ const app = express();
 const cors  = require("cors");
 
 const usuarios = require("./Router/Usuarios/usuarios");
+const tiposProductos = require("./Router/tiposProductos/tiposProductos");
+const descuentos = require("./Router/Descuentos/descuentos");
+const productos = require("./Router/Productos/productos");
 
 // Configuración inicial
 app.use(express.json());
@@ -10,6 +13,9 @@ app.use(cors());
 
 // Middlewares
 app.use('/usuarios', usuarios);
+app.use('/tiposProductos', tiposProductos);
+app.use('/descuentos', descuentos);
+app.use('/productos', productos);
 
 
 app.listen(3001,()=>{

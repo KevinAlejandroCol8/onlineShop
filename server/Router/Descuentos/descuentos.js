@@ -4,8 +4,9 @@ const db  = require('../../configMySQL')
 
 
 router.post("/create",(req,res)=>{
-    const NombreTipoProducto = req.body.NombreTipoProducto;
-    db.query('INSERT INTO TiposProducto (NombreTipoProducto) values (?)',[NombreTipoProducto],
+    const NombreDescuento = req.body.NombreDescuento;
+    const PorcentajeDescuento = req.body.PorcentajeDescuento;
+    db.query('INSERT INTO Descuentos (NombreDescuento,PorcentajeDescuento) values (?,?)',[NombreDescuento,PorcentajeDescuento],
         (err,result) =>{
             if(err){
                 console.log("El Error",err);
@@ -17,7 +18,7 @@ router.post("/create",(req,res)=>{
 });
 
 router.get("/lista",(req,res)=>{
-    db.query('SELECT * FROM TiposProducto;',
+    db.query('SELECT * FROM Descuentos;',
         (err,result) =>{
             if(err){
                 console.log("El Error",err);
@@ -29,9 +30,10 @@ router.get("/lista",(req,res)=>{
 });
 
 router.put("/update",(req,res)=>{
-    const TipoProductoID = req.body.TipoProductoID
-    const NombreTipoProducto = req.body.NombreTipoProducto;
-    db.query('UPDATE TiposProducto SET NombreTipoProducto= ? WHERE TipoProductoID = ?',[NombreTipoProducto,TipoProductoID],
+    const DescuentoID = req.body.DescuentoID
+    const NombreDescuento = req.body.NombreDescuento;
+    const PorcentajeDescuento = req.body.PorcentajeDescuento;
+    db.query('UPDATE Descuentos SET NombreDescuento= ?,PorcentajeDescuento = ? WHERE DescuentoID = ?',[NombreDescuento,PorcentajeDescuento,DescuentoID],
         (err,result) =>{
             if(err){
                 console.log("El Error",err);
@@ -42,9 +44,9 @@ router.put("/update",(req,res)=>{
     );
 });
 
-router.delete("/eliminar/:TipoProductoID",(req,res)=>{
-    const TipoProductoID = req.params.TipoProductoID
-    db.query('DELETE FROM TiposProducto WHERE TipoProductoID = ?',[TipoProductoID],
+router.delete("/eliminar/:DescuentoID",(req,res)=>{
+    const DescuentoID = req.params.DescuentoID
+    db.query('DELETE FROM Descuentos WHERE DescuentoID = ?',[DescuentoID],
         (err,result) =>{
             if(err){
                 console.log("El Error",err);
