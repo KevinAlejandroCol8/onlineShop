@@ -1,0 +1,19 @@
+/* Agrega estilos para el cuadro blanco (carrito) */
+.carrito {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Agrega estilos para mostrar el cuadro blanco */
+.mostrar {
+    display: block;
+}
+
+/* Estilos para ocultar el cuadro blanco */
+.col-md-4:not(.mostrar) {
+    display: none;
+}
+
+/*Copia afedito*/
