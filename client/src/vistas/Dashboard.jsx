@@ -46,7 +46,6 @@ const Dashboard = () => {
                                         <h1 className="card-text">Q. {val.PrecioVenta}</h1>
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group">
-                                                <h1 className="btn btn-primary">Detalles</h1>
                                             </div>
                                             <h1 className="btn btn-success" onClick={() => agregarAlCarrito(val)}>Agregar</h1>
                                         </div>
