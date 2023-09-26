@@ -1,0 +1,14 @@
+.carrito-container {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Esto controla la posición inicial fuera de la pantalla */
+    width: 300px; /* Ancho del carrito */
+    height: 100%;
+    background-color: #f0f0f0;
+    transition: right 0.3s ease-in-out; /* Animación de transición suave */
+}
+
+/* Estilo para mostrar el carrito */
+.carrito-container.mostrar {
+    right: 0; /* Muestra el carrito al desplazarlo desde la derecha */
+}

@@ -2,6 +2,7 @@ import { useEffect,useState } from "react"
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/catalogoProductos.css'
+import '../css/carrito.css'
 
 const Dashboard = () => {
     const [productosList, setProductosList] = useState([]); 
@@ -57,7 +58,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <button onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
-            <div className={`col-md-4 ${mostrarCarrito ? 'mostrar' : ''}`}>
+            <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>
                 <div className="carrito">
                     <h2>Carrito de Compras</h2>
                     <ul>
