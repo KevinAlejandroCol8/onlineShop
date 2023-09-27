@@ -11,31 +11,22 @@ import twitter from '../img/twitter-logo-48.png'
 import linkedin from '../img/linkedin-square-logo-48.png'
 import youtube from '../img/youtube-logo-48.png'
 import instagram from '../img/instagram-logo-48.png'
+import whatsapp from '../img/whatsapp-logo-48.png'
 
 const footer = () => {
+    const openLinkInNewTab = (url) => {
+        window.open(url, '_blank'); };
     return (
         <>
             <div class="container">
                 <section class="follow">
                     <p>Siguenos en nuestras redes</p>
-                    <a href="https://facebook.com">
-                        <img src={facebook}alt="Facebook" />
-                    </a>
-                    <a href="https://twitter.com">
-                        <img src={twitter} alt="Twitter" />
-                    </a>
-                    <a href="https://linkedin.com">
-                        <img src={linkedin} alt="Linkedin" />
-                    </a>
-                    <a href="https://Youtube.com">
-                        <img src={youtube} alt="Youtube" />
-                    </a>
-                    <a href="https://Instagram.com">
-                        <img src={instagram} alt="Instagram" />
-                    </a>
-                    <a href="https://linkedin.com">
-                        <img src={linkedin} alt="Linkedin" />
-                    </a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" onClick={() => openLinkInNewTab('https://facebook.com')}><img src={facebook}alt="Facebook" title='Facebook'/> </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" onClick={() => openLinkInNewTab('https://twitter.com')}><img src={twitter} alt="Twitter" title='Twitter'/></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" onClick={() => openLinkInNewTab('https://linkedin.com')}><img src={linkedin} alt="Linkedin" title='Linkedin'/></a>
+                    <a href="https://Youtube.com" target="_blank" rel="noopener noreferrer" onClick={() => openLinkInNewTab('https://Youtube.com')}><img src={youtube} alt="Youtube" title='Youtube'/></a>
+                    <a href="https://Instagram.com" target="_blank" rel="noopener noreferrer" onClick={() => openLinkInNewTab('https://Instagram.com')}><img src={instagram} alt="Instagram"title='Instagram' /></a>
+                    <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer" onClick={() => openLinkInNewTab('https://web.whatsapp.com')}><img src={whatsapp} alt="Whatsapp" title='WhatsApp'/></a>
                 </section>
                 <section class="links">
                     <div class="links-inner">
@@ -95,11 +86,11 @@ const footer = () => {
                             <li> <img className = "pago" src={pagar} alt="" />    Metodos de pago</li>
                         </ul>
                         <ul>    
-                            <li> <img className = "pago" src={visa} alt="" /></li>
-                            <li> <img className = "pago" src={mastercard} alt="" /></li>
-                            <li> <img className = "pago" src={paypal} alt="" /></li>
-                            <li> <img className = "pago" src={efectivo} alt="" /></li>
-                            <li> <img className = "pago" src={transfer} alt="" /></li>
+                            <li> <img className = "pago" src={visa} alt="" title='Visa'/></li>
+                            <li> <img className = "pago" src={mastercard} alt="" title='Master-Card'/></li>
+                            <li> <img className = "pago" src={paypal} alt="" title='PayPal'/></li>
+                            <li> <img className = "pago" src={efectivo} alt="" title='Efectivo'/></li>
+                            <li> <img className = "pago" src={transfer} alt="" title='Transferencia'/></li>
                         </ul>
                     </div>
                 </footer>

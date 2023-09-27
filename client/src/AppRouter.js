@@ -12,6 +12,7 @@ import Descuentos from "./vistas/Descuentos";
 import IngresoProducto from "./vistas/IngresoProducto";
 import Home from "./vistas/Home"
 import Footer from "./vistas/Footer"
+import Carrito from "./vistas/Carrito"
 
 
 
@@ -28,6 +29,7 @@ function AppRouter(){
             <Route exact path="/descuentos" element={<Descuentos/>}/>
             <Route exact path="/ingresoProduct" element={<IngresoProducto/>}/>
             <Route exact path="/Home" element={<Home/>}/>
+            <Route exact path="/Carrito" element={<Carrito/>}/>
           </Routes>
       </main>
       <Footer/>

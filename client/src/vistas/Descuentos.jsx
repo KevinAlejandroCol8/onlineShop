@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 const Descuentos = () => {
-    /*Cmapos de la base de datos*/
+    /*Campos de la base de datos*/
   const [NombreDescuento, setNombreDescuento] = useState("");
   const [PorcentajeDescuento, setPorcentajeDescuento] = useState("");
   const [DescuentoID, setDescuentoID] = useState("");

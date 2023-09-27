@@ -1,4 +1,5 @@
 import { useEffect,useState } from "react"
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/catalogoProductos.css'
@@ -8,6 +9,7 @@ const Dashboard = () => {
     const [productosList, setProductosList] = useState([]); 
     const [carrito, setCarrito] = useState([]);
     const [mostrarCarrito, setMostrarCarrito] = useState(false);
+    const navigate = useNavigate();
 
     const getLista = () => {
         axios.get("http://localhost:3001/productos/lista").then((response) => {
@@ -67,6 +69,7 @@ const Dashboard = () => {
                             </li>
                         ))}
                     </ul>
+                    <button onClick={() => navigate("/Carrito")}>Proceder a la Compra</button>
                 </div>
             </div>
         </main>
