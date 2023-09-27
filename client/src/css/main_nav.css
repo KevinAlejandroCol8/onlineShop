@@ -55,3 +55,13 @@ container-fluid {
 .icon {
   border-bottom: 2px solid #262626;
 }
+
+.submenu {
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-li:hover .submenu {
+  display: block;
+}

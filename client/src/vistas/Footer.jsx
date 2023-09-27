@@ -1,31 +1,51 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/footer.css'
+import pagar from '../img/dollar-circle-solid-24.png'
+import visa from '../img/visa-logo-24.png'
+import mastercard from '../img/mastercard-logo-24.png' 
+import paypal from '../img/paypal-logo-24.png'
+import efectivo from '../img/money-regular-24.png'
+import transfer from '../img/transfer-regular-24.png'
+import facebook from '../img/facebook-square-logo-48.png'
+import twitter from '../img/twitter-logo-48.png'
+import linkedin from '../img/linkedin-square-logo-48.png'
+import youtube from '../img/youtube-logo-48.png'
+import instagram from '../img/instagram-logo-48.png'
 
 const footer = () => {
     return (
         <>
             <div class="container">
                 <section class="follow">
-                    <p>Follow Microsoft</p>
+                    <p>Siguenos en nuestras redes</p>
                     <a href="https://facebook.com">
-                        <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook" />
+                        <img src={facebook}alt="Facebook" />
                     </a>
                     <a href="https://twitter.com">
-                        <img src="https://i.ibb.co/vJvbLwm/social-twitter.png" alt="Twitter" />
+                        <img src={twitter} alt="Twitter" />
                     </a>
                     <a href="https://linkedin.com">
-                        <img src="https://i.ibb.co/b30HMhR/social-linkedin.png" alt="Linkedin" />
+                        <img src={linkedin} alt="Linkedin" />
+                    </a>
+                    <a href="https://Youtube.com">
+                        <img src={youtube} alt="Youtube" />
+                    </a>
+                    <a href="https://Instagram.com">
+                        <img src={instagram} alt="Instagram" />
+                    </a>
+                    <a href="https://linkedin.com">
+                        <img src={linkedin} alt="Linkedin" />
                     </a>
                 </section>
                 <section class="links">
                     <div class="links-inner">
                         <ul>
-                            <li><h3>What's New</h3></li>
+                            <li><h3>¿Que hay de nuevo?</h3></li>
                             <li><a href="#">Surface Pro X</a></li>
                             <li><a href="#">Surface Laptop 3</a></li>
                             <li><a href="#">Surface Pro 7</a></li>
-                            <li><a href="#">Windows 10 apps</a></li>
-                            <li><a href="#">Office apps</a></li>
+                            <li><a href="#">PlayStation 5</a></li>
+                            <li><a href="#">PlayStation 4</a></li>
                         </ul>
                         <ul>
                             <li><h3>Microsoft Store</h3></li>
@@ -71,16 +91,15 @@ const footer = () => {
                 </section>
                 <footer class="footer">
                     <div class="footer-inner">
-                        <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
                         <ul>
-                            <li><a href="#">Sitemap</a></li>
-                            <li><a href="#">Contact Microsoft</a></li>
-                            <li><a href="#">Privacy & cookies</a></li>
-                            <li><a href="#">Terms of use</a></li>
-                            <li><a href="#">Trademarks</a></li>
-                            <li><a href="#">Safety & eco</a></li>
-                            <li><a href="#">About our ads</a></li>
-                            <li><a href="#">&copy; Microsoft 2020</a></li>
+                            <li> <img className = "pago" src={pagar} alt="" />    Metodos de pago</li>
+                        </ul>
+                        <ul>    
+                            <li> <img className = "pago" src={visa} alt="" /></li>
+                            <li> <img className = "pago" src={mastercard} alt="" /></li>
+                            <li> <img className = "pago" src={paypal} alt="" /></li>
+                            <li> <img className = "pago" src={efectivo} alt="" /></li>
+                            <li> <img className = "pago" src={transfer} alt="" /></li>
                         </ul>
                     </div>
                 </footer>
