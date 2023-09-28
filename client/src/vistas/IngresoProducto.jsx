@@ -11,7 +11,7 @@ const IngresoProducto = () => {
   const [PrecioVenta, setPrecioVenta] = useState("");
   const [CostoAdquisicion, setCostoAdquisicion] = useState("");
   const [CantidadDisponible, setCantidadDisponible] = useState("");
-  const [Imagen, setImagen] = useState("");
+  const [Imagen, setImagen] = useState(null);
   const [DescuentoID, setDescuentoID] = useState("");
   const [TipoProductoID, setTipoProductoID] = useState("");
   const [ProductoID, setProductoID] = useState("");
@@ -22,7 +22,7 @@ const IngresoProducto = () => {
   /*Fin lista a mostrar*/
   const [descuentosList, setdescuentosList] = useState([]);
   const [tipoProductoList, settipoProductoList] = useState([]);
-  /*List llaves PK
+  /*List llaves PK*/
 
   /*fIN */
 
@@ -32,7 +32,7 @@ const IngresoProducto = () => {
     alert(nombre);
   }*/
 
-  const add = () => {
+  /*const add = () => {
     axios.post("http://localhost:3001/productos/create", {
         NombreProducto: NombreProducto,
         DescripcionProducto: DescripcionProducto,
@@ -47,7 +47,25 @@ const IngresoProducto = () => {
         limpiar();
         //alert("Empleado Registrado");
     })
-  }
+  }*/
+  /*Nueva Forma */
+  const add = () => {
+    const formData = new FormData();
+    formData.append("NombreProducto", NombreProducto);
+    formData.append("DescripcionProducto", DescripcionProducto);
+    formData.append("PrecioVenta", PrecioVenta);
+    formData.append("CostoAdquisicion", CostoAdquisicion);
+    formData.append("CantidadDisponible", CantidadDisponible);
+    formData.append("Imagen", Imagen); // Aquí adjuntamos la imagen seleccionada
+    formData.append("DescuentoID", DescuentoID);
+    formData.append("TipoProductoID", TipoProductoID);
+  
+    axios.post("http://localhost:3001/productos/create", formData)
+      .then(() => {
+        getLista();
+        limpiar();
+      });
+  };
 
   const update = () => {
     axios.put("http://localhost:3001/productos/update", {
@@ -175,9 +193,9 @@ const IngresoProducto = () => {
             <span className="input-group-text" id="basic-addon1">Imagen</span>
             <input
               onChange={(event) => {
-                setImagen(event.target.value);
+                setImagen(event.target.files[0]);
               }}
-              type="text" value={Imagen} className="form-control" placeholder="Imagen" aria-label="Imagen" aria-describedby="basic-addon1" />
+              type="file" className="form-control"  aria-label="Imagen" aria-describedby="basic-addon1" />
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Tipo Descuento</span>

@@ -38,12 +38,12 @@ const Dashboard = () => {
                             <div className="col mb-4" key={key}>
                                 <div className="card h-100 shadow-sm">
                                     <img
-                                        src="https://i.ibb.co/XCNWQHD/principal.jpg"
-                                        alt=""
-                                        className="card-img-top"
-                                        style={{ height: "200px" }}
+                                        src={`http://localhost:3001/productos/imagen/${val.Imagen}`} 
+                                        alt={val.NombreProducto} 
+                                        width="100" height="100"
                                     />
                                     <div className="card-body">
+                                        <h5 className="card-title">{val.Imagen}</h5>
                                         <h5 className="card-title">{val.NombreProducto}</h5>
                                         <h1 className="card-text">Q. {val.PrecioVenta}</h1>
                                         <div className="d-flex justify-content-between align-items-center">
