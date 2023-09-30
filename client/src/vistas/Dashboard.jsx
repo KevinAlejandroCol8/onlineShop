@@ -58,7 +58,7 @@ const Dashboard = () => {
             <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>
                 <div className="carrito">
                     <h2>Carrito de Compras</h2>
-                    <ul>
+                    <ul className="articulos-del-carrito">
                         {carrito.map((producto, index) => (
                             <li key={index}>
                                 {producto.NombreProducto} - Q. {producto.PrecioVenta}

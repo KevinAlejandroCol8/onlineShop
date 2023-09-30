@@ -146,7 +146,7 @@ const IngresoProducto = () => {
       <br></br>
       <div className="card text-center">
         <div className="card-header">
-          Ingreso Empleados
+          Ingreso De Productos
         </div>
         <div className="card-body">
           <div className="input-group mb-3">

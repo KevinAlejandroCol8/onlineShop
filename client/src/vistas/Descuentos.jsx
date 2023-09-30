@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import '../css/Descuentos.css'
 
 const Descuentos = () => {
     /*Campos de la base de datos*/
@@ -75,11 +75,11 @@ const Descuentos = () => {
     <div className="container">
       <br></br>
       <div className="card text-center">
-        <div className="card-header">
+        <div className="card-header display-6">
           Catalogo de descuentos
         </div>
         <div className="card-body">
-          <div className="input-group mb-3">
+          <div className="input-group mb-3 ">
             <span className="input-group-text" id="basic-addon1">Nombre del Descuento</span>
             <input
               onChange={(event) => {
@@ -113,9 +113,9 @@ const Descuentos = () => {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nombre Descuento</th>
+            <th scope="col">Nombre Del Descuento</th>
             <th scope="col">% Procentaje</th>
-            <th scope="col">acciones</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
