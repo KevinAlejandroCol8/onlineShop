@@ -1,12 +1,11 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/catalogoProductos.css'
 import '../css/carrito.css'
 
 const Dashboard = () => {
-    const [productosList, setProductosList] = useState([]); 
+    const [productosList, setProductosList] = useState([]);
     const [carrito, setCarrito] = useState([]);
     const [mostrarCarrito, setMostrarCarrito] = useState(false);
     const navigate = useNavigate();
@@ -31,32 +30,23 @@ const Dashboard = () => {
 
     return (
         <main>
-            <div className="container">
-                <div className="row row-cols-3">
-                    {productosList.map((val, key) => {
-                        return (
-                            <div className="col mb-4" key={key}>
-                                <div className="card h-100 shadow-sm">
-                                    <img
-                                        src={`http://localhost:3001/productos/imagen/${val.Imagen}`} 
-                                        alt={val.NombreProducto} 
-                                        width="100" height="100"
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{val.Imagen}</h5>
-                                        <h5 className="card-title">{val.NombreProducto}</h5>
-                                        <h1 className="card-text">Q. {val.PrecioVenta}</h1>
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <div className="btn-group">
-                                            </div>
-                                            <h1 className="btn btn-success" onClick={() => agregarAlCarrito(val)}>Agregar</h1>
-                                        </div>
-                                    </div>
+            <div className="container-items">
+
+                {productosList.map((val, key) => {
+                    return (
+                        <div className="item">
+                            <figure>
+                                <img src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
+                            </figure>
+                                <div className="info-product">
+                                    <h5 >{val.NombreProducto}</h5>
+                                    <h1 class="price">Q. {val.PrecioVenta}</h1>
+                                    <button onClick={() => agregarAlCarrito(val)}>Añadir al carrito</button>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
+
             </div>
             <button onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
             <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>
