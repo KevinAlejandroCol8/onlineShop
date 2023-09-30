@@ -64,7 +64,7 @@ html {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .container-logo i {
@@ -122,6 +122,7 @@ html {
 .menu {
 	display: flex;
 	gap: 2rem;
+	cursor: pointer;
 }
 
 .menu li {
@@ -224,7 +225,7 @@ html {
 		display: block;
 		color: #fff;
 		font-size: 3rem;
-    size: 2px;
+		size: 2px;
 	}
 
 	.menu {
@@ -235,14 +236,15 @@ html {
 @media (max-width: 468px) {
 	html {
 		font-size: 42.5%;
-	}}
+	}
+}
 
 
 .submenu {
-  display: none;
-  list-style: none;
+	display: none;
+	list-style: none;
 }
 
 .submenu.open {
-  display: block;
+	display: block;
 }

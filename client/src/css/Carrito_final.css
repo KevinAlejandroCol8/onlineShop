@@ -1,13 +1,26 @@
+:root {
+    --primary-color: #668eed9f;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
+small-container cart-page {
     font-family: "Poppins", sans-serif;
+    max-width: 120rem;
+    margin: 0 auto;
+
 }
 
+main {
+    max-width: 120rem;
+    margin: 0 auto;
+}
 
 .small-container {
     width: 90%;
@@ -16,74 +29,152 @@ body {
 }
 
 
-/* cart items */
+html {
+    font-size: 62.5%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulo-carrito {
+    font-weight: 600;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+#cart-container {
+    overflow-x: auto;
+}
 
 
-
-table {
-    width: 100%;
+#cart-container table {
     border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-.cart-info {
-    display: flex;
-    flex-wrap: wrap;
+.cart-page {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    font-weight: 600;
+    font-size: 6rem;
+    text-transform: uppercase;
 }
 
-th {
-    text-align: left;
-    padding: 5px;
-    color: #ffffff;
-    background: #f2f2f2;
-    font-weight: normal;
+#coupon h5 {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-transform: uppercase;
 }
 
-td {
-    padding: 10px 5px;
+#cart-container table thead {
+    font-weight: 700;
 }
 
-td input {
-    width: 40px;
-    height: 30px;
-    padding: 5px;
+#cart-container table thead td {
+    background: var(--primary-color);
+    color: #000000;
+    border: none;
+    padding: 6px 0;
 }
 
-td a {
-    color: #fa0000;
-    font-size: 12px;
+#cart-container table td {
+    border: 1px solid #b6b3b3;
+    text-align: center;
 }
 
-td img {
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
+#cart-container table td:nth-child(1) {
+    width: 100px;
 }
 
-.total-price {
+#cart-container table td:nth-child(2),
+#cart-container table td:nth-child(3) {
+    width: 200px;
+}
+
+#cart-container table td:nth-child(4),
+#cart-container table td:nth-child(5),
+#cart-container table td:nth-child(6) {
+    width: 170px;
+}
+
+#cart-container table tbody img {
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 10px 10px 0 0;
+    transition: all .5s;
+}
+
+#cart-bottom .coupon>div,
+#cart-bottom .total>div {
+    border: 1px solid #b6b3b3;
+}
+
+#cart-bottom .coupon h5,
+#cart-bottom .total h5 {
+    background: var(--primary-color);
+    color: #000000;
+    border: none;
+    padding: 6px 12px;
+    font-weight: 700;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+
+#cart-bottom .coupon p,
+#cart-bottom .coupon input,
+#cart-bottom .total h6,
+#cart-bottom .total p  {
+    padding: 0 12px;
+    font-size: 1.6rem;
+}
+
+#cart-bottom .coupon input {
+    height: 44px;
+}
+
+#cart-bottom .coupon input {
+    margin: 0 0 20px 12px;
+}
+
+#cart-bottom .total div>div {
+    padding: 0 12px;
+}
+
+.botton1 {
+    border: none;
+    background: none;
+    background-color: #000;
+    color: #fff;
+    padding: 13px 10px;
+    margin: 0 0 20px 12px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transform: translateY(-2px);
+}
+
+.botton2 {
     display: flex;
     justify-content: flex-end;
+    border: none;
+    background: none;
+    background-color: #000;
+    color: #fff;
+    padding: 13px 10px;
+    cursor: pointer;
+    font-size: 1.25rem;
 }
 
-.total-price table {
-    border-top: 3px solid #262626;
-    width: 100%;
-    max-width: 400px;
+.eliminar-boton {
+    cursor: pointer;
 }
-
-td:last-child {
-    text-align: right;
-}
-
-th:last-child {
-    text-align: right;
-}
-
-th {
-    color: #262626;
-    text-decoration: none;
-}
-
-.encabezado {
-    border: 2px solid #000000; 
-}
-

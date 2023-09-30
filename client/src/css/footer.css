@@ -164,13 +164,19 @@ html {
   display: flex;
   justify-content: space-between;
   padding-top: 2rem;
-  border-top: 1px solid #d2b495;
+  border-top: 1px solid #000000;
 }
 
 .copyright p {
   font-weight: 400;
   font-size: 1.6rem;
 }
+
+.imagen-pagos{
+    max-width: 100%;
+    height: auto;
+  }
+
 
 .fa-facebook-f,
 .fa-twitter,
