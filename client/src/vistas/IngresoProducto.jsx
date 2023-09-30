@@ -11,6 +11,7 @@ const IngresoProducto = () => {
   const [PrecioVenta, setPrecioVenta] = useState("");
   const [CostoAdquisicion, setCostoAdquisicion] = useState("");
   const [CantidadDisponible, setCantidadDisponible] = useState("");
+  const [SKU, setSKU] = useState("");
   const [Imagen, setImagen] = useState(null);
   const [DescuentoID, setDescuentoID] = useState("");
   const [TipoProductoID, setTipoProductoID] = useState("");
@@ -56,6 +57,7 @@ const IngresoProducto = () => {
     formData.append("PrecioVenta", PrecioVenta);
     formData.append("CostoAdquisicion", CostoAdquisicion);
     formData.append("CantidadDisponible", CantidadDisponible);
+    formData.append("SKU", SKU);
     formData.append("Imagen", Imagen); // Aquí adjuntamos la imagen seleccionada
     formData.append("DescuentoID", DescuentoID);
     formData.append("TipoProductoID", TipoProductoID);
@@ -102,6 +104,7 @@ const IngresoProducto = () => {
     setDescuentoID("");
     setTipoProductoID("");
     setProductoID("");
+    setSKU("");
   }
 
   const getLista = () => {
@@ -131,6 +134,7 @@ const IngresoProducto = () => {
     setCantidadDisponible(val.CantidadDisponible);
     setImagen(val.Imagen);
     setDescuentoID(val.DescuentoID);
+    setSKU(val.SKU);
     setTipoProductoID(val.TipoProductoID);
     setProductoID(val.ProductoID);
   }
@@ -188,6 +192,14 @@ const IngresoProducto = () => {
                 setCantidadDisponible(event.target.value);
               }}
               type="text" value={CantidadDisponible} className="form-control" placeholder="Cantidad" aria-label="Cantidad" aria-describedby="basic-addon1" />
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">SKU</span>
+            <input
+              onChange={(event) => {
+                setSKU(event.target.value);
+              }}
+              type="text" value={SKU} className="form-control" placeholder="SKU" aria-label="SKU" aria-describedby="basic-addon1" />
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Imagen</span>

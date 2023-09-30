@@ -27,13 +27,14 @@ router.post("/create", upload.single("Imagen"), (req, res) => {
     const CostoAdquisicion = req.body.CostoAdquisicion;
     const CantidadDisponible = req.body.CantidadDisponible;
     const Imagen = req.file ? req.file.filename : null; // Nombre del archivo subido
+    const SKU = req.body.SKU;
     /* Referecnias llaves foraneas*/
     const DescuentoID = req.body.DescuentoID;
     const TipoProductoID = req.body.TipoProductoID;
     /* Fin de las llaves foraneas */
     db.query(
-      'INSERT INTO Productos (NombreProducto, DescripcionProducto, PrecioVenta, CostoAdquisicion, CantidadDisponible, Imagen, DescuentoID, TipoProductoID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [NombreProducto, DescripcionProducto, PrecioVenta, CostoAdquisicion, CantidadDisponible, Imagen, DescuentoID, TipoProductoID],
+      'INSERT INTO Productos (NombreProducto, DescripcionProducto, PrecioVenta, CostoAdquisicion, CantidadDisponible,SKU, Imagen, DescuentoID, TipoProductoID) VALUES (?,?,?,?,?,?,?,?,?)',
+      [NombreProducto, DescripcionProducto, PrecioVenta, CostoAdquisicion, CantidadDisponible,SKU, Imagen, DescuentoID, TipoProductoID],
       (err, result) => {
         if (err) {
           console.log("El Error", err);

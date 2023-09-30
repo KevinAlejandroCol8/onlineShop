@@ -25,7 +25,8 @@ CREATE TABLE Productos (
     CantidadDisponible INT,
     Imagen VARCHAR(255),
     DescuentoID INT,
-    TipoProductoID INT, -- Clave foránea para relacionar con TiposProducto
+    TipoProductoID INT,
+    SKU  VARCHAR(120) -- Clave foránea para relacionar con TiposProducto
     FOREIGN KEY (TipoProductoID) REFERENCES TiposProducto(TipoProductoID),
     FOREIGN KEY (DescuentoID) REFERENCES Descuentos(DescuentoID)
 );
