@@ -1,80 +1,115 @@
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import '../css/Carrito_final.css'
 
-const carritofinal = () => {
+const IVA_RATE = 0.12; // Tasa de IVA del 12%
+
+const Carrito = () => {
+    const location = useLocation();
+    const { carrito: carritoInicial } = location.state || {};
+
+    // Usamos useState para mantener el estado del carrito
+    const [carrito, setCarrito] = useState(carritoInicial);
+
+    if (!carrito || carrito.length === 0) {
+        return (
+            <div className="small-container cart-page">
+                <p>El carrito está vacío</p>
+            </div>
+        );
+    }
+
+    // Función para calcular el subtotal de un producto en una línea
+    const calcularSubtotal = (producto) => {
+        return producto.PrecioVenta * producto.Cantidad;
+    };
+
+    const eliminarProducto = (index) => {
+        const nuevoCarrito = [...carrito];
+        nuevoCarrito.splice(index, 1); // Elimina el producto en el índice especificado
+        setCarrito(nuevoCarrito);
+    };
+
+    const actualizarCantidad = (index, nuevaCantidad) => {
+        const nuevoCarrito = [...carrito];
+        nuevoCarrito[index].Cantidad = nuevaCantidad;
+        setCarrito(nuevoCarrito);
+    };
+
+    const calcularTotalSubtotal = () => {
+        let totalSubtotal = 0;
+        carrito.forEach((producto) => {
+            totalSubtotal += calcularSubtotal(producto);
+        });
+        return totalSubtotal;
+    };
+
+    const calcularIVA = () => {
+        const totalSubtotal = calcularTotalSubtotal();
+        return totalSubtotal * IVA_RATE;
+    };
+
     return (
-        <div class="small-container cart-page">
-        <table>
-            <tr className='encabezado'>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="https://i.ibb.co/B3vYjvw/buy-1.jpg" alt="" />
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price Q500.00</small>
-                            <br />
-                            <a href="#">Eliminar</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1" /></td>
-                <td>Q500.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="https://i.ibb.co/qmSHWx7/buy-2.jpg" alt="" />
-                        <div>
-                            <p>HRX Shoes</p>
-                            <small>Price Q1500.00</small>
-                            <br />
-                            <a href="#">Eliminar</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1" /></td>
-                <td>Q1500.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="https://i.ibb.co/NyYtY31/buy-3.jpg" alt="" />
-                        <div>
-                            <p>Reebok Tracksuit</p>
-                            <small>Price Q1500.00</small>
-                            <br />
-                            <a href="#">Eliminar</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1" /></td>
-                <td>Q1500.00</td>
-            </tr>
-        </table>
-
-        <div class="total-price">
+        <div className="small-container cart-page">
             <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td>Q3500.00</td>
-                </tr>
-                <tr>
-                    <td>IVA</td>
-                    <td>Q15.00</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>Q3515.00</td>
-                </tr>
+                <thead>
+                    <tr className='encabezado'>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {carrito.map((producto, index) => (
+                        <tr key={producto.ID}>
+                        <td>
+                            <div className="cart-info">
+                            <img
+                                src={`http://localhost:3001/productos/imagen/${producto.Imagen}`}
+                                alt={producto.NombreProducto}
+                            />
+                            <div>
+                                <p>{producto.NombreProducto}</p>
+                                <small>Price Q.{producto.PrecioVenta.toFixed(2)}</small>
+                            </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={producto.Cantidad}
+                                onChange={(e) => actualizarCantidad(index, parseInt(e.target.value, 10))}
+                            />
+                        </td>
+                        <td>Q.{calcularSubtotal(producto).toFixed(2)}</td>
+                        <td>
+                            <button onClick={() => eliminarProducto(index)}>Eliminar</button>
+                        </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
+            <div className="total-price">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>Q.{calcularTotalSubtotal().toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td>IVA</td>
+                            <td>Q.{calcularIVA().toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>Q.{(calcularTotalSubtotal() + calcularIVA()).toFixed(2)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
     );
 }
 
-export default carritofinal;
+export default Carrito;

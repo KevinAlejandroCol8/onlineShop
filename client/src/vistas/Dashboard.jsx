@@ -4,6 +4,7 @@ import axios from "axios"
 import '../css/catalogoProductos.css'
 import '../css/carrito.css'
 
+
 const Dashboard = () => {
     const [productosList, setProductosList] = useState([]);
     const [carrito, setCarrito] = useState([]);
@@ -22,6 +23,11 @@ const Dashboard = () => {
 
     const toggleCarrito = () => {
         setMostrarCarrito(!mostrarCarrito);
+    };
+
+    // Función para proceder a la compra y pasar el carrito
+    const procederALaCompra = () => {
+        navigate("/Carrito", { state: { carrito } });
     };
 
     useEffect(() => {
@@ -48,7 +54,7 @@ const Dashboard = () => {
                 })}
 
             </div>
-            <button onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
+            <button className ="info-product" onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
             <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>
                 <div className="carrito">
                     <h2>Carrito de Compras</h2>
@@ -59,7 +65,7 @@ const Dashboard = () => {
                             </li>
                         ))}
                     </ul>
-                    <button onClick={() => navigate("/Carrito")}>Proceder a la Compra</button>
+                    <button className="info-product" onClick={procederALaCompra}>Proceder a la Compra</button>
                 </div>
             </div>
         </main>
