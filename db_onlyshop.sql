@@ -86,7 +86,8 @@ CREATE TABLE Usuarios (
     NombreCompleto VARCHAR(100),
     CorreoElectronico VARCHAR(100),
     FechaRegistro DATE,
-    Activo BOOLEAN DEFAULT TRUE
+    Activo BOOLEAN DEFAULT TRUE,
+    tipoRool INT
 );
 
 CREATE TABLE MovimientosInventario (
