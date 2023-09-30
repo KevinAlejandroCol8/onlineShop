@@ -166,7 +166,7 @@ const Menu = () => {
               <div className="overlay">
                 <div className="overlay-panel overlay-right">
                   <h1>Hola</h1>
-                  <p>Introduce tus datos personales y comienza tu viaje con nosotros.</p>
+                  <p class="parrafo-login">Introduce tus datos personales y comienza tu viaje con nosotros.</p>
                   <div className="button-container">
                     <button className="ghost buttonsLogin">Ingreso</button>
                     <span className="button-space"></span>

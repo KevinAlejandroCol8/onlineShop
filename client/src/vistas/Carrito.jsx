@@ -79,7 +79,7 @@ const Carrito = () => {
                                     <h5>Q.{producto.PrecioVenta.toFixed(2)}</h5>
                                 </td>
                                 <td>
-                                    <input class="w-25 pl-1" type="number" value={producto.Cantidad} onChange={(e) => actualizarCantidad(index, parseInt(e.target.value, 10))} />
+                                    <input placeholder="0" class="w-25 pl-1" type="number" value={producto.Cantidad} onChange={(e) => actualizarCantidad(index, parseInt(e.target.value, 10))} />
                                 </td>
                                 <td>
                                     Q.{calcularSubtotal(producto).toFixed(2)}

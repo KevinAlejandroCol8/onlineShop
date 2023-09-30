@@ -135,7 +135,7 @@ html {
 #cart-bottom .coupon input,
 #cart-bottom .total h6,
 #cart-bottom .total p  {
-    padding: 0 12px;
+    padding: 0 12px 12px;
     font-size: 1.6rem;
 }
 
