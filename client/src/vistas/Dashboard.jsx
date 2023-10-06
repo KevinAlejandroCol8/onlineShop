@@ -44,28 +44,39 @@ const Dashboard = () => {
                             <figure>
                                 <img src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
                             </figure>
-                                <div className="info-product">
-                                    <h5 >{val.NombreProducto}</h5>
-                                    <h1 class="price">Q. {val.PrecioVenta}</h1>
-                                    <button onClick={() => agregarAlCarrito(val)}>Añadir al carrito</button>
-                                </div>
+                            <div className="info-product">
+                                <h5 >{val.NombreProducto}</h5>
+                                <h1 class="price">Q. {val.PrecioVenta}</h1>
+                                <button className="classBtn first" onClick={() => agregarAlCarrito(val)}>Añadir al carrito</button>
+                            </div>
                         </div>
                     );
                 })}
 
             </div>
-            <button className ="info-product" onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
+            <button className="info-product" onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
             <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>
                 <div className="carrito">
-                    <h2>Carrito de Compras</h2>
-                    <ul className="articulos-del-carrito">
+                    <div class="col checkout__summary">
+                        <div class="h3 mb-3">Resumen de orden</div>
                         {carrito.map((producto, index) => (
-                            <li key={index}>
-                                {producto.NombreProducto} - Q. {producto.PrecioVenta}
-                            </li>
+                            <div class="card p-3 shadow rounded-3">
+                                <div class="row align-items-center mb-4">
+                                    <div class="col-4">
+                                        <div class="rounded-3 overflow-hidden">
+                                            <img src={`http://localhost:3001/productos/imagen/${producto.Imagen}`} width="100%" alt="Producto" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="nombreProducto h6 mb-1">{producto.NombreProducto}</div>
+                                        <div class="descripcionProducto text-muted small mb-1">{producto.DescripcionProducto}</div>
+                                        <div class="montoProducto h5 mb-0"> Q. {producto.PrecioVenta}</div>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
-                    </ul>
-                    <button className="info-product" onClick={procederALaCompra}>Proceder a la Compra</button>
+                    </div>
+                    <button className="classBtn first info-product" onClick={procederALaCompra}>Proceder a la Compra</button>
                 </div>
             </div>
         </main>

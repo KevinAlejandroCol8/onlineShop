@@ -83,7 +83,7 @@ CREATE TABLE Pagos (
 CREATE TABLE Usuarios (
     UsuarioID INT PRIMARY KEY AUTO_INCREMENT,
     NombreUsuario VARCHAR(50) NOT NULL,
-    Contraseña VARCHAR(255) NOT NULL,
+    Contrasenia VARCHAR(255) NOT NULL,
     NombreCompleto VARCHAR(100),
     CorreoElectronico VARCHAR(100),
     FechaRegistro DATE,

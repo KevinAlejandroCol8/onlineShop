@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const TestImage = () => {
@@ -19,8 +19,6 @@ const TestImage = () => {
           <p>Nombre del Producto: {producto.NombreProducto}</p>
           <p>Descripción: {producto.DescripcionProducto}</p>
           <p>Precio: {producto.PrecioVenta}</p>
-
-          {/* Mostrar la imagen */}
           {producto.Imagen && (
             <img
               src={`http://localhost:3001/${producto.Imagen}`}
@@ -30,6 +28,20 @@ const TestImage = () => {
           )}
         </div>
       ))}
+    </div>
+  );
+};
+
+*/
+
+import React from "react";
+
+const TestImage = () => {
+  
+  return (
+    <div>
+      <h1>Lista de Productos</h1>
+      
     </div>
   );
 };
