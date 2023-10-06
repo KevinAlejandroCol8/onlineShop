@@ -17,7 +17,6 @@ const Login = () => {
     });
 
     const [loginMessage, setLoginMessage] = useState(""); // Para mostrar un mensaje de inicio de sesión
-    const [loggedInUser, setLoggedInUser] = useState(""); // Para mostrar el nombre del usuario logueado
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -95,12 +94,11 @@ const Login = () => {
                         <button className="btn btn-lg btn-primary btn-wide" type="submit">Ingreso</button>
                     </div>
                     <div>
-                        <button className="btn btn-lg btn-primary btn-wide" type="button">Registrarme</button>
+                        <button className="btn btn-lg btn-primary btn-wide" type="button" onClick={() => navigate("/LoginRegister")}>Registrarme</button>
                     </div>
                 </div>
             </form>
             {loginMessage && <div className="alert alert-info">{loginMessage}</div>}
-            {loggedInUser && <div className="alert alert-success">Usuario logueado: {loggedInUser}</div>}
         </div>
     );
 };

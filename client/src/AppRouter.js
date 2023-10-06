@@ -15,6 +15,7 @@ import Footer from "./vistas/Footer"
 import Carrito from "./vistas/Carrito"
 import Productos from "./vistas/Productos";
 import Login from "./vistas/Login";
+import LoginRegister from "./vistas/LoginRegister";
 
 
 
@@ -34,6 +35,7 @@ function AppRouter(){
             <Route exact path="/Carrito" element={<Carrito/>}/>
             <Route exact path="/Productos" element={<Productos/>}/>
             <Route exact path="/Login" element={<Login/>}/>
+            <Route exact path="/LoginRegister" element={<LoginRegister/>}/>
           </Routes>
       </main>
       <Footer/>
