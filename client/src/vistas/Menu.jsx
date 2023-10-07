@@ -22,6 +22,7 @@ const Menu = () => {
   const { carrito, eliminarDelCarrito } = useCarrito();
 
   const procederALaCompra = () => {
+    toggleCarrito();
     navigate("/Carrito", { state: { carrito } });
   };
 

@@ -63,7 +63,6 @@ const Dashboard = () => {
                 })}
 
             </div>
-            <button className="info-product" onClick={toggleCarrito}>Mostrar/ocultar carrito</button>
             <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>
                 <div className="carrito">
                     <div class="col checkout__summary">
