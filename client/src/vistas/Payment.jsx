@@ -1,11 +1,14 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import '../css/Payment.css'
 import mc from '../img/mc.png'
 import vi from '../img/vi.png'
 import pp from '../img/pp.png'
-import React, { useState } from "react";
 
 const Payment = () => {
+    
+    const navigate = useNavigate();
     const [cardNumber, setCardNumber] = useState("");
 
     const handleInputChange = (e) => {
@@ -131,7 +134,7 @@ const Payment = () => {
 
                         </div>
                         <div class="button-master-container">
-                            <div class="button-container button-finish"><a href="#">Finalizar Orden</a>
+                            <div class="button-container button-finish" onClick={() => navigate("/Facturacion")}><a>Finalizar Orden</a>
                             </div>
                         </div>
                     </form>
