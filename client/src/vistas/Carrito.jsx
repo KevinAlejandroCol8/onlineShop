@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCarrito } from "../hoocks/carritoState";
+import { useNavigate } from "react-router-dom";
 
 import '../css/Carrito_final.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -8,6 +9,7 @@ const IVA_RATE = 0.12; // Tasa de IVA del 12%
 
 const Carrito = () => {
 
+    const navigate = useNavigate();
     const [cantidades, setCantidades] = useState({}); // Estado para mantener las cantidades
     const { carrito, eliminarDelCarrito } = useCarrito();
 
@@ -125,7 +127,7 @@ const Carrito = () => {
                                 <h6>TOTAL</h6>
                                 <p>Q.{(calcularTotalSubtotal() + calcularIVA()).toFixed(2)}</p>
                             </div>
-                            <button class="botton2 ml-auto">PROCEDER AL PAGO</button>
+                            <button class="botton2 ml-auto" onClick={() => navigate("/Payment")}>PROCEDER AL PAGO</button>
                         </div>
                     </div>
                 </div>
