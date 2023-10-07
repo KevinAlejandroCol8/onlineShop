@@ -69,8 +69,8 @@ const Descuentos = () => {
 
   return (
     <>
-      <div className="inicio">
-        <div className="container_register">
+      <div className="inicio_descuentos">
+        <div className="container_register_descuentos">
           <h1>Descuentos</h1>
           <div className="mb-3">
             <h3 className="titulos">Nombre del Descuento</h3>

@@ -10,7 +10,7 @@ span.input-group-text,
     font-size: 16px;
 }
 
-.inicio_descuentos {
+.inicio_catalogo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +18,10 @@ span.input-group-text,
     margin: 0;
 }
 
-.container_register_descuentos {
+.container_register_catalogo {
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
-    height: 700px;
+    height: 600px;
     /* Altura igual al ancho */
     padding: 20px;
     background-color: white;

@@ -1,13 +1,12 @@
-.inicio {
+.inicio_factura{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
     /* Asegura que el contenedor esté centrado verticalmente en la pantalla */
     margin: 0;
 }
 
-.container_register {
+.container_register_facturacion {
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
     height: 700px;

@@ -6,11 +6,18 @@ span.input-group-text,
 .btn-danger,
 .form-select,
 .card-header,
-.btn-info {
+.btn-info{
     font-size: 16px;
+    border-radius: 10px;
 }
 
-.inicio_descuentos {
+.btn-primary{
+    font-size: 16px;
+    border-radius: 10px;
+    top: -4.5px;
+}
+
+.inicio_ingreso_producto{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +25,10 @@ span.input-group-text,
     margin: 0;
 }
 
-.container_register_descuentos {
+.container_register_ingreso_producto{
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
-    height: 700px;
+    height: 1300px;
     /* Altura igual al ancho */
     padding: 20px;
     background-color: white;
@@ -47,4 +54,3 @@ table td {
     border: 1px solid #b6b3b3;
     text-align: center;
 }
-

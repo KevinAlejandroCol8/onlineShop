@@ -1,17 +1,17 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../css/IngresoProducto.css'
 
 
 const IngresoProducto = () => {
 
-    /*Cmapos de la base de datos*/
+  /*Cmapos de la base de datos*/
   const [NombreProducto, setNombreProducto] = useState("");
   const [DescripcionProducto, setDescripcionProducto] = useState("");
   const [PrecioVenta, setPrecioVenta] = useState("");
   const [CostoAdquisicion, setCostoAdquisicion] = useState("");
   const [CantidadDisponible, setCantidadDisponible] = useState("");
-  const [SKU, setSKU] = useState("");
   const [Imagen, setImagen] = useState(null);
   const [DescuentoID, setDescuentoID] = useState("");
   const [TipoProductoID, setTipoProductoID] = useState("");
@@ -61,7 +61,7 @@ const IngresoProducto = () => {
     formData.append("Imagen", Imagen); // Aquí adjuntamos la imagen seleccionada
     formData.append("DescuentoID", DescuentoID);
     formData.append("TipoProductoID", TipoProductoID);
-  
+
     axios.post("http://localhost:3001/productos/create", formData)
       .then(() => {
         getLista();
@@ -71,29 +71,29 @@ const IngresoProducto = () => {
 
   const update = () => {
     axios.put("http://localhost:3001/productos/update", {
-        NombreProducto: NombreProducto,
-        DescripcionProducto: DescripcionProducto,
-        PrecioVenta: PrecioVenta,
-        CostoAdquisicion:CostoAdquisicion,
-        CantidadDisponible: CantidadDisponible,
-        Imagen: Imagen,
-        DescuentoID: DescuentoID,
-        TipoProductoID: TipoProductoID,
-        ProductoID: ProductoID
+      NombreProducto: NombreProducto,
+      DescripcionProducto: DescripcionProducto,
+      PrecioVenta: PrecioVenta,
+      CostoAdquisicion: CostoAdquisicion,
+      CantidadDisponible: CantidadDisponible,
+      Imagen: Imagen,
+      DescuentoID: DescuentoID,
+      TipoProductoID: TipoProductoID,
+      ProductoID: ProductoID
     }).then(() => {
-        setEditar(false);
-        getLista();
-        limpiar();
+      setEditar(false);
+      getLista();
+      limpiar();
     })
   }
 
   const eliminar = (idPrueba) => {
     axios.delete(`http://localhost:3001/productos/elimiarEmpleado/${idPrueba}`).then(() => {
-        getLista();
+      getLista();
     })
   }
 
-  const limpiar = () =>{
+  const limpiar = () => {
     setEditar(false);
     setNombreProducto("");
     setDescripcionProducto("");
@@ -109,19 +109,19 @@ const IngresoProducto = () => {
 
   const getLista = () => {
     axios.get("http://localhost:3001/productos/lista").then((response) => {
-        setProductosList(response.data);
+      setProductosList(response.data);
     })
   }
 
   const cargarDescuentos = () => {
     axios.get("http://localhost:3001/descuentos/lista").then((response) => {
-        setdescuentosList(response.data);
+      setdescuentosList(response.data);
     })
   }
 
   const cargarTipoProducto = () => {
     axios.get("http://localhost:3001/tiposProductos/lista").then((response) => {
-        settipoProductoList(response.data);
+      settipoProductoList(response.data);
     })
   }
 
@@ -140,167 +140,180 @@ const IngresoProducto = () => {
   }
 
   useEffect(() => {
-      getLista();
-      cargarDescuentos();
-      cargarTipoProducto();
+    getLista();
+    cargarDescuentos();
+    cargarTipoProducto();
   }, []);
 
+
+  const [SKU, setSKU] = useState('');
+  const generateSKU = () => {
+    // Generar un SKU aleatorio (en este caso, una cadena de 8 caracteres)
+    const randomSKU = Math.random().toString(36).substring(2, 10).toUpperCase();
+
+    // Actualizar el estado con el SKU generado
+    setSKU(randomSKU);
+  };
   return (
-    <div className="container">
-      <br></br>
-      <div className="card text-center">
-        <div className="card-header">
-          Ingreso De Productos
-        </div>
-        <div className="card-body">
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Nombre Producto</span>
-            <input
-              onChange={(event) => {
-                setNombreProducto(event.target.value);
-              }}
-              type="text" value={NombreProducto} className="form-control" placeholder="Nombre Producto" aria-label="Nombre Producto" aria-describedby="basic-addon1" />
-          </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Descripcion Producto</span>
+    <div className="inicio_ingreso_producto">
+      <div className="container_register_ingreso_producto">
+        <h1>Ingreso De Productos</h1>
+        <div className="mb-3">
+          <h3 className="titulos">Nombre Producto </h3>
+          <input
+            onChange={(event) => {
+              setNombreProducto(event.target.value);
+            }}
+            type="text" value={NombreProducto} className="form-control custom-input" placeholder="Nombre Producto" aria-label="Nombre Producto" />
+          <div className="mb-3">
+            <h3 className="titulos">Descripcion Producto</h3>
             <input
               onChange={(event) => {
                 setDescripcionProducto(event.target.value);
               }}
-              type="text" value={DescripcionProducto} className="form-control" placeholder="Descripción Producto" aria-label="Descripción Producto" aria-describedby="basic-addon1" />
+              type="text" value={DescripcionProducto} className="form-control custom-input" placeholder="Descripción Producto" aria-label="Descripción Producto" />
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Precio Venta</span>
+          <div className="mb-3">
+            <h3 className="titulos">Precio Venta</h3>
             <input
               onChange={(event) => {
                 setPrecioVenta(event.target.value);
               }}
-              type="text" value={PrecioVenta} className="form-control" placeholder="Precio Venta" aria-label="Precio Venta" aria-describedby="basic-addon1" />
+              type="text" value={PrecioVenta} className="form-control custom-input" placeholder="Precio Venta" aria-label="Precio Venta" />
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Costo Adquisicion</span>
+          <div className="mb-3">
+            <h3 className="titulos">Costo Adquisicion</h3>
             <input
               onChange={(event) => {
                 setCostoAdquisicion(event.target.value);
               }}
-              type="text" value={CostoAdquisicion} className="form-control" placeholder="Costo Adquision" aria-label="Costo Adquision" aria-describedby="basic-addon1" />
+              type="text" value={CostoAdquisicion} className="form-control custom-input" placeholder="Costo Adquision" aria-label="Costo Adquision" />
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Cantidad</span>
+          <div className="mb-3">
+            <h3 className="titulos">Cantidad</h3>
             <input
               onChange={(event) => {
                 setCantidadDisponible(event.target.value);
               }}
-              type="text" value={CantidadDisponible} className="form-control" placeholder="Cantidad" aria-label="Cantidad" aria-describedby="basic-addon1" />
+              type="text" value={CantidadDisponible} className="form-control custom-input" placeholder="Cantidad" aria-label="Cantidad" />
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">SKU</span>
-            <input
-              onChange={(event) => {
-                setSKU(event.target.value);
-              }}
-              type="text" value={SKU} className="form-control" placeholder="SKU" aria-label="SKU" aria-describedby="basic-addon1" />
+          <div className="mb-3">
+            <h3 className="titulos">SKU</h3>
+            <div className="input-group">
+              <input
+                onChange={(event) => {
+                  setSKU(event.target.value);
+                }}
+                type="text"
+                value={SKU}
+                className="form-control custom-input"
+                placeholder="SKU"
+                aria-label="SKU"
+              />
+              <button className="btn btn-primary m-2" onClick={generateSKU}>Generar SKU</button>
+            </div>
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Imagen</span>
+          <div className="mb-3">
+            <h3 className="titulos">Imagen</h3>
             <input
               onChange={(event) => {
                 setImagen(event.target.files[0]);
               }}
-              type="file" className="form-control"  aria-label="Imagen" aria-describedby="basic-addon1" />
+              type="file" className="form-control custom-input" aria-label="Imagen" />
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Tipo Descuento</span>
-            <select class="form-select" aria-label="Default select example"
-                onChange={(event) => {
-                  setDescuentoID(event.target.value);
-                }}
-                value={DescuentoID}
+          <div className="mb-3">
+            <h3 className="titulos">Tipo Descuento</h3>
+            <select className="form-select" aria-label="Default select example"
+              onChange={(event) => {
+                setDescuentoID(event.target.value);
+              }}
+              value={DescuentoID}
             >
-                {
-                    descuentosList.map((desc, i) => {
-                        return (
-                            <option key={i} value={desc.DescuentoID} >
-                                {desc.NombreDescuento}
-                            </option>
-                        )
-                    })
-                }
+              {
+                descuentosList.map((desc, i) => {
+                  return (
+                    <option key={i} value={desc.DescuentoID} >
+                      {desc.NombreDescuento}
+                    </option>
+                  )
+                })
+              }
             </select>
           </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Tipo Producto</span>
+          <div className="mb-3">
+            <h3 className="titulos">Tipo Producto</h3>
             <select class="form-select" aria-label="Default select example"
-                onChange={(event) => {
-                  setTipoProductoID(event.target.value);
-                }}
-                value={TipoProductoID}
+              onChange={(event) => {
+                setTipoProductoID(event.target.value);
+              }}
+              value={TipoProductoID}
             >
-                {
-                    tipoProductoList.map((tp, i) => {
-                        return (
-                            <option key={i} value={tp.TipoProductoID} >
-                                {tp.NombreTipoProducto}
-                            </option>
-                        )
-                    })
-                }
+              {
+                tipoProductoList.map((tp, i) => {
+                  return (
+                    <option key={i} value={tp.TipoProductoID} >
+                      {tp.NombreTipoProducto}
+                    </option>
+                  )
+                })
+              }
             </select>
           </div>
         </div>
-        <div className="card-footer text-muted">
+        <div className="mb-3 d-flex justify-content-center">
           {
-            editar===true?
-            <div>
-              <button className='btn btn-warning m-2' onClick={update}>Actualizar</button> 
-              <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button> 
-            </div>
-            :<button className='btn btn-success' onClick={add}>Guardar</button>
+            editar === true ?
+              <div>
+                <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
+                <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
+              </div>
+              : <button className='btn btn-success' onClick={add}>Guardar</button>
           }
         </div>
+
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre Producto</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio Venta</th>
+              <th scope="col">Costo Adquisicion</th>
+              <th scope="col">Cantidad Disponibilidad</th>
+              <th scope="col">acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              productosList.map((val, key) => {
+                return <tr key={val.ProductoID}>
+                  <th scope="row">{val.ProductoID}</th>
+                  <td>{val.NombreProducto}</td>
+                  <td>{val.DescripcionProducto}</td>
+                  <td>{val.PrecioVenta}</td>
+                  <td>{val.CostoAdquisicion}</td>
+                  <td>{val.CantidadDisponible}</td>
+                  <td>
+                    <div className="btn-group" role="group" aria-label="Basic mixed styles example">
+                      <button
+                        onClick={() => {
+                          editarList(val);
+                        }}
+                        type="button" className="btn btn-warning">Editar</button>
+                      <button
+                        onClick={() => {
+                          eliminar(val.ProductoID);
+                        }}
+                        type="button" className="btn btn-danger">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+              })
+            }
+          </tbody>
+        </table>
+        <button className='btn btn-success' onClick={getLista}>Lista</button>
       </div>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre Producto</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Precio Venta</th>
-            <th scope="col">Costo Adquisicion</th>
-            <th scope="col">Cantidad Disponibilidad</th>
-            <th scope="col">acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            productosList.map((val, key) => {
-              return <tr key={val.ProductoID}>
-                <th scope="row">{val.ProductoID}</th>
-                <td>{val.NombreProducto}</td>
-                <td>{val.DescripcionProducto}</td>
-                <td>{val.PrecioVenta}</td>
-                <td>{val.CostoAdquisicion}</td>
-                <td>{val.CantidadDisponible}</td>
-                <td>
-                  <div className="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <button 
-                      onClick={()=>{
-                        editarList(val);
-                      }}
-                      type="button" className="btn btn-warning">Editar</button>
-                    <button 
-                      onClick={()=>{
-                        eliminar(val.ProductoID);
-                      }}
-                    type="button" className="btn btn-danger">Eliminar</button>
-                  </div>
-                </td>
-              </tr>
-            })
-          }
-        </tbody>
-      </table>
-      <button className='btn btn-success' onClick={getLista}>Lista</button>      
     </div>
   );
 }

@@ -42,8 +42,8 @@ const Facturacion = () => {
     });
 
     return (
-        <div className="inicio" id="factura">
-                <div ref={conponentPDF}className="invoice-box container_register">
+        <div className="inicio_factura" id="factura">
+                <div ref={conponentPDF}className="invoice-box container_register_facturacion">
                     <table cellpadding="0" cellspacing="0">
                         <tr className="top">
                             <td colspan="4">
