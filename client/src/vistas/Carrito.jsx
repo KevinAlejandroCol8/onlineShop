@@ -95,33 +95,6 @@ const Carrito = () => {
                     ))}
                 </table>
             </section>
-            <section id="cart-bottom" className="container">
-                <div className="row">
-                    <div className="coupon mb-4">
-                        <div>
-                            <h5>Informacion de pago </h5>
-                            <p>Numero de tarjeta</p>
-                            <div class="d-flex">
-                                <input type="text" className="inpTarjeta" id="cardNumber1" maxlength="4" placeholder="####" />
-                                <input type="text" className="inpTarjeta" id="cardNumber2" maxlength="4" placeholder="####" />
-                                <input type="text" className="inpTarjeta" id="cardNumber3" maxlength="4" placeholder="####" />
-                                <input type="text" className="inpTarjeta" id="cardNumber4" maxlength="4" placeholder="####" />
-                            </div>
-                            <div class="d-flex">
-                                <p>Fecha de vencimiento</p>
-                                <div class="d-flex">
-                                    <input type="text" className="inpTarjeta" id="cardNumber1" maxlength="2" placeholder="01" />
-                                    <input type="text" className="inpTarjeta" id="cardNumber2" maxlength="4" placeholder="2023" />
-                                </div>
-                                <p>CCV</p>
-                                <div class="d-flex">
-                                    <input type="text" className="miniImput" id="cardNumber3" maxlength="3" placeholder="###" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <section id="cart-bottom" class="container">
                 <div className="row">
                     <div className="coupon col-lg-6 col-md-6 col-12 mb-4">

@@ -16,8 +16,8 @@ import Carrito from "./vistas/Carrito"
 import Productos from "./vistas/Productos";
 import Login from "./vistas/Login";
 import LoginRegister from "./vistas/LoginRegister";
-
-
+import Payment from "./vistas/Payment";
+import Facturacion from "./vistas/Facturacion";
 
 function AppRouter(){
   return(
@@ -36,6 +36,8 @@ function AppRouter(){
             <Route exact path="/Productos" element={<Productos/>}/>
             <Route exact path="/Login" element={<Login/>}/>
             <Route exact path="/LoginRegister" element={<LoginRegister/>}/>
+            <Route exact path="/Payment" element={<Payment/>}/>
+            <Route exact path="/Facturacion" element={<Facturacion/>}/>
           </Routes>
       </main>
       <Footer/>

@@ -116,7 +116,7 @@ const Menu = () => {
           <ul className="menu">
             <li><a onClick={() => navigate("/Home")}>Inicio</a></li>
             <li><a onClick={() => navigate("/")}>Productos</a></li>
-            <li><a>Descuentos</a></li>
+            <li><a onClick={() => navigate("/Facturacion")}>Descuentos</a></li>
             <li><a>Empleados</a></li>
             <li><a onClick={toggleMenu}>Mantenimientos</a></li>
             <ul className={`submenu ${isOpen ? "open" : ""}`}>
