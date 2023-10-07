@@ -127,7 +127,9 @@ const Carrito = () => {
                                 <h6>TOTAL</h6>
                                 <p>Q.{(calcularTotalSubtotal() + calcularIVA()).toFixed(2)}</p>
                             </div>
+
                             <button onClick={() => navigate("/Payment")} class="botton2 ml-auto">PROCEDER AL PAGO</button>
+                            <button class="botton2 ml-auto" onClick={() => navigate("/Payment")}>PROCEDER AL PAGO</button>
                         </div>
                     </div>
                 </div>
