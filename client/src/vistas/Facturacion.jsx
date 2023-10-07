@@ -1,14 +1,11 @@
 import React from "react";
 import { useCarrito } from "../hoocks/carritoState";
-import { html2pdf } from 'html2pdf.js';
+
 
 import '../css/Facturacion.css'
 
 const Facturacion = () => {
 
-    /*tamo pdf */
-    const Vwidth =  (800/96)+1;
-    const Vheight=  (700/96)+1;
     
     const fechaActual = new Date();
     const numeroAleatorio = Math.floor(Math.random() * 1000000) + 1;
@@ -37,17 +34,6 @@ const Facturacion = () => {
         const totalSubtotal = calcularTotalSubtotal();
         return totalSubtotal * IVA_RATE;
     };
-
-    const Facturar = () => {   
-        let options = {
-            filename: 'FACTURA.pdf',
-            margin: 0.5,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: [(Vheight + (0.5 * 2)), Vwidth], orientation: 'landscape' },
-        };
-        html2pdf().set(options).from(document.getElementById('factura')).save(); 
-    }
 
     return (
         <div className="inicio" id="factura">
@@ -102,7 +88,6 @@ const Facturacion = () => {
                         <td>Total: Q.{(calcularTotalSubtotal() + calcularIVA()).toFixed(2)}</td>
                     </tr>
                 </table>
-                <button onClick={Facturar}></button>
             </div>
         </div>
     );
