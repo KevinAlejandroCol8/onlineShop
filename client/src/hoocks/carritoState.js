@@ -1,25 +1,33 @@
-// carritoState.js
 
-import { useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
-// Estado inicial del carrito
-const initialCarrito = [];
+const CarritoContext = createContext();
 
-// Función para agregar un producto al carrito
-export function agregarAlCarrito(producto, carrito, setCarrito) {
-  setCarrito([...carrito, producto]);
-}
+export const useCarrito = () => {
+  return useContext(CarritoContext);
+};
 
-// Función para eliminar un producto del carrito por índice
-export function eliminarDelCarrito(index, carrito, setCarrito) {
-  const nuevoCarrito = [...carrito];
-  nuevoCarrito.splice(index, 1);
-  setCarrito(nuevoCarrito);
-}
+export const CarritoProvider = ({ children }) => {
+  const [carrito, setCarrito] = useState([]);
 
-// Exporta el estado del carrito y las funciones
-export function useCarrito() {
-  const [carrito, setCarrito] = useState(initialCarrito);
+  const agregarAlCarrito = (producto) => {
+    setCarrito([...carrito, producto]);
+  };
 
-  return { carrito, setCarrito };
-}
+  const eliminarDelCarrito = (productoId) => {
+    console.log("origianl ",carrito);
+    const nuevoCarrito = carrito.filter((producto) => {
+      console.log("producto.id:", producto.id);
+      console.log("productoId:", productoId);
+      return producto.id == productoId;
+    });
+    console.log("nuevo carrito  ",nuevoCarrito);
+    setCarrito(nuevoCarrito);
+  };
+
+  return (
+    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, eliminarDelCarrito }}>
+      {children}
+    </CarritoContext.Provider>
+  );
+};

@@ -1,16 +1,24 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useCarrito } from "../hoocks/carritoState";
+
 import '../css/Carrito_final.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const IVA_RATE = 0.12; // Tasa de IVA del 12%
 
 const Carrito = () => {
-    const location = useLocation();
-    const { carrito: carritoInicial } = location.state || {};
 
-    // Usamos useState para mantener el estado del carrito
-    const [carrito, setCarrito] = useState(carritoInicial);
+    const [cantidades, setCantidades] = useState({}); // Estado para mantener las cantidades
+    const { carrito, eliminarDelCarrito } = useCarrito();
+
+
+    useEffect(() => {
+        const cantidadesPredeterminadas = {};
+        carrito.forEach((producto) => {
+            cantidadesPredeterminadas[producto.ProductoID] = 1;
+        });
+        setCantidades(cantidadesPredeterminadas);
+    }, [carrito]);
 
     if (!carrito || carrito.length === 0) {
         return (
@@ -20,21 +28,18 @@ const Carrito = () => {
         );
     }
 
+    const handleCantidadChange = (productoId, cantidad) => {
+        setCantidades({ ...cantidades, [productoId]: cantidad });
+    };
+
     // Función para calcular el subtotal de un producto en una línea
     const calcularSubtotal = (producto) => {
-        return producto.PrecioVenta * producto.Cantidad;
+        return producto.PrecioVenta * cantidades[producto.ProductoID];
     };
 
-    const eliminarProducto = (index) => {
-        const nuevoCarrito = [...carrito];
-        nuevoCarrito.splice(index, 1); // Elimina el producto en el índice especificado
-        setCarrito(nuevoCarrito);
-    };
-
-    const actualizarCantidad = (index, nuevaCantidad) => {
-        const nuevoCarrito = [...carrito];
-        nuevoCarrito[index].Cantidad = nuevaCantidad;
-        setCarrito(nuevoCarrito);
+    const handleEliminarProducto = (productoId) => {
+        // Llama a la función para eliminar el producto del carrito
+        eliminarDelCarrito(productoId);
     };
 
     const calcularTotalSubtotal = () => {
@@ -69,17 +74,18 @@ const Carrito = () => {
                     </thead>
                     {carrito.map((producto, index) => (
                         <tbody>
-                            <tr key={producto.ID}>
-                                <td><svg class="eliminar-boton" onClick={() => eliminarProducto(index)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" /></svg></td>
+                            <tr key={producto.ProductoID}>
+                                <td><svg class="eliminar-boton" onClick={() => handleEliminarProducto(producto.ProductoID)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" /></svg></td>
                                 <td><img src={`http://localhost:3001/productos/imagen/${producto.Imagen}`} alt={producto.NombreProducto} /></td>
                                 <td>
-                                    <h5>{producto.NombreProducto}</h5>
+                                    <h5 className="textoLinea">{producto.NombreProducto}</h5>
                                 </td>
                                 <td>
                                     <h5>Q.{producto.PrecioVenta.toFixed(2)}</h5>
                                 </td>
                                 <td>
-                                    <input placeholder="0" class="w-25 pl-1" type="number" value={producto.Cantidad} onChange={(e) => actualizarCantidad(index, parseInt(e.target.value, 10))} />
+                                    <input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades[producto.ProductoID] || 0}
+                                        onChange={(e) => handleCantidadChange(producto.ProductoID, parseInt(e.target.value))} />
                                 </td>
                                 <td>
                                     Q.{calcularSubtotal(producto).toFixed(2)}
@@ -89,13 +95,40 @@ const Carrito = () => {
                     ))}
                 </table>
             </section>
+            <section id="cart-bottom" className="container">
+                <div className="row">
+                    <div className="coupon mb-4">
+                        <div>
+                            <h5>Informacion de pago </h5>
+                            <p>Numero de tarjeta</p>
+                            <div class="d-flex">
+                                <input type="text" className="inpTarjeta" id="cardNumber1" maxlength="4" placeholder="####" />
+                                <input type="text" className="inpTarjeta" id="cardNumber2" maxlength="4" placeholder="####" />
+                                <input type="text" className="inpTarjeta" id="cardNumber3" maxlength="4" placeholder="####" />
+                                <input type="text" className="inpTarjeta" id="cardNumber4" maxlength="4" placeholder="####" />
+                            </div>
+                            <div class="d-flex">
+                                <p>Fecha de vencimiento</p>
+                                <div class="d-flex">
+                                    <input type="text" className="inpTarjeta" id="cardNumber1" maxlength="2" placeholder="01" />
+                                    <input type="text" className="inpTarjeta" id="cardNumber2" maxlength="4" placeholder="2023" />
+                                </div>
+                                <p>CCV</p>
+                                <div class="d-flex">
+                                    <input type="text" className="miniImput" id="cardNumber3" maxlength="3" placeholder="###" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section id="cart-bottom" class="container">
                 <div className="row">
                     <div className="coupon col-lg-6 col-md-6 col-12 mb-4">
                         <div>
                             <h5>Cupón de descuento</h5>
                             <p>Ingrese su cupón si tiene uno</p>
-                            <input type="text" placeholder="Código de Cupón" />
+                            <input className="miniImput" type="text" placeholder="Código de Cupón" />
                             <button class="botton1">APLICAR CUPÓN</button>
                         </div>
                     </div>
@@ -124,6 +157,7 @@ const Carrito = () => {
                     </div>
                 </div>
             </section>
+
         </div>
         </>
     );

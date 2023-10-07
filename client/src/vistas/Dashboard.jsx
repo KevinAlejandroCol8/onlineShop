@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { useCarrito } from "../hoocks/carritoState";
 import axios from "axios"
 import '../css/catalogoProductos.css'
 import '../css/carrito.css'
@@ -7,7 +8,10 @@ import '../css/carrito.css'
 
 const Dashboard = () => {
     const [productosList, setProductosList] = useState([]);
-    const [carrito, setCarrito] = useState([]);
+    //const [carrito, setCarrito] = useState([]);
+
+    const { carrito, agregarAlCarrito } = useCarrito();
+
     const [mostrarCarrito, setMostrarCarrito] = useState(false);
     const navigate = useNavigate();
 
@@ -17,9 +21,14 @@ const Dashboard = () => {
         })
     }
 
-    const agregarAlCarrito = (producto) => {
+    /*const agregarAlCarrito = (producto) => {
         setCarrito([...carrito, producto]);
+    };*/
+
+    const agregarProductoAlCarrito = (producto) => {
+        agregarAlCarrito(producto);
     };
+
 
     const toggleCarrito = () => {
         setMostrarCarrito(!mostrarCarrito);
@@ -40,14 +49,14 @@ const Dashboard = () => {
 
                 {productosList.map((val, key) => {
                     return (
-                        <div className="item">
+                        <div className="item" key={key}>
                             <figure>
                                 <img src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
                             </figure>
                             <div className="info-product">
                                 <h5 >{val.NombreProducto}</h5>
                                 <h1 class="price">Q. {val.PrecioVenta}</h1>
-                                <button className="classBtn first" onClick={() => agregarAlCarrito(val)}>Añadir al carrito</button>
+                                <button className="classBtn first" onClick={() => agregarProductoAlCarrito(val)}>Añadir al carrito</button>
                             </div>
                         </div>
                     );

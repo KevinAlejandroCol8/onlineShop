@@ -248,3 +248,12 @@ html {
 .submenu.open {
 	display: block;
 }
+
+/*Codigo kevin*/
+.textoLinea{
+    font-size: 18px;
+}
+
+.textoNumero{
+    font-size: 13px;
+}
