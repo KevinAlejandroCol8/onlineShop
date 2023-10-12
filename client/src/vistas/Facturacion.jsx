@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useCarrito } from "../hoocks/carritoState";
 import { useReactToPrint } from 'react-to-print';
 

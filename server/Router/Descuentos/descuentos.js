@@ -6,7 +6,8 @@ const db  = require('../../configMySQL')
 router.post("/create",(req,res)=>{
     const NombreDescuento = req.body.NombreDescuento;
     const PorcentajeDescuento = req.body.PorcentajeDescuento;
-    db.query('INSERT INTO Descuentos (NombreDescuento,PorcentajeDescuento) values (?,?)',[NombreDescuento,PorcentajeDescuento],
+    const Codigo_Descuento = req.body.Codigo_Descuento;
+    db.query('INSERT INTO Descuentos (NombreDescuento,PorcentajeDescuento,Codigo_Descuento) values (?,?,?)',[NombreDescuento,PorcentajeDescuento,Codigo_Descuento],
         (err,result) =>{
             if(err){
                 console.log("El Error",err);
@@ -33,7 +34,8 @@ router.put("/update",(req,res)=>{
     const DescuentoID = req.body.DescuentoID
     const NombreDescuento = req.body.NombreDescuento;
     const PorcentajeDescuento = req.body.PorcentajeDescuento;
-    db.query('UPDATE Descuentos SET NombreDescuento= ?,PorcentajeDescuento = ? WHERE DescuentoID = ?',[NombreDescuento,PorcentajeDescuento,DescuentoID],
+    const Codigo_Descuento = req.body.Codigo_Descuento;
+    db.query('UPDATE Descuentos SET NombreDescuento= ?,PorcentajeDescuento = ?, Codigo_Descuento = ? WHERE DescuentoID = ?',[NombreDescuento,PorcentajeDescuento,Codigo_Descuento,DescuentoID],
         (err,result) =>{
             if(err){
                 console.log("El Error",err);

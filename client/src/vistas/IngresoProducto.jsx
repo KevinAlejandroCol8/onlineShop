@@ -13,7 +13,7 @@ const IngresoProducto = () => {
   const [CostoAdquisicion, setCostoAdquisicion] = useState("");
   const [CantidadDisponible, setCantidadDisponible] = useState("");
   const [Imagen, setImagen] = useState(null);
-  const [DescuentoID, setDescuentoID] = useState("");
+  const [ProveedorID, setProveedorID] = useState("");
   const [TipoProductoID, setTipoProductoID] = useState("");
   const [ProductoID, setProductoID] = useState("");
   /*Fin campos*/
@@ -21,7 +21,7 @@ const IngresoProducto = () => {
   /*Lista elementos a mostrar*/
   const [productosList, setProductosList] = useState([]); //Lista
   /*Fin lista a mostrar*/
-  const [descuentosList, setdescuentosList] = useState([]);
+  const [proveedoresList, setproveedoresList] = useState([]);
   const [tipoProductoList, settipoProductoList] = useState([]);
   /*List llaves PK*/
 
@@ -50,6 +50,7 @@ const IngresoProducto = () => {
     })
   }*/
   /*Nueva Forma */
+
   const add = () => {
     const formData = new FormData();
     formData.append("NombreProducto", NombreProducto);
@@ -59,7 +60,7 @@ const IngresoProducto = () => {
     formData.append("CantidadDisponible", CantidadDisponible);
     formData.append("SKU", SKU);
     formData.append("Imagen", Imagen); // Aquí adjuntamos la imagen seleccionada
-    formData.append("DescuentoID", DescuentoID);
+    formData.append("ProveedorID", ProveedorID);
     formData.append("TipoProductoID", TipoProductoID);
 
     axios.post("http://localhost:3001/productos/create", formData)
@@ -77,7 +78,7 @@ const IngresoProducto = () => {
       CostoAdquisicion: CostoAdquisicion,
       CantidadDisponible: CantidadDisponible,
       Imagen: Imagen,
-      DescuentoID: DescuentoID,
+      ProveedorID: ProveedorID,
       TipoProductoID: TipoProductoID,
       ProductoID: ProductoID
     }).then(() => {
@@ -87,8 +88,8 @@ const IngresoProducto = () => {
     })
   }
 
-  const eliminar = (idPrueba) => {
-    axios.delete(`http://localhost:3001/productos/elimiarEmpleado/${idPrueba}`).then(() => {
+  const eliminar = (ProductoID) => {
+    axios.delete(`http://localhost:3001/productos/eliminar/${ProductoID}`).then(() => {
       getLista();
     })
   }
@@ -101,7 +102,7 @@ const IngresoProducto = () => {
     setCostoAdquisicion("");
     setCantidadDisponible("");
     setImagen("");
-    setDescuentoID("");
+    setProveedorID("");
     setTipoProductoID("");
     setProductoID("");
     setSKU("");
@@ -113,11 +114,13 @@ const IngresoProducto = () => {
     })
   }
 
-  const cargarDescuentos = () => {
-    axios.get("http://localhost:3001/descuentos/lista").then((response) => {
-      setdescuentosList(response.data);
+
+  const cargarProveedores = () => {
+    axios.get("http://localhost:3001/Proveedores/lista").then((response) => {
+      setproveedoresList(response.data);
     })
   }
+
 
   const cargarTipoProducto = () => {
     axios.get("http://localhost:3001/tiposProductos/lista").then((response) => {
@@ -133,7 +136,7 @@ const IngresoProducto = () => {
     setCostoAdquisicion(val.CostoAdquisicion);
     setCantidadDisponible(val.CantidadDisponible);
     setImagen(val.Imagen);
-    setDescuentoID(val.DescuentoID);
+    setProveedorID(val.ProveedorID);
     setSKU(val.SKU);
     setTipoProductoID(val.TipoProductoID);
     setProductoID(val.ProductoID);
@@ -141,7 +144,7 @@ const IngresoProducto = () => {
 
   useEffect(() => {
     getLista();
-    cargarDescuentos();
+    cargarProveedores();
     cargarTipoProducto();
   }, []);
 
@@ -149,7 +152,7 @@ const IngresoProducto = () => {
   const [SKU, setSKU] = useState('');
   const generateSKU = () => {
     // Generar un SKU aleatorio (en este caso, una cadena de 8 caracteres)
-    const randomSKU = Math.random().toString(36).substring(2, 10).toUpperCase();
+  const randomSKU = Math.random().toString(36).substring(2, 10).toUpperCase();
 
     // Actualizar el estado con el SKU generado
     setSKU(randomSKU);
@@ -220,20 +223,20 @@ const IngresoProducto = () => {
                 setImagen(event.target.files[0]);
               }}
               type="file" className="form-control custom-input" aria-label="Imagen" />
-          </div>
+          </div> 
           <div className="mb-3">
-            <h3 className="titulos">Tipo Descuento</h3>
-            <select className="form-select" aria-label="Default select example"
+            <h3 className="titulos">Prooveedor</h3>
+            <select class="form-select" aria-label="Default select example"
               onChange={(event) => {
-                setDescuentoID(event.target.value);
+                setProveedorID(event.target.value);
               }}
-              value={DescuentoID}
+              value={ProveedorID}
             >
               {
-                descuentosList.map((desc, i) => {
+                proveedoresList.map((tp, i) => {
                   return (
-                    <option key={i} value={desc.DescuentoID} >
-                      {desc.NombreDescuento}
+                    <option key={i} value={tp.ProveedorID} >
+                      {tp.NombreProveedor}
                     </option>
                   )
                 })

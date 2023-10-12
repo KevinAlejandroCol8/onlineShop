@@ -7,6 +7,7 @@ const Descuentos = () => {
   /*Campos de la base de datos*/
   const [NombreDescuento, setNombreDescuento] = useState("");
   const [PorcentajeDescuento, setPorcentajeDescuento] = useState("");
+  const [Codigo_Descuento, setCodigo_Descuento] = useState("");
   const [DescuentoID, setDescuentoID] = useState("");
   /*Fin campos*/
 
@@ -18,7 +19,8 @@ const Descuentos = () => {
   const add = () => {
     axios.post("http://localhost:3001/descuentos/create", {
       NombreDescuento: NombreDescuento,
-      PorcentajeDescuento: PorcentajeDescuento
+      PorcentajeDescuento: PorcentajeDescuento,
+      Codigo_Descuento : Codigo_Descuento
     }).then(() => {
       getLista();
       limpiar();
@@ -30,6 +32,7 @@ const Descuentos = () => {
     axios.put("http://localhost:3001/descuentos/update", {
       NombreDescuento: NombreDescuento,
       PorcentajeDescuento: PorcentajeDescuento,
+      Codigo_Descuento: Codigo_Descuento,
       DescuentoID: DescuentoID
     }).then(() => {
       getLista();
@@ -48,6 +51,7 @@ const Descuentos = () => {
     setNombreDescuento("");
     setPorcentajeDescuento("");
     setDescuentoID("");
+    setCodigo_Descuento("");
   }
 
   const getLista = () => {
@@ -60,7 +64,8 @@ const Descuentos = () => {
     setEditar(true);
     setNombreDescuento(val.NombreDescuento);
     setPorcentajeDescuento(val.PorcentajeDescuento);
-    setDescuentoID(val.sPorcentajeDescuento);
+    setCodigo_Descuento(val.Codigo_Descuento);
+    setDescuentoID(val.DescuentoID);
   }
 
   useEffect(() => {
@@ -78,7 +83,7 @@ const Descuentos = () => {
               onChange={(event) => {
                 setNombreDescuento(event.target.value);
               }}
-              value={NombreDescuento} type="text" className="form-control custom-input" id="nombre" placeholder="Nombre Completo" />
+              value={NombreDescuento} type="text" className="form-control custom-input" id="NombreDescuento" placeholder="Nombre Completo" />
           </div>
           <div className="mb-3">
             <h3 className="titulos">% Descuento</h3>
@@ -86,7 +91,15 @@ const Descuentos = () => {
               onChange={(event) => {
                 setPorcentajeDescuento(event.target.value);
               }}
-              value={PorcentajeDescuento} type="text" className="form-control custom-input" id="nombre" placeholder="Nombre Completo" />
+              value={PorcentajeDescuento} type="text" className="form-control custom-input" id="Codigo_Descuento" placeholder="Nombre Completo" />
+          </div>
+          <div className="mb-3">
+            <h3 className="titulos">Codigo Desceunto</h3>
+            <input
+              onChange={(event) => {
+                setCodigo_Descuento(event.target.value);
+              }}
+              value={Codigo_Descuento} type="text" className="form-control custom-input" id="Codigo_Descuento" placeholder="Nombre Completo" />
           </div>
           <div className="mb-3 d-flex justify-content-center">
             {
@@ -105,6 +118,7 @@ const Descuentos = () => {
                 <th scope="col">#</th>
                 <th scope="col">Nombre Del Descuento</th>
                 <th scope="col">% Procentaje</th>
+                <th scope="col">Codigo Descuento</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -115,6 +129,7 @@ const Descuentos = () => {
                     <th scope="row">{val.DescuentoID}</th>
                     <td>{val.NombreDescuento}</td>
                     <td>{val.PorcentajeDescuento}</td>
+                    <td>{val.Codigo_Descuento}</td>
                     <td>
                       <div className="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button

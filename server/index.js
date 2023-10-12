@@ -7,6 +7,7 @@ const tiposProductos = require("./Router/tiposProductos/tiposProductos");
 const descuentos = require("./Router/Descuentos/descuentos");
 const productos = require("./Router/Productos/productos");
 const loginUsuarios = require("./Router/Login/creacionUsuarios");
+const Proveedores = require("./Router/Proveedores/proveedor");
 
 // Configuración inicial
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use('/tiposProductos', tiposProductos);
 app.use('/descuentos', descuentos);
 app.use('/productos', productos);
 app.use('/loginUsuario', loginUsuarios);
+app.use('/Proveedores', Proveedores);
 
 
 app.listen(3001,()=>{
