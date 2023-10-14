@@ -9,24 +9,31 @@ export const useCarrito = () => {
 
 export const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
+  const [cantidades2, setCantidades] = useState({}); //Nuevo
+  const [descuentoGlobal, setDescuentoGlobal] = useState(null);
 
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
+    setCantidades({ ...cantidades2, [producto.ProductoID]: 1 });
   };
 
   const eliminarDelCarrito = (productoId) => {
-    console.log("origianl ",carrito);
-    const nuevoCarrito = carrito.filter((producto) => {
-      console.log("producto.id:", producto.id);
-      console.log("productoId:", productoId);
-      return producto.id == productoId;
+    const nuevoCarrito = carrito.filter(function(item) {
+      return item.ProductoID !== productoId;
     });
-    console.log("nuevo carrito  ",nuevoCarrito);
+    //const nuevoCarrito = carrito.splice(productoId, 1);
     setCarrito(nuevoCarrito);
   };
 
+  // Nueva función para actualizar las cantidades
+  const actualizarCantidad = (productoId, cantidad) => {
+    setCantidades({ ...cantidades2, [productoId]: cantidad });
+  };
+
+
+
   return (
-    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, eliminarDelCarrito }}>
+    <CarritoContext.Provider value={{ carrito,cantidades2,descuentoGlobal, setDescuentoGlobal, agregarAlCarrito, eliminarDelCarrito,actualizarCantidad }}>
       {children}
     </CarritoContext.Provider>
   );

@@ -16,10 +16,10 @@ const Facturacion = () => {
 
 
     const IVA_RATE = 0.12; // Tasa de IVA del 12%
-    const { carrito } = useCarrito();
+    const { carrito, cantidades2 } = useCarrito();
 
     const calcularSubtotal = (producto) => {
-        return producto.PrecioVenta * 1;
+        return producto.PrecioVenta * cantidades2[producto.ProductoID];
     };
 
     const calcularTotalSubtotal = () => {
@@ -81,7 +81,7 @@ const Facturacion = () => {
                             <tr class="item" key={producto.ProductoID}>
                                 <td><h5 className=" ">{producto.NombreProducto}</h5></td>
                                 <td><h5>Q.{producto.PrecioVenta.toFixed(2)}</h5></td>
-                                <td><h5>1</h5></td>
+                                <td><h5>{cantidades2[producto.ProductoID]}</h5></td>
                                 <td>Q.{calcularSubtotal(producto).toFixed(2)}</td>
                             </tr>
                         ))}

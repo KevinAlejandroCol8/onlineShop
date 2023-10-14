@@ -49,7 +49,7 @@ const Dashboard = () => {
 
                 {productosList.map((val, key) => {
                     return (
-                        <div className="item" key={key}>
+                        <div className="item" key={val.ProductoID}>
                             <figure>
                                 <img src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
                             </figure>

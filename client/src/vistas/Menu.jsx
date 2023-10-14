@@ -99,8 +99,8 @@ const Menu = () => {
               viewBox="0 0 576 512"
             ><path d={tiendaIco} /></svg>
             <div className="content-shopping-cart">
-              <span className="text textoLinea">Carrito</span>
-              <span className="number textoNumero">{cantidadProductosEnCarrito}</span>
+              <span className="text textoLinea" onClick={toggleCarrito}>Carrito</span>
+              <span className="number textoNumero" onClick={toggleCarrito}>{cantidadProductosEnCarrito}</span>
             </div>
           </div>
         </div>

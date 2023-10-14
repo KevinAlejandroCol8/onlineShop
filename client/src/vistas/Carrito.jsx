@@ -1,25 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useCarrito } from "../hoocks/carritoState";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 import '../css/Carrito_final.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
+import { IconoEliminar } from "../hoocks/iconos";
 
 const IVA_RATE = 0.12; // Tasa de IVA del 12%
 
 const Carrito = () => {
 
     const navigate = useNavigate();
-    const [cantidades, setCantidades] = useState({}); // Estado para mantener las cantidades
-    const { carrito, eliminarDelCarrito } = useCarrito();
+    //const [cantidades, setCantidades] = useState({}); // Estado para mantener las cantidades
+    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad } = useCarrito();
 
+    const [codigoDescuento, setCodigoDescuento] = useState('');
+    const [descuentos, setDescuentos] = useState(null);
 
+    
+
+    //console.log('Esto es el carrito ', carrito)
+    //console.log(JSON.stringify(carrito, null, 2));
+    //console.log('Esto es la cantidad ',cantidades2)
+    
     useEffect(() => {
         const cantidadesPredeterminadas = {};
         carrito.forEach((producto) => {
             cantidadesPredeterminadas[producto.ProductoID] = 1;
         });
-        setCantidades(cantidadesPredeterminadas);
+        //setCantidades(cantidadesPredeterminadas);
     }, [carrito]);
 
     if (!carrito || carrito.length === 0) {
@@ -30,13 +41,19 @@ const Carrito = () => {
         );
     }
 
-    const handleCantidadChange = (productoId, cantidad) => {
+    /*const handleCantidadChange = (productoId, cantidad) => {
         setCantidades({ ...cantidades, [productoId]: cantidad });
+    };*/
+
+    const cambiarCantidades = (productoId, cantidad2) => {
+        console.log('ID producto ', productoId, 'Cantidad modificada ', cantidad2);
+        //setCantidades({ ...cantidades, [productoId]: cantidad2 });
+        actualizarCantidad(productoId, cantidad2);
     };
 
     // Función para calcular el subtotal de un producto en una línea
     const calcularSubtotal = (producto) => {
-        return producto.PrecioVenta * cantidades[producto.ProductoID];
+        return producto.PrecioVenta * cantidades2[producto.ProductoID];
     };
 
     const handleEliminarProducto = (productoId) => {
@@ -55,6 +72,31 @@ const Carrito = () => {
     const calcularIVA = () => {
         const totalSubtotal = calcularTotalSubtotal();
         return totalSubtotal * IVA_RATE;
+    };
+
+    const buscarDescuento = () => {
+        console.log(codigoDescuento);
+        axios
+            .get(`http://localhost:3001/descuentos/lista/${codigoDescuento}`)
+            .then((response) => {
+            // Actualizar el estado de descuentos con la respuesta de la API
+                setDescuentos(response.data);
+            //console.log(response.data);
+            })
+            .catch((error) => {
+             console.error("Error al obtener los descuentos:", error);
+            });
+        //console.log('cambios ',descuentos[0].PorcentajeDescuento)
+    };
+
+    const calcularDescuento = (producto) => {
+        if (descuentos && Array.isArray(descuentos) && descuentos.length > 0 && descuentos[0].PorcentajeDescuento) {
+            return (
+                (((calcularTotalSubtotal() + calcularIVA()) * descuentos[0].PorcentajeDescuento) / 100)
+            ).toFixed(2);
+        } else {
+            return "0.00"; // o cualquier otro valor por defecto
+        }
     };
 
     return (
@@ -77,7 +119,14 @@ const Carrito = () => {
                     {carrito.map((producto, index) => (
                         <tbody>
                             <tr key={producto.ProductoID}>
-                                <td><svg class="eliminar-boton" onClick={() => handleEliminarProducto(producto.ProductoID)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" /></svg></td>
+                                {/*<td>
+                                    <svg class="eliminar-boton" onClick={() => handleEliminarProducto(producto.ProductoID)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
+                                    <path d={IconoEliminar} /></svg>
+                                </td>*/}
+                                <td>
+                                    <svg class="eliminar-boton" onClick={() => handleEliminarProducto(producto.ProductoID)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
+                                        <path d={IconoEliminar} /></svg>
+                                </td>
                                 <td><img src={`http://localhost:3001/productos/imagen/${producto.Imagen}`} alt={producto.NombreProducto} /></td>
                                 <td>
                                     <h5 className="textoLinea">{producto.NombreProducto}</h5>
@@ -86,10 +135,14 @@ const Carrito = () => {
                                     <h5>Q.{producto.PrecioVenta.toFixed(2)}</h5>
                                 </td>
                                 <td>
-                                    <input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades[producto.ProductoID] || 0}
-                                        onChange={(e) => handleCantidadChange(producto.ProductoID, parseInt(e.target.value))} />
+                                    {/*<input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades[producto.ProductoID] || 0}
+                                        onChange={(e) => handleCantidadChange(producto.ProductoID, parseInt(e.target.value))} />*/}
+                                    <input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades2[producto.ProductoID]}
+                                        onChange={(e) => cambiarCantidades(producto.ProductoID, parseInt(e.target.value))} />
                                 </td>
                                 <td>
+                                    {/*<input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades2[producto.ProductoID]}
+                                        onChange={(e) => cambiarCantidades(producto.ProductoID, parseInt(e.target.value))} />*/}
                                     Q.{calcularSubtotal(producto).toFixed(2)}
                                 </td>
                             </tr>
@@ -103,8 +156,13 @@ const Carrito = () => {
                         <div>
                             <h5>Cupón de descuento</h5>
                             <p>Ingrese su cupón si tiene uno</p>
-                            <input className="miniImput" type="text" placeholder="Código de Cupón" />
-                            <button class="botton1">APLICAR CUPÓN</button>
+                            <input className="miniImput" type="text" placeholder="Código de Cupón"
+                                onChange={(event) => {
+                                    setCodigoDescuento(event.target.value);
+                                }}
+                                value={codigoDescuento}
+                            />
+                            <button class="botton1" onClick={buscarDescuento} >APLICAR CUPÓN</button>
                         </div>
                     </div>
                     <div className="total col-lg-6 col-md-6 col-12 mb-4">
@@ -120,12 +178,12 @@ const Carrito = () => {
                             </div>
                             <div className="d-flex justify-content-between">
                                 <h6>Descuento</h6>
-                                <p>Q.0</p>
+                                <p>Q.{calcularDescuento()}</p>
                             </div>
                             <hr class="second-hr" />
                             <div className="d-flex justify-content-between">
                                 <h6>TOTAL</h6>
-                                <p>Q.{(calcularTotalSubtotal() + calcularIVA()).toFixed(2)}</p>
+                                <p>Q.{((calcularTotalSubtotal() + calcularIVA()) - calcularDescuento()).toFixed(2)}</p>
                             </div>
 
                             <button onClick={() => navigate("/Payment")} class="botton2 ml-auto">PROCEDER AL PAGO</button>

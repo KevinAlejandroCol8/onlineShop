@@ -59,4 +59,17 @@ router.delete("/eliminar/:DescuentoID",(req,res)=>{
     );
 });
 
+router.get("/lista/:Codigo_Descuento",(req,res)=>{
+    const Codigo_Descuento = req.params.Codigo_Descuento
+    db.query('SELECT PorcentajeDescuento FROM Descuentos WHERE Codigo_Descuento = ?;',[Codigo_Descuento],
+        (err,result) =>{
+            if(err){
+                console.log("El Error",err);
+            }else{
+                res.send(result);
+            }
+        }
+    );
+});
+
 module.exports = router;

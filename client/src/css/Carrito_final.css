@@ -10,6 +10,11 @@
     padding: 0;
 }
 
+.miniImput2{
+    width: 45% !important;
+    text-align: center !important;
+}
+
 small-container cart-page {
     font-family: "Poppins", sans-serif;
     max-width: 120rem;
@@ -181,11 +186,6 @@ html {
 
 .miniImput{
     width: 80%;
-}
-
-.miniImput2{
-    width: 35%;
-    text-align: center;
 }
 
 .textoLinea{
