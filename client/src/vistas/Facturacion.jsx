@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useCarrito } from "../hoocks/carritoState";
 import { useReactToPrint } from 'react-to-print';
+import { useAuth } from '../hoocks/AuthContext';
 
 import '../css/Facturacion.css'
 
@@ -14,9 +15,12 @@ const Facturacion = () => {
     const dia = fechaActual.getDate();
     const fechaFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${dia < 10 ? '0' : ''}${dia}`;
 
+    /*Valores usuario*/
+    const { direccionList } = useAuth();
+
 
     const IVA_RATE = 0.12; // Tasa de IVA del 12%
-    const { carrito, cantidades2 } = useCarrito();
+    const { carrito, cantidades2,descuentoGlobal } = useCarrito();
 
     const calcularSubtotal = (producto) => {
         return producto.PrecioVenta * cantidades2[producto.ProductoID];
@@ -41,6 +45,7 @@ const Facturacion = () => {
         onAfterPrint: () => alert('PDF generado con éxito')
     });
 
+
     return (
         <div className="inicio_factura" id="factura">
                 <div ref={conponentPDF}className="invoice-box container_register_facturacion">
@@ -62,10 +67,10 @@ const Facturacion = () => {
                                 <table>
                                     <tr>
                                         <td>
-                                            Sparksuite, Inc.<br></br>12345 Sunny Road<br></br>Sunnyville, CA 12345
+                                            {direccionList.Direccion}
                                         </td>
                                         <td>
-                                            Acme Corp.<br></br>John Doe<br></br> john@example.com
+                                        {direccionList.NombreUsuario}<br></br>{direccionList.NombreCompleto}<br></br>{direccionList.CorreoElectronico}
                                         </td>
                                     </tr>
                                 </table>
@@ -91,7 +96,11 @@ const Facturacion = () => {
                         </tr>
                         <tr class="total">
                             <td colspan="3"></td>
-                            <td>Total: Q.{(calcularTotalSubtotal() + calcularIVA()).toFixed(2)}</td>
+                            <td>Descuento: Q.{descuentoGlobal}</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="3"></td>
+                            <td>Total: Q.{(calcularTotalSubtotal() + calcularIVA() - descuentoGlobal).toFixed(2)}</td>
                         </tr>
                     </table>
 

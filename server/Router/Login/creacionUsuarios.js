@@ -3,8 +3,6 @@ const db  = require('../../configMySQL');
 const bcrypt = require('bcrypt');
 const router = Router();
 
-
-
 /*router.post("/create",(req,res)=>{
     const NombreUsuario = req.body.NombreUsuario;
     const Contrasenia = req.body.Contrasenia;
@@ -82,11 +80,47 @@ router.post("/login", (req, res) => {
                 return;
             }
             // El inicio de sesión fue exitoso, puedes agregar lógica adicional aquí si es necesario
-            res.send("Inicio de sesión exitoso");
+            //res.send("Inicio de sesión exitoso");
+            res.json({ message: "Inicio de sesión exitoso", UsuarioID: user.UsuarioID});
         });
     });
 });
 
+/*
+router.post("/login", (req, res) => {
+    const NombreUsuario = req.body.NombreUsuario;
+    const Contrasenia = req.body.Contrasenia;
+    // Busca el usuario por NombreUsuario
+    db.query('SELECT UsuarioID, Contrasenia FROM Usuarios WHERE NombreUsuario = ?', [NombreUsuario], (err, results) => {
+        if (err) {
+            console.log("Error al buscar el usuario", err);
+            res.status(500).send("Error al iniciar sesión");
+            return;
+        }
+        if (results.length === 0) {
+            // El usuario no existe
+            res.status(401).send("Usuario no encontrado");
+            return;
+        }
+        const user = results[0];
+        // Compara la contraseña proporcionada con el hash almacenado en la base de datos
+        bcrypt.compare(Contrasenia, user.Contrasenia, (err, passwordMatch) => {
+            if (err) {
+                console.log("Error al comparar contraseñas", err);
+                res.status(500).send("Error al iniciar sesión");
+                return;
+            }
+            if (!passwordMatch) {
+                // Contraseña incorrecta
+                res.status(401).send("Contraseña incorrecta");
+                return;
+            }
+            // El inicio de sesión fue exitoso, devuelve el ID del usuario
+            res.json({ message: "Inicio de sesión exitoso", UsuarioID: user.UsuarioID });
+        });
+    });
+});
+*/
 
 router.get("/lista",(req,res)=>{
     db.query('SELECT * FROM Usuarios;',
@@ -130,5 +164,6 @@ router.delete("/eliminar/:UsuarioID",(req,res)=>{
         }
     );
 });
+
 
 module.exports = router;

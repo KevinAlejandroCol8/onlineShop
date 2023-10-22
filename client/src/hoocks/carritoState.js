@@ -10,7 +10,7 @@ export const useCarrito = () => {
 export const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [cantidades2, setCantidades] = useState({}); //Nuevo
-  const [descuentoGlobal, setDescuentoGlobal] = useState(null);
+  const [descuentoGlobal, setDescuentoGlobal] = useState(null); //Nuevo
 
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
@@ -30,10 +30,14 @@ export const CarritoProvider = ({ children }) => {
     setCantidades({ ...cantidades2, [productoId]: cantidad });
   };
 
+  const montoDescuento = (monto) => {
+    setDescuentoGlobal(monto);
+  };
+
 
 
   return (
-    <CarritoContext.Provider value={{ carrito,cantidades2,descuentoGlobal, setDescuentoGlobal, agregarAlCarrito, eliminarDelCarrito,actualizarCantidad }}>
+    <CarritoContext.Provider value={{ carrito,cantidades2,descuentoGlobal, montoDescuento, agregarAlCarrito, eliminarDelCarrito,actualizarCantidad }}>
       {children}
     </CarritoContext.Provider>
   );

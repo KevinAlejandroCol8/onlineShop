@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Login = () => {
 
-    const { login } = useAuth();
+    const { login,codigo } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -26,33 +26,15 @@ const Login = () => {
         });
     };
 
-    /*const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:3001/loginUsuario/login", formData);
-            // Maneja la respuesta del servidor aquí
-            if (response.data === "Inicio de sesión exitoso") {
-                setLoggedInUser(formData.NombreUsuario); // Guarda el nombre de usuario
-                setLoginMessage(`Inicio de sesión exitoso para ${formData.NombreUsuario}`);
-                localStorage.setItem('loggedUser', formData.NombreUsuario); 
-                onLogin(formData.NombreUsuario);
-                // Puedes redirigir al usuario a otra página aquí si es necesario
-            } else {
-                setLoginMessage("Error al iniciar sesión");
-            }
-        } catch (error) {
-            console.error("Error al iniciar sesión:", error);
-            setLoginMessage("Error al iniciar sesión");
-        }
-    };*/
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post("http://localhost:3001/loginUsuario/login", formData);
-            if (response.data === "Inicio de sesión exitoso") {
+            if (response.data.message === "Inicio de sesión exitoso") {
+                const usuarioID = response.data.UsuarioID;
                 // Resto de tu código
                 // Llama a la función de inicio de sesión del contexto
+                codigo(usuarioID);
                 login(formData.NombreUsuario);
                 navigate('/home');
             } else {
@@ -63,6 +45,28 @@ const Login = () => {
             setLoginMessage("Error al iniciar sesión");
         }
     };
+
+    /*
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:3001/loginUsuario/login", formData);
+            if (response.data.message === "Inicio de sesión exitoso") {
+                const usuarioID = response.data.UsuarioID; // Obtiene el ID del usuario
+                // Resto de tu código
+                // Llama a la función de inicio de sesión del contexto
+                login(formData.NombreUsuario, usuarioID);
+                navigate('/home');
+            } else {
+                setLoginMessage("Error al iniciar sesión");
+            }
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+            setLoginMessage("Error al iniciar sesión");
+        }
+    };
+
+    */
 
     return (
         <div className="wrapper">

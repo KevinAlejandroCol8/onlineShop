@@ -51,7 +51,7 @@ const Dashboard = () => {
                     return (
                         <div className="item" key={val.ProductoID}>
                             <figure>
-                                <img src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
+                                <img onClick={toggleCarrito} src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
                             </figure>
                             <div className="info-product">
                                 <h5 >{val.NombreProducto}</h5>

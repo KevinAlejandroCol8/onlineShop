@@ -14,7 +14,7 @@ const Carrito = () => {
 
     const navigate = useNavigate();
     //const [cantidades, setCantidades] = useState({}); // Estado para mantener las cantidades
-    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad } = useCarrito();
+    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad,montoDescuento } = useCarrito();
 
     const [codigoDescuento, setCodigoDescuento] = useState('');
     const [descuentos, setDescuentos] = useState(null);
@@ -89,7 +89,7 @@ const Carrito = () => {
         //console.log('cambios ',descuentos[0].PorcentajeDescuento)
     };
 
-    const calcularDescuento = (producto) => {
+    const calcularDescuento = () => {
         if (descuentos && Array.isArray(descuentos) && descuentos.length > 0 && descuentos[0].PorcentajeDescuento) {
             return (
                 (((calcularTotalSubtotal() + calcularIVA()) * descuentos[0].PorcentajeDescuento) / 100)
@@ -97,6 +97,11 @@ const Carrito = () => {
         } else {
             return "0.00"; // o cualquier otro valor por defecto
         }
+    };
+
+    const envioPago = () => {
+        montoDescuento(calcularDescuento());
+        navigate("/Payment");
     };
 
     return (
@@ -137,7 +142,7 @@ const Carrito = () => {
                                 <td>
                                     {/*<input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades[producto.ProductoID] || 0}
                                         onChange={(e) => handleCantidadChange(producto.ProductoID, parseInt(e.target.value))} />*/}
-                                    <input className="miniImput2" placeholder="0" class="w-25 pl-1" type="text" value={cantidades2[producto.ProductoID]}
+                                    <input className="miniImput2" placeholder="0" class="w-25 pl-1" type="number" value={cantidades2[producto.ProductoID]}
                                         onChange={(e) => cambiarCantidades(producto.ProductoID, parseInt(e.target.value))} />
                                 </td>
                                 <td>
@@ -186,7 +191,8 @@ const Carrito = () => {
                                 <p>Q.{((calcularTotalSubtotal() + calcularIVA()) - calcularDescuento()).toFixed(2)}</p>
                             </div>
 
-                            <button onClick={() => navigate("/Payment")} class="botton2 ml-auto">PROCEDER AL PAGO</button>
+                            {/*<button onClick={() => navigate("/Payment")} class="botton2 ml-auto">PROCEDER AL PAGO</button>*/}
+                            <button onClick={envioPago} class="botton2 ml-auto">PROCEDER AL PAGO</button>
                         </div>
                     </div>
                 </div>

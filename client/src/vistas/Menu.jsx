@@ -9,7 +9,7 @@ import '../css/main_nav.css'
 import { tiendaIco, buscador, userIcon, IconoTienda, IconoAtencion } from "../hoocks/iconos";
 
 const Menu = () => {
-  const { loggedInUser, logout } = useAuth();
+  const { loggedInUser, logout,codigoUser } = useAuth();
 
 
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ const Menu = () => {
                   height="1em"
                   viewBox="0 0 448 512"
                 ><path d={userIcon} /></svg>
-                <span className="user-welcome">{loggedInUser}</span>
+                <span className="user-welcome">{loggedInUser}-{codigoUser}</span>
                 <button onClick={logout} className="btn btn-logout">Cerrar Sesión</button>
               </div>
             ) : (
