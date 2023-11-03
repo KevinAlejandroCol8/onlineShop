@@ -203,12 +203,11 @@ const IngresoProducto = () => {
               }}
               type="text" value={CantidadDisponible}   placeholder="Cantidad de Productos" aria-label="Cantidad" />
           </div>
-<<<<<<< HEAD
+
           <div className="">
-=======
+
           */}
           <div className="mb-3">
->>>>>>> bed2f91751401a0728322d7de90c83bae2e9e190
             <h3 className="titulos">SKU</h3>
             <div className="col v-center">
               <input

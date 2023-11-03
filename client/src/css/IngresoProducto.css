@@ -13,7 +13,7 @@
 .container_register_ingreso_producto{
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
-    height: 800px;
+    height: 1200px;
     /* Altura igual al ancho */
     padding: 20px;
     background-color: white;
