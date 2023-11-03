@@ -117,7 +117,7 @@ const Menu = () => {
             <li><a onClick={() => navigate("/Home")}>Inicio</a></li>
             <li><a onClick={() => navigate("/")}>Productos</a></li>
             <li><a onClick={() => navigate("/Facturacion")}>Descuentos</a></li>
-            <li><a>Empleados</a></li>
+            <li><a onClick={() => navigate("/Proveedores")}>Proveedores</a></li>
             <li><a onClick={toggleMenu}>Mantenimientos</a></li>
             <ul className={`submenu ${isOpen ? "open" : ""}`}>
               <li onClick={() => navigate("/descuentos")}><a>Catalogo Descuentos</a></li>
@@ -126,6 +126,7 @@ const Menu = () => {
               <li onClick={() => navigate("/EmpleadosList")}><a>Empleados</a></li>
             </ul>
           </ul>
+          {/* 
           <form className="search-form">
             <input type="search" placeholder="Buscar..." />
             <button className="btn-search">
@@ -137,6 +138,7 @@ const Menu = () => {
               ><path d={buscador} /></svg>
             </button>
           </form>
+          */}
         </nav>
       </div>
       <div className={`carrito-container ${mostrarCarrito ? 'mostrar' : ''}`}>

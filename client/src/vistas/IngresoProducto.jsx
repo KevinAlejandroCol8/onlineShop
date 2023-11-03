@@ -10,10 +10,10 @@ const IngresoProducto = () => {
   const [NombreProducto, setNombreProducto] = useState("");
   const [DescripcionProducto, setDescripcionProducto] = useState("");
   const [PrecioVenta, setPrecioVenta] = useState("");
-  const [CostoAdquisicion, setCostoAdquisicion] = useState("");
-  const [CantidadDisponible, setCantidadDisponible] = useState("");
+  //const [CostoAdquisicion, setCostoAdquisicion] = useState("");
+  //const [CantidadDisponible, setCantidadDisponible] = useState("");
   const [Imagen, setImagen] = useState(null);
-  const [ProveedorID, setProveedorID] = useState("");
+  //const [ProveedorID, setProveedorID] = useState("");
   const [TipoProductoID, setTipoProductoID] = useState("");
   const [ProductoID, setProductoID] = useState("");
   /*Fin campos*/
@@ -21,7 +21,7 @@ const IngresoProducto = () => {
   /*Lista elementos a mostrar*/
   const [productosList, setProductosList] = useState([]); //Lista
   /*Fin lista a mostrar*/
-  const [proveedoresList, setproveedoresList] = useState([]);
+  //const [proveedoresList, setproveedoresList] = useState([]);
   const [tipoProductoList, settipoProductoList] = useState([]);
   /*List llaves PK*/
 
@@ -56,11 +56,11 @@ const IngresoProducto = () => {
     formData.append("NombreProducto", NombreProducto);
     formData.append("DescripcionProducto", DescripcionProducto);
     formData.append("PrecioVenta", PrecioVenta);
-    formData.append("CostoAdquisicion", CostoAdquisicion);
-    formData.append("CantidadDisponible", CantidadDisponible);
+    //formData.append("CostoAdquisicion", CostoAdquisicion);
+    //formData.append("CantidadDisponible", CantidadDisponible);
     formData.append("SKU", SKU);
     formData.append("Imagen", Imagen); // Aquí adjuntamos la imagen seleccionada
-    formData.append("ProveedorID", ProveedorID);
+    //formData.append("ProveedorID", ProveedorID);
     formData.append("TipoProductoID", TipoProductoID);
 
     axios.post("http://localhost:3001/productos/create", formData)
@@ -75,10 +75,10 @@ const IngresoProducto = () => {
       NombreProducto: NombreProducto,
       DescripcionProducto: DescripcionProducto,
       PrecioVenta: PrecioVenta,
-      CostoAdquisicion: CostoAdquisicion,
-      CantidadDisponible: CantidadDisponible,
+      //CostoAdquisicion: CostoAdquisicion,
+      //CantidadDisponible: CantidadDisponible,
       Imagen: Imagen,
-      ProveedorID: ProveedorID,
+      //ProveedorID: ProveedorID,
       TipoProductoID: TipoProductoID,
       ProductoID: ProductoID
     }).then(() => {
@@ -99,10 +99,10 @@ const IngresoProducto = () => {
     setNombreProducto("");
     setDescripcionProducto("");
     setPrecioVenta("");
-    setCostoAdquisicion("");
-    setCantidadDisponible("");
+    //setCostoAdquisicion("");
+    //setCantidadDisponible("");
     setImagen("");
-    setProveedorID("");
+    //setProveedorID("");
     setTipoProductoID("");
     setProductoID("");
     setSKU("");
@@ -115,12 +115,13 @@ const IngresoProducto = () => {
   }
 
 
+  /*
   const cargarProveedores = () => {
     axios.get("http://localhost:3001/Proveedores/lista").then((response) => {
       setproveedoresList(response.data);
     })
   }
-
+  */
 
   const cargarTipoProducto = () => {
     axios.get("http://localhost:3001/tiposProductos/lista").then((response) => {
@@ -133,10 +134,10 @@ const IngresoProducto = () => {
     setNombreProducto(val.NombreProducto);
     setDescripcionProducto(val.DescripcionProducto);
     setPrecioVenta(val.PrecioVenta);
-    setCostoAdquisicion(val.CostoAdquisicion);
-    setCantidadDisponible(val.CantidadDisponible);
+    //setCostoAdquisicion(val.CostoAdquisicion);
+    //setCantidadDisponible(val.CantidadDisponible);
     setImagen(val.Imagen);
-    setProveedorID(val.ProveedorID);
+    //setProveedorID(val.ProveedorID);
     setSKU(val.SKU);
     setTipoProductoID(val.TipoProductoID);
     setProductoID(val.ProductoID);
@@ -144,7 +145,7 @@ const IngresoProducto = () => {
 
   useEffect(() => {
     getLista();
-    cargarProveedores();
+    //cargarProveedores();
     cargarTipoProducto();
   }, []);
 
@@ -184,6 +185,7 @@ const IngresoProducto = () => {
               }}
               type="text" value={PrecioVenta} className="form-control custom-input" placeholder="Precio Venta" aria-label="Precio Venta" />
           </div>
+          {/*/ 
           <div className="mb-3">
             <h3 className="titulos">Costo Adquisicion</h3>
             <input
@@ -192,6 +194,8 @@ const IngresoProducto = () => {
               }}
               type="text" value={CostoAdquisicion} className="form-control custom-input" placeholder="Costo Adquision" aria-label="Costo Adquision" />
           </div>
+          */}
+          {/* 
           <div className="mb-3">
             <h3 className="titulos">Cantidad</h3>
             <input
@@ -200,6 +204,7 @@ const IngresoProducto = () => {
               }}
               type="text" value={CantidadDisponible} className="form-control custom-input" placeholder="Cantidad" aria-label="Cantidad" />
           </div>
+          */}
           <div className="mb-3">
             <h3 className="titulos">SKU</h3>
             <div className="input-group">
@@ -224,6 +229,7 @@ const IngresoProducto = () => {
               }}
               type="file" className="form-control custom-input" aria-label="Imagen" />
           </div> 
+          {/* 
           <div className="mb-3">
             <h3 className="titulos">Prooveedor</h3>
             <select class="form-select" aria-label="Default select example"
@@ -243,6 +249,7 @@ const IngresoProducto = () => {
               }
             </select>
           </div>
+          */}
           <div className="mb-3">
             <h3 className="titulos">Tipo Producto</h3>
             <select class="form-select" aria-label="Default select example"
@@ -281,8 +288,10 @@ const IngresoProducto = () => {
               <th scope="col">Nombre Producto</th>
               <th scope="col">Descripcion</th>
               <th scope="col">Precio Venta</th>
+              {/* 
               <th scope="col">Costo Adquisicion</th>
               <th scope="col">Cantidad Disponibilidad</th>
+              */}
               <th scope="col">acciones</th>
             </tr>
           </thead>
@@ -292,10 +301,12 @@ const IngresoProducto = () => {
                 return <tr key={val.ProductoID}>
                   <th scope="row">{val.ProductoID}</th>
                   <td>{val.NombreProducto}</td>
-                  <td>{val.DescripcionProducto}</td>
+                  <td>{val.DescripcionProducto}</td>    
                   <td>{val.PrecioVenta}</td>
+                  {/* 
                   <td>{val.CostoAdquisicion}</td>
                   <td>{val.CantidadDisponible}</td>
+                  */}
                   <td>
                     <div className="btn-group" role="group" aria-label="Basic mixed styles example">
                       <button

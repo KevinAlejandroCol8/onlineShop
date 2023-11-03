@@ -19,7 +19,7 @@ CREATE TABLE Descuentos (
 
 -- Tabla de Proveedores --Modificada
 CREATE TABLE Proveedores (
-    ProveedorID INT PRIMARY KEY AUTO_INCREMENT,,
+    ProveedorID INT PRIMARY KEY AUTO_INCREMENT,
     NombreProveedor VARCHAR(255),
     Direccion VARCHAR(255),
     InformacionContacto VARCHAR(255),
@@ -43,10 +43,10 @@ CREATE TABLE Productos (
     CantidadDisponible INT,
     Imagen VARCHAR(255),
     TipoProductoID INT,
-    ProveedorID INT,
+    --ProveedorID INT,
     SKU  VARCHAR(120),
-    FOREIGN KEY (TipoProductoID) REFERENCES TiposProducto(TipoProductoID),
-    FOREIGN KEY (ProveedorID) REFERENCES Proveedores(ProveedorID)
+    FOREIGN KEY (TipoProductoID) REFERENCES TiposProducto(TipoProductoID)
+    --FOREIGN KEY (ProveedorID) REFERENCES Proveedores(ProveedorID)
 );
 
 --Tabla Usuarios
@@ -94,14 +94,14 @@ CREATE TABLE Facturas (
 );
 
 -- Tabla de Pagos
-    CREATE TABLE Pagos (
-        PagoID INT PRIMARY KEY,
-        FacturaID INT,
-        FechaPago DATE,
-        MetodoPago VARCHAR(50),
-        MontoPago DECIMAL(10, 2),
-        FOREIGN KEY (FacturaID) REFERENCES Facturas(FacturaID)
-    );
+CREATE TABLE Pagos (
+    PagoID INT PRIMARY KEY,
+    FacturaID INT,
+    FechaPago DATE,
+    MetodoPago VARCHAR(50),
+    MontoPago DECIMAL(10, 2),
+    FOREIGN KEY (FacturaID) REFERENCES Facturas(FacturaID)
+);
 
 CREATE TABLE MovimientosInventario (
     MovimientoID INT PRIMARY KEY AUTO_INCREMENT,

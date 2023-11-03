@@ -28,7 +28,7 @@ span.input-group-text,
 .container_register_ingreso_producto{
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
-    height: 1300px;
+    height: 800px;
     /* Altura igual al ancho */
     padding: 20px;
     background-color: white;
