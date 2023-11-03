@@ -1,21 +1,6 @@
-span.input-group-text,
-.form-control,
-.btn-success,
-.table-striped,
-.btn-warning,
-.btn-danger,
-.form-select,
-.card-header,
-.btn-info{
-    font-size: 16px;
-    border-radius: 10px;
-}
 
-.btn-primary{
-    font-size: 16px;
-    border-radius: 10px;
-    top: -4.5px;
-}
+
+
 
 .inicio_ingreso_producto{
     display: flex;

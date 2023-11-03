@@ -90,7 +90,7 @@ const EmpleadosList = () => {
             onChange={(event) => {
               setNombre(event.target.value);
             }}
-            type="text" value={nombre} className="form-control custom-input" placeholder="Nombre" aria-label="Nombre" />
+            type="text" value={nombre}   placeholder="Nombre" aria-label="Nombre" />
         </div>
         <div className="mb-3">
           <h3 className="titulos">Edad</h3>
@@ -98,7 +98,7 @@ const EmpleadosList = () => {
             onChange={(event) => {
               setedad(event.target.value);
             }}
-            type="text" value={edad} className="form-control custom-input" placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1" />
+            type="text" value={edad}   placeholder="Edad" aria-label="Edad" aria-describedby="basic-addon1" />
         </div>
         <div className="mb-3">
           <h3 className="titulos">País</h3>
@@ -106,7 +106,7 @@ const EmpleadosList = () => {
             onChange={(event) => {
               setpais(event.target.value);
             }}
-            type="text" value={pais} className="form-control custom-input" placeholder="País" aria-label="País" aria-describedby="basic-addon1" />
+            type="text" value={pais}   placeholder="País" aria-label="País" aria-describedby="basic-addon1" />
         </div>
         <div className="mb-3">
           <h3 className="titulos">Cargo</h3>
@@ -114,7 +114,7 @@ const EmpleadosList = () => {
             onChange={(event) => {
               setCargo(event.target.value);
             }}
-            type="text" value={cargo} className="form-control custom-input" placeholder="Cargo" aria-label="Cargo" aria-describedby="basic-addon1" />
+            type="text" value={cargo}   placeholder="Cargo" aria-label="Cargo" aria-describedby="basic-addon1" />
         </div>
         <div className="mb-3">
           <h3 className="titulos">Años</h3>
@@ -122,7 +122,7 @@ const EmpleadosList = () => {
             onChange={(event) => {
               setAnios(event.target.value);
             }}
-            type="text" value={anios} className="form-control custom-input" placeholder="Años" aria-label="Años" aria-describedby="basic-addon1" />
+            type="text" value={anios}   placeholder="Años" aria-label="Años" aria-describedby="basic-addon1" />
         </div>
         <div className="mb-3 d-flex justify-content-center">
           {
@@ -131,7 +131,7 @@ const EmpleadosList = () => {
                 <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
                 <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
               </div>
-              : <button className='btn btn-success' onClick={add}>Guardar</button>
+              : <button   onClick={add}>Guardar</button>
           }
         </div>
 
@@ -176,7 +176,7 @@ const EmpleadosList = () => {
             }
           </tbody>
         </table>
-        <button className='btn btn-success' onClick={getEmpleados}>Lista</button>
+        <button   onClick={getEmpleados}>Lista</button>
       </div>
     </div>
   );

@@ -3,8 +3,15 @@ body {
 }
 
 .wrapper {	
-    margin-top: 80px;
-  margin-bottom: 80px;
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
 }
 
 .form-signin {
@@ -30,18 +37,37 @@ body {
 	  padding: 10px;
 	}
 
-	input[type="text"] {
-	  margin-bottom: -1px;
-	  border-bottom-left-radius: 0;
-	  border-bottom-right-radius: 0;
-	}
-
-	input[type="password"] {
-	  margin-bottom: 20px;
-	  border-top-left-radius: 0;
-	  border-top-right-radius: 0;
+	input {
+		background-color: #eee;
+		border: none;
+		padding: 12px 15px;
+		margin: 8px 0;
+		width: 100%;
 	}
 }
+
+button {
+	border-radius: 20px;
+	border: 1px solid #668eed9f;
+	background-color: #668eed9f;
+	color: #000000;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+
 .checkbox {
     margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
 }
@@ -73,4 +99,126 @@ body {
 
 .button-container button {
     margin-right: 10px; /* Agrega margen derecho entre los botones */
+}
+
+.container-login {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+}
+
+.form-container-login {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+	left: 0;
+	width: 50%;
+	z-index: 2;
+}
+
+.container-login.right-panel-active .sign-in-container {
+	transform: translateX(100%);
+}
+
+.overlay-container-login {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+.container.right-panel-active .overlay-container-login{
+	transform: translateX(-100%);
+}
+
+.overlay-login {
+	background: #668eed9f;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay-login {
+	transform: translateX(50%);
+}
+
+.overlay-panel-login {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.overlay-right-login {
+	right: 0;
+	transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right-login {
+	transform: translateX(20%);
+}
+
+.body-login {
+	width: 800px;
+    /* Ancho mayor para hacerlo cuadrado */
+    height: 700px;
+    /* Se agregó sombra */
+    text-align: center;
+    /* Para centrar el contenido */
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    font-size: 16px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+.body-login h1, p, a, label {
+	color: #000000;
+}
+
+.body-login h1 {
+	font-size: 30px;
+	font-weight: bold;
+	
+}
+
+.form-login {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
 }

@@ -119,7 +119,7 @@ const Proveedores = () => {
                             onChange={(event) => {
                                 setNombreProveedor(event.target.value);
                             }}
-                            value={NombreProveedor} type="text" className="form-control custom-input" id="NombreProveedor" placeholder="Nombre Proveedor" />
+                            value={NombreProveedor} type="text"   id="NombreProveedor" placeholder="Nombre Proveedor" />
                     </div>
                     <div className="mb-3">
                         <h3 className="titulos">Dirección</h3>
@@ -127,7 +127,7 @@ const Proveedores = () => {
                             onChange={(event) => {
                                 setDireccion(event.target.value);
                             }}
-                            value={Direccion} type="text" className="form-control custom-input" id="Direccion" placeholder="Direccion" />
+                            value={Direccion} type="text"   id="Direccion" placeholder="Direccion" />
                     </div>
                     <div className="row">
                         <div className="col-md-6 mb-3">
@@ -136,7 +136,7 @@ const Proveedores = () => {
                                 onChange={(event) => {
                                     setInformacionContacto(event.target.value);
                                 }}
-                                value={InformacionContacto} type="text" className="form-control custom-input" id="InformacionContacto" placeholder="Informacion de Contacto" />
+                                value={InformacionContacto} type="text"   id="InformacionContacto" placeholder="Informacion de Contacto" />
                         </div>
                         <div className="col-md-6 mb-3">
                             <h3 className="titulos">Numero de Telefono</h3>
@@ -144,7 +144,7 @@ const Proveedores = () => {
                                 onChange={(event) => {
                                     setTelefono(event.target.value);
                                 }}
-                                value={Telefono} type="text" className="form-control custom-input" id="Telefono" placeholder="xxxxxxxx" maxLength="8"/>
+                                value={Telefono} type="text"   id="Telefono" placeholder="xxxxxxxx" maxLength="8"/>
                         </div>
                     </div>
                     <div className="row">
@@ -154,7 +154,7 @@ const Proveedores = () => {
                                 onChange={(event) => {
                                     setCorreoElectronico(event.target.value);
                                 }}
-                                value={CorreoElectronico} type="text" className="form-control custom-input" id="CorreoElectronico" placeholder="example@gmail.com" />
+                                value={CorreoElectronico} type="text"   id="CorreoElectronico" placeholder="example@gmail.com" />
                         </div>
                         <div className="col-md-6 mb-3">
                             <h3 className="titulos">Sitios Web</h3>
@@ -162,7 +162,7 @@ const Proveedores = () => {
                                 onChange={(event) => {
                                     setSitioWeb(event.target.value);
                                 }}
-                                value={SitioWeb} type="text" className="form-control custom-input" id="SitioWeb" placeholder="example.com" />
+                                value={SitioWeb} type="text"   id="SitioWeb" placeholder="example.com" />
                         </div>
                     </div>
                     <div className="mb-3">
@@ -171,7 +171,7 @@ const Proveedores = () => {
                             onChange={(event) => {
                                 setTipoProductoServicio(event.target.value);
                             }}
-                            value={TipoProductoServicio} type="text" className="form-control custom-input" id="TipoProductoServicio" placeholder="Tecnologia" />
+                            value={TipoProductoServicio} type="text"   id="TipoProductoServicio" placeholder="Tecnologia" />
                     </div>
                     <div className="mb-3">
                         <h3 className="titulos">Fecha Inicio Relacion</h3>
@@ -179,7 +179,7 @@ const Proveedores = () => {
                             onChange={(event) => {
                                 setFechaInicioRelacion(event.target.value);
                             }}
-                            value={FechaInicioRelacion} type="date" className="form-control custom-input" id="FechaInicioRelacion" />
+                            value={FechaInicioRelacion} type="date"   id="FechaInicioRelacion" />
                     </div>
                     <div className="mb-3">
                         <h3 className="titulos">Comentarios</h3>
@@ -188,7 +188,7 @@ const Proveedores = () => {
                                 setNotasComentarios(event.target.value);
                             }}
                             value={NotasComentarios}
-                            className="form-control custom-input"
+                             
                             id="NotasComentarios"
                         ></textarea>
                     </div>
@@ -199,7 +199,7 @@ const Proveedores = () => {
                                     <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
                                     <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
                                 </div>
-                                : <button className='btn btn-success' onClick={add}>Guardar</button>
+                                : <button   onClick={add}>Guardar</button>
                         }
                     </div>
                     <br></br>

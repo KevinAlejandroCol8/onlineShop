@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/IngresoProducto.css'
 
 
@@ -162,58 +161,58 @@ const IngresoProducto = () => {
       <div className="container_register_ingreso_producto">
         <h1>Ingreso De Productos</h1>
         <div className="mb-3">
-          <h3 className="titulos">Nombre Producto </h3>
+          <h3 className="titulos">Nombre del Producto </h3>
           <input
             onChange={(event) => {
               setNombreProducto(event.target.value);
             }}
-            type="text" value={NombreProducto} className="form-control custom-input" placeholder="Nombre Producto" aria-label="Nombre Producto" />
+            type="text" value={NombreProducto}  placeholder="Nombre del Producto" aria-label="Nombre Producto" />
           <div className="mb-3">
-            <h3 className="titulos">Descripcion Producto</h3>
+            <h3 className="titulos">Descripcion del Producto</h3>
             <input
               onChange={(event) => {
                 setDescripcionProducto(event.target.value);
               }}
-              type="text" value={DescripcionProducto} className="form-control custom-input" placeholder="Descripción Producto" aria-label="Descripción Producto" />
+              type="text" value={DescripcionProducto}   placeholder="Descripción del Producto" aria-label="Descripción Producto" />
           </div>
           <div className="mb-3">
-            <h3 className="titulos">Precio Venta</h3>
+            <h3 className="titulos">Precio de Venta</h3>
             <input
               onChange={(event) => {
                 setPrecioVenta(event.target.value);
               }}
-              type="text" value={PrecioVenta} className="form-control custom-input" placeholder="Precio Venta" aria-label="Precio Venta" />
+              type="text" value={PrecioVenta}   placeholder="Precio de Venta" aria-label="Precio Venta" />
           </div>
           <div className="mb-3">
-            <h3 className="titulos">Costo Adquisicion</h3>
+            <h3 className="titulos">Costo de Adquisicion</h3>
             <input
               onChange={(event) => {
                 setCostoAdquisicion(event.target.value);
               }}
-              type="text" value={CostoAdquisicion} className="form-control custom-input" placeholder="Costo Adquision" aria-label="Costo Adquision" />
+              type="text" value={CostoAdquisicion}   placeholder="Costo de Adquisicion" aria-label="Costo Adquision" />
           </div>
           <div className="mb-3">
-            <h3 className="titulos">Cantidad</h3>
+            <h3 className="titulos">Cantidad de Productos</h3>
             <input
               onChange={(event) => {
                 setCantidadDisponible(event.target.value);
               }}
-              type="text" value={CantidadDisponible} className="form-control custom-input" placeholder="Cantidad" aria-label="Cantidad" />
+              type="text" value={CantidadDisponible}   placeholder="Cantidad de Productos" aria-label="Cantidad" />
           </div>
-          <div className="mb-3">
+          <div className="">
             <h3 className="titulos">SKU</h3>
-            <div className="input-group">
+            <div className="col v-center">
               <input
                 onChange={(event) => {
                   setSKU(event.target.value);
                 }}
                 type="text"
                 value={SKU}
-                className="form-control custom-input"
+                
                 placeholder="SKU"
                 aria-label="SKU"
               />
-              <button className="btn btn-primary m-2" onClick={generateSKU}>Generar SKU</button>
+              <button class="mx-auto" onClick={generateSKU}>Generar SKU</button>
             </div>
           </div>
           <div className="mb-3">
@@ -222,7 +221,7 @@ const IngresoProducto = () => {
               onChange={(event) => {
                 setImagen(event.target.files[0]);
               }}
-              type="file" className="form-control custom-input" aria-label="Imagen" />
+              type="file"  aria-label="Imagen" />
           </div> 
           <div className="mb-3">
             <h3 className="titulos">Prooveedor</h3>
@@ -270,7 +269,7 @@ const IngresoProducto = () => {
                 <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
                 <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
               </div>
-              : <button className='btn btn-success' onClick={add}>Guardar</button>
+              : <button  onClick={add}>Guardar</button>
           }
         </div>
 
@@ -315,7 +314,7 @@ const IngresoProducto = () => {
             }
           </tbody>
         </table>
-        <button className='btn btn-success' onClick={getLista}>Lista</button>
+        <button onClick={getLista}>Lista</button>
       </div>
     </div>
   );

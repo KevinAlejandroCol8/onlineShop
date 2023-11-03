@@ -4,11 +4,10 @@ import axios from "axios";
 import { useAuth } from '../hoocks/AuthContext';
 
 import '../css/NewLogin.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Login = () => {
 
-    const { login,codigo } = useAuth();
+    const { login, codigo } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -69,40 +68,31 @@ const Login = () => {
     */
 
     return (
-        <div className="wrapper">
-            <form className="form-signin" onSubmit={handleSubmit}>
-                <h2 className="form-signin-heading">Please login</h2>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="NombreUsuario"
-                        placeholder="Nick name"
-                        required
-                        autoFocus
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        className="form-control"
-                        name="Contrasenia"
-                        placeholder="Password"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="text-center">
-                    <div className="mb-2">
-                        <button className="btn btn-lg btn-primary btn-wide" type="submit">Ingreso</button>
-                    </div>
-                    <div>
-                        <button className="btn btn-lg btn-primary btn-wide" type="button" onClick={() => navigate("/LoginRegister")}>Registrarme</button>
+        <div className="body-login">
+            <div className="wrapper">
+                <div class="form-container-login sign-in-container">
+                <div class="form-login">
+                    <form className="form-signin-login" onSubmit={handleSubmit}>
+                        <h1>Iniciar Sesión</h1>
+                        <input type="text"  name="NombreUsuario" placeholder="Nombre de usuario"
+                            required autoFocus onChange={handleInputChange} />
+                        <input type="password"  name="Contrasenia" placeholder="Contraseña" required
+                            onChange={handleInputChange} />
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
                     </div>
                 </div>
-            </form>
-            {loginMessage && <div className="alert alert-info">{loginMessage}</div>}
+                <div class="overlay-container-login">
+                    <div class="overlay-login">
+                        <div class="overlay-panel-login overlay-right-login">
+                            <h1>¡Bienvenido de nuevo!</h1>
+                            <p>Ingresa tus datos para explorar las mejores ofertas del momento.</p>
+                            <button class="ghost" id="signUp" onClick={() => navigate("/LoginRegister")}>Registrarse</button>
+                        </div>
+                    </div>
+                </div>
+                {loginMessage && <div className="alert alert-info">{loginMessage}</div>}
+            </div>
         </div>
     );
 };

@@ -106,7 +106,7 @@ const Facturacion = () => {
 
             </div>
             <div className='d-grid d-md-flex justify-content-md-end mb-3'>
-                <button className='btn btn-success' onClick={generatePDF}>PDF</button>
+                <button   onClick={generatePDF}>PDF</button>
             </div>
 
         </div>

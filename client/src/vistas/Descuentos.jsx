@@ -83,7 +83,7 @@ const Descuentos = () => {
               onChange={(event) => {
                 setNombreDescuento(event.target.value);
               }}
-              value={NombreDescuento} type="text" className="form-control custom-input" id="NombreDescuento" placeholder="Nombre Completo" />
+              value={NombreDescuento} type="text"  id="NombreDescuento" placeholder="Nombre del Descuento" />
           </div>
           <div className="mb-3">
             <h3 className="titulos">% Descuento</h3>
@@ -91,15 +91,15 @@ const Descuentos = () => {
               onChange={(event) => {
                 setPorcentajeDescuento(event.target.value);
               }}
-              value={PorcentajeDescuento} type="text" className="form-control custom-input" id="Codigo_Descuento" placeholder="Nombre Completo" />
+              value={PorcentajeDescuento} type="text" id="Codigo_Descuento" placeholder="Porcentaje de descuento" />
           </div>
           <div className="mb-3">
-            <h3 className="titulos">Codigo Desceunto</h3>
+            <h3 className="titulos">Codigo de Descuento</h3>
             <input
               onChange={(event) => {
                 setCodigo_Descuento(event.target.value);
               }}
-              value={Codigo_Descuento} type="text" className="form-control custom-input" id="Codigo_Descuento" placeholder="Nombre Completo" />
+              value={Codigo_Descuento} type="text"  id="Codigo_Descuento" placeholder="Codigo de Descuento" />
           </div>
           <div className="mb-3 d-flex justify-content-center">
             {
@@ -108,7 +108,7 @@ const Descuentos = () => {
                   <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
                   <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
                 </div>
-                : <button className='btn btn-success' onClick={add}>Guardar</button>
+                : <button onClick={add}>Guardar</button>
             }
           </div>
           <br></br>

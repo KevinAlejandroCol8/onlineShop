@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 import '../css/RegisterLogin.css'
-import '../css/carrito.css'
+
 
 const LoginRegister = () => {
-
+    const navigate = useNavigate();
     /*Cmapos de la base de datos*/
     const [NombreUsuario, setNombreUsuario] = useState("");
     const [Contrasenia, setContrasenia] = useState("");
@@ -22,14 +23,14 @@ const LoginRegister = () => {
             NombreCompleto: NombreCompleto,
             CorreoElectronico: CorreoElectronico,
             FechaRegistro: FechaRegistro,
-            tipoRool : tipoRool
+            tipoRool: tipoRool
         }).then(() => {
-          limpiar();
-          alert("Registro Guardar");
+            limpiar();
+            alert("Registro Guardar");
         })
     }
 
-    const limpiar = () =>{
+    const limpiar = () => {
         setNombreUsuario("");
         setContrasenia("");
         setNombreCompleto("");
@@ -39,60 +40,52 @@ const LoginRegister = () => {
     }
 
     return (
-        <div className="inicio">
-            <div className="container_register">
-                <h1>Registro Usuario</h1>
-                <div className="mb-3">
-                    <h3 className="titulos">Nombre Completo</h3>
-                    <input 
-                        onChange={(event) => {
-                            setNombreCompleto(event.target.value);
-                        }}
-                        value={NombreCompleto} type="text" className="form-control custom-input" id="nombre" placeholder="Nombre Completo" />
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <h3 className="titulos">Email</h3>
-                        <input 
-                            onChange={(event) => {
-                                setCorreoElectronico(event.target.value);
-                            }}
-                            value={CorreoElectronico} type="email" className="form-control custom-input" id="email" placeholder="name@example.com" />
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <h3 className="titulos">Fecha Nacimiento</h3>
-                        <input 
-                            onChange={(event) => {
-                                setFechaRegistro(event.target.value);
-                            }}
-                            value={FechaRegistro} type="date" className="form-control custom-input" id="fecha" placeholder="name@example.com" />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <h3 className="titulos">NickName</h3>
-                        <input 
-                            onChange={(event) => {
-                                setNombreUsuario(event.target.value);
-                            }}
-                            value={NombreUsuario} type="text" className="form-control custom-input" id="nickname" placeholder="Nika Name" />
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <h3 className="titulos">Password</h3>
-                        <input 
-                            onChange={(event) => {
-                                setContrasenia(event.target.value);
-                            }}
-                            value={Contrasenia} type="password" className="form-control custom-input" id="password" placeholder="Password" />
+        <div className="body-login">
+            <div className="wrapper">
+                <div class="form-container-login sign-in-container">
+                    <div class="form-login">
+                        <h1>Registro Usuario</h1>
+                        <form className="form-signin-login">
+                            <input
+                                onChange={(event) => {
+                                    setNombreCompleto(event.target.value);
+                                }}
+                                value={NombreCompleto} type="text"  id="nombre" placeholder="Nombre Completo" />
+                            <input
+                                onChange={(event) => {
+                                    setCorreoElectronico(event.target.value);
+                                }}
+                                value={CorreoElectronico} type="email"  id="email" placeholder="nombre@institucion.com" />
+                            <input
+                                onChange={(event) => {
+                                    setFechaRegistro(event.target.value);
+                                }}
+                                value={FechaRegistro} type="date"  id="fecha" />
+                            <input
+                                onChange={(event) => {
+                                    setNombreUsuario(event.target.value);
+                                }}
+                                value={NombreUsuario} type="text"  id="nickname" placeholder="Nombre de Usuario" />
+                            <input
+                                onChange={(event) => {
+                                    setContrasenia(event.target.value);
+                                }}
+                                value={Contrasenia} type="password" id="password" placeholder="Contraseña" />
+                            <button class="ghost"  onClick={add} >Guardar</button>
+                        </form>
                     </div>
                 </div>
-                
-                <div className="mb-3 d-flex justify-content-center"> {/* Utilizamos "d-flex" para activar flexbox */}
-                    <button className="classBtn first" onClick={add} >Guardar</button>
+                <div class="overlay-container-login">
+                    <div class="overlay-login">
+                        <div class="overlay-panel-login overlay-right-login">
+                            <h1>¡Bienvenido!</h1>
+                            <p>Ingresa tus datos para registrarse.</p>
+                            <button id="signUp" onClick={() => navigate("/Login")}>Iniciar Sesión</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     );
 };
 

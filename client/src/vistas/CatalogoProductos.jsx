@@ -76,7 +76,7 @@ const CatalogoProductos = () => {
               onChange={(event) => {
                 setTipoProducto(event.target.value);
               }}
-              type="text" value={NombreTipoProducto} className="form-control custom-input" placeholder="Tipo Producto" aria-label="Tipo Produccto"/>
+              type="text" value={NombreTipoProducto} placeholder="Tipo Producto" aria-label="Tipo Produccto"/>
         </div>
         <div className="mb-3 d-flex justify-content-center">
           {
@@ -85,7 +85,7 @@ const CatalogoProductos = () => {
                 <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
                 <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
               </div>
-              : <button className='btn btn-success' onClick={add}>Guardar</button>
+              : <button onClick={add}>Guardar</button>
           }
         </div>
       
@@ -122,7 +122,7 @@ const CatalogoProductos = () => {
           }
         </tbody>
       </table>
-      <button className='btn btn-success' onClick={getLista}>Lista</button>
+      <button onClick={getLista}>Lista</button>
     </div>
     </div>
   );

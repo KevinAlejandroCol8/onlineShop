@@ -1,4 +1,4 @@
-span.input-group-text,
+.input-group-text,
 .form-control,
 .btn-success,
 .table-striped,
@@ -21,7 +21,7 @@ span.input-group-text,
 .container_register_catalogo {
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
-    height: 600px;
+    height: 675px;
     /* Altura igual al ancho */
     padding: 20px;
     background-color: white;
