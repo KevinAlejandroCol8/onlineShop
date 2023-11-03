@@ -43,10 +43,8 @@ CREATE TABLE Productos (
     CantidadDisponible INT,
     Imagen VARCHAR(255),
     TipoProductoID INT,
-    --ProveedorID INT,
     SKU  VARCHAR(120),
     FOREIGN KEY (TipoProductoID) REFERENCES TiposProducto(TipoProductoID)
-    --FOREIGN KEY (ProveedorID) REFERENCES Proveedores(ProveedorID)
 );
 
 --Tabla Usuarios
@@ -103,9 +101,32 @@ CREATE TABLE Pagos (
     FOREIGN KEY (FacturaID) REFERENCES Facturas(FacturaID)
 );
 
-CREATE TABLE MovimientosInventario (
-    MovimientoID INT PRIMARY KEY AUTO_INCREMENT,
-    TipoMovimiento VARCHAR(80) NOT NULL,
-    CantidadMovimiento INT NOT NULL,
-    FechaMovimiento DATE NOT NULL
+
+CREATE TABLE Encabezado_Compras(
+    CompraID INT PRIMARY KEY,
+    fechaCompra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    MontoCompra DECIMAL(10, 2),
+    CantidadTotal INT,
+    ProveedorID INT,
+    FOREIGN KEY (ProveedorID) REFERENCES Proveedores(ProveedorID)
 );
+
+CREATE TABLE Detalle_Compra(
+    DetalleID INT PRIMARY KEY AUTO_INCREMENT, 
+    Cantidad INT,
+    PrecioCompra DECIMAL(10, 2),
+    ProductoID INT,
+    CompraID INT,
+    FOREIGN KEY (CompraID) REFERENCES Encabezado_Compras(CompraID),
+    FOREIGN KEY (ProductoID) REFERENCES Productos(ProductoID)
+);
+
+
+CREATE TABLE InventarioTienda(
+    InventarioID INT PRIMARY KEY AUTO_INCREMENT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Cantidad INT,
+    ProductosID INT
+);
+
+
