@@ -1,8 +1,4 @@
-
-
-
-
-.inicio_ingreso_producto{
+.inicio_Compras {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,10 +6,10 @@
     margin: 0;
 }
 
-.container_register_ingreso_producto{
+.container_register_Compras {
     width: 800px;
     /* Ancho mayor para hacerlo cuadrado */
-    height: 800px;
+    height: 700px;
     /* Altura igual al ancho */
     padding: 20px;
     background-color: white;
@@ -34,8 +30,25 @@
 }
 
 
-table tr th,
-table td {
-    border: 1px solid #b6b3b3;
-    text-align: center;
+.NumeroCompra {
+    text-align: right;
 }
+
+.inputCompra {
+    width: 200px;
+    height: 37px;
+    /* O el tamaño que prefieras */
+}
+
+.inputDiseño{
+    height: 37px;
+}
+
+.miLineaDivisoria {
+    border: 0;
+    height: 2px; /* Esto determina el grosor de tu línea */
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); /* Gradiente para la línea */
+    margin-top: 20px; /* Espacio arriba de la línea */
+    margin-bottom: 20px; /* Espacio debajo de la línea */
+  }
+
