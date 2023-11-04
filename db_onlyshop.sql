@@ -139,3 +139,36 @@ CREATE TABLE InventarioTienda(
 );
 
 
+
+
+/* Trigers*/
+/* Correr para la tabla detallepedido*/
+
+DELIMITER $$
+
+CREATE TRIGGER after_detallepedido_insert
+AFTER INSERT ON DetallesPedidos
+FOR EACH ROW
+BEGIN
+    UPDATE Productos
+    SET CantidadDisponible = CantidadDisponible - NEW.CantidadProducto
+    WHERE ProductoID = NEW.ProductoID;
+END$$
+
+DELIMITER ;
+
+/* Para la tabla  inventarioTienda*/
+
+DELIMITER //
+
+CREATE TRIGGER after_inventario_insert
+AFTER INSERT ON InventarioTienda
+FOR EACH ROW
+BEGIN
+    UPDATE Productos
+    SET CantidadDisponible = CantidadDisponible + NEW.Cantidad
+    WHERE ProductoID = NEW.ProductoID;
+END;
+
+//
+DELIMITER ;

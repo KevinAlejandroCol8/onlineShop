@@ -34,7 +34,7 @@ const Descuentos = () => {
       //alert("Empleado Registrado");
       MySwal.fire({
         title: <p>Registro</p>,
-        html: <i> click boton</i>,
+        html: <i>Su registro fue guardo con exito</i>,
         icon: 'success'
       });
     })

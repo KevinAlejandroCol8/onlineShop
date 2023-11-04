@@ -7,12 +7,15 @@ import axios from 'axios';
 import '../css/Carrito_final.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import { IconoEliminar } from "../hoocks/iconos";
 
 const IVA_RATE = 0.12; // Tasa de IVA del 12%
 
 const Carrito = () => {
-
+    const MySwal = withReactContent(Swal);
     //Generales
     const { codigoUser } = useAuth();
     
@@ -129,7 +132,11 @@ const Carrito = () => {
             TotalPedido: ((calcularTotalSubtotal() + calcularIVA()) - calcularDescuento()).toFixed(2)
         }).then(() => {
             //limpiar();
-            alert("Registro Guardar");
+            MySwal.fire({
+                title: <p>Registro</p>,
+                html: <i>Su registro fue guardo con exito</i>,
+                icon: 'success'
+              });
         })
     }
 
