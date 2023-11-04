@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/Descuentos.css'
+
 
 const Descuentos = () => {
   /*Campos de la base de datos*/
@@ -14,7 +19,9 @@ const Descuentos = () => {
   /*Lista elementos a mostrar*/
   const [descuentosList, setDescuentosList] = useState([]); //Lista
   /*Fin lista a mostrar*/
-  const [editar, setEditar] = useState(false)
+  const [editar, setEditar] = useState(false);
+
+  const MySwal = withReactContent(Swal);
 
   const add = () => {
     axios.post("http://localhost:3001/descuentos/create", {
@@ -25,6 +32,11 @@ const Descuentos = () => {
       getLista();
       limpiar();
       //alert("Empleado Registrado");
+      MySwal.fire({
+        title: <p>Registro</p>,
+        html: <i> click boton</i>,
+        icon: 'success'
+      });
     })
   }
 

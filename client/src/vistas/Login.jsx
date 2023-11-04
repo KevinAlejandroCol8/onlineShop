@@ -3,9 +3,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from '../hoocks/AuthContext';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+
+
 import '../css/NewLogin.css'
 
 const Login = () => {
+
+    const MySwal = withReactContent(Swal);
 
     const { login, codigo } = useAuth();
     const navigate = useNavigate();
@@ -35,13 +42,28 @@ const Login = () => {
                 // Llama a la función de inicio de sesión del contexto
                 codigo(usuarioID);
                 login(formData.NombreUsuario);
+                MySwal.fire({
+                    title: <p>¡Bienvenido</p>,
+                    html: <i>¡Bienvenido a nuestra tienda en linea</i>,
+                    icon: 'success'
+                });
                 navigate('/home');
             } else {
                 setLoginMessage("Error al iniciar sesión");
+                MySwal.fire({
+                    title: <p>Error</p>,
+                    html: <i>Error al iniciar sesión</i>,
+                    icon: 'error'
+                });
             }
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
-            setLoginMessage("Error al iniciar sesión");
+            //setLoginMessage("Error al iniciar sesión");
+            MySwal.fire({
+                title: <p>Error</p>,
+                html: <i>Error al iniciar sesión</i>,
+                icon: 'error'
+            });
         }
     };
 
@@ -91,7 +113,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                {loginMessage && <div className="alert alert-info">{loginMessage}</div>}
+                {/*loginMessage && <div className="alert alert-info">{loginMessage}</div> */}
             </div>
         </div>
     );
