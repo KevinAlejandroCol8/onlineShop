@@ -25,7 +25,7 @@ const Carrito = () => {
     const [descuentos, setDescuentos] = useState(null);
 
     
-    console.log("Info ",carrito);
+    //console.log("Info ",carrito);
     useEffect(() => {
         const cantidadesPredeterminadas = {};
         carrito.forEach((producto) => {
@@ -45,10 +45,31 @@ const Carrito = () => {
     }
 
     //Calculos
+    /*
     const cambiarCantidades = (productoId, cantidad2) => {
         console.log('ID producto ', productoId, 'Cantidad modificada ', cantidad2);
         //setCantidades({ ...cantidades, [productoId]: cantidad2 });
         actualizarCantidad(productoId, cantidad2);
+    };
+    */
+    const cambiarCantidades = (productoId, cantidad2) => {
+        console.log('ID producto ', productoId, 'Cantidad modificada ', cantidad2);
+        
+        // Encuentra el producto en el carrito para obtener la cantidad disponible
+        const producto = carrito.find(p => p.ProductoID === productoId);
+        
+        if (producto) {
+            if (cantidad2 > producto.CantidadDisponible) {
+                alert(`La cantidad no puede ser mayor a la disponible (${producto.CantidadDisponible} en stock).`);
+                // Puedes decidir si quieres restablecer a la cantidad máxima disponible o simplemente no actualizar
+                actualizarCantidad(productoId, producto.CantidadDisponible);
+            } else {
+                // Todo está bien, actualiza la cantidad
+                actualizarCantidad(productoId, cantidad2);
+            }
+        } else {
+            console.error('Producto no encontrado en el carrito');
+        }
     };
 
     // Función para calcular el subtotal de un producto en una línea
