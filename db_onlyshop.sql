@@ -111,10 +111,18 @@ CREATE TABLE Encabezado_Compras(
     FOREIGN KEY (ProveedorID) REFERENCES Proveedores(ProveedorID)
 );
 
+CREATE TABLE Encabezado_ComprasCP(
+    CompraID INT,
+    fechaCompra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    MontoCompra DECIMAL(10, 2),
+    CantidadTotal INT,
+    ProveedorID INT
+);
+
 CREATE TABLE Detalle_Compra(
     DetalleID INT PRIMARY KEY AUTO_INCREMENT, 
     Cantidad INT,
-    PrecioCompra DECIMAL(10, 2),
+    CostoAdquisicion DECIMAL(10, 2),
     ProductoID INT,
     CompraID INT,
     FOREIGN KEY (CompraID) REFERENCES Encabezado_Compras(CompraID),

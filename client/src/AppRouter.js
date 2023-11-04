@@ -20,6 +20,7 @@ import Payment from "./vistas/Payment";
 import Facturacion from "./vistas/Facturacion";
 import Proveedores from "./vistas/Proveedores";
 import Compras from "./vistas/Compras";
+import NewCompra from "./vistas/NewCompra";
 
 function AppRouter(){
   return(
@@ -41,7 +42,8 @@ function AppRouter(){
             <Route exact path="/Payment" element={<Payment/>}/>
             <Route exact path="/Facturacion" element={<Facturacion/>}/>
             <Route exact path="/Proveedores" element={<Proveedores/>}/>
-            <Route exact path="/Compras" element={<Compras/>}/>
+            <Route exact path="/Compras2" element={<Compras/>}/>
+            <Route exact path="/Compras" element={<NewCompra/>}/>
           </Routes>
       </main>
       {/*<Footer/>*/}

@@ -3,36 +3,45 @@ import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/Compras.css'
 
-const Compras = () => {
+const inicio = 1;
 
-    // Estado para almacenar el número aleatorio
+const NewCompra = () => {
+    //Acciones botones
+    const [GuardarGeneral, setGuardarGeneral] = useState(false)
+
+    //General 
     const [CompraID, setCompraID] = useState("");
     const [ProveedorID, setProveedorID] = useState("");
     const [ProductoID, setProductoID] = useState("");
-
+    
     //Encabezado
-    const [MontoCompra, setMontoCompra] = useState('0');
-    const [CantidadTotal, setCantidadTotal] = useState('0');
+    const [MontoCompra, setMontoCompra] = useState("");
+    const [CantidadTotal, setCantidadTotal] = useState("");
 
-    //Datos Detalle
-    const [Cantidad, setCantidad] = useState('');
-    const [CostoAdquisicion, setCostoAdquisicion] = useState('');
-    // Listas de datos
+    //Detalle De encabezado
+    const [Cantidad, setCantidad] = useState("");
+    const [CostoAdquisicion, setCostoAdquisicion] = useState("");
+
+     // Listas de datos
     const [proveedoresList, setproveedoresList] = useState([]);
     const [productosList, setProductosList] = useState([]);
+    const [detallesCampraList, setDetallesCampraList] = useState([]);
 
-    const [detallesComprasList, setDetallesComprasList] = useState([]);
-
-    //Almancenamiento 
-    const [cantidadOriginal, setCantidadOriginal] = useState([]);
-
-
-    // Proveedores
+    //Cargo Proveedores
     const cargarProveedores = () => {
         axios.get("http://localhost:3001/Proveedores/lista").then((response) => {
             setproveedoresList(response.data);
         })
     }
+
+    //Carga Cantidad Original
+    const cargaProductos= () => {
+        axios.get(`http://localhost:3001/Compras/Detalles/${CompraID}`)
+        .then((response) => {
+            setDetallesCampraList(response.data);
+        })
+    }
+
 
     //Productos
     const cargarProductos = () => {
@@ -41,100 +50,78 @@ const Compras = () => {
         })
     }
 
-    //Detalle
-    const cargarDetallesCompras = () => {
-        axios.get("http://localhost:3001/Compras/detallesCP").then((response) => {
-            setDetallesComprasList(response.data);
+
+    const addEncabezado = () => {
+        axios.post("http://localhost:3001/Compras/create", {
+            CompraID: CompraID,
+            MontoCompra: MontoCompra,
+            CantidadTotal: CantidadTotal,
+            ProveedorID: ProveedorID
+        }).then(() => {
+            //limpiar();
+            //alert("Registro Guardar");
         })
     }
 
-    //Cantidad Original
-    const cargaOriginal = () => {
-        axios.get(`http://localhost:3001/Compras/producto-cantidad/${ProductoID}`)
-            .then((response) => {
-                setCantidadOriginal(response.data);
-            })
-            .catch((error) => {
-                console.error("Error al obtener la cantidad original:", error);
-            });
-    }
-
-    //Segmento CRUD 
     const addDetalle = () => {
-        const formData = new FormData();
-        formData.append("Cantidad", Cantidad);
-        formData.append("CostoAdquisicion", CostoAdquisicion);
-        formData.append("ProductoID", ProductoID);
-        formData.append("CompraID", CompraID);
-
-        axios.post("http://localhost:3001/Compras/create-detalle", formData)
-        .then(() => {
-            console.log("Guardo los valores");
-        });
-    };
-
+        axios.post("http://localhost:3001/Compras/createDetalle", {
+            Cantidad: Cantidad,
+            ProductoID: ProductoID,
+            CompraID: CompraID,
+            CostoAdquisicion: CostoAdquisicion
+        }).then(() => {
+            //limpiar();
+            cargaProductos();
+        })
+    }
 
     const addInventario = () => {
-        const formData = new FormData();
-        formData.append("Cantidad", Cantidad);
-        formData.append("ProductoID", ProductoID);
-
-        axios.post("http://localhost:3001/Compras/create-inventario", formData)
-            .then(() => {
-                console.log("Ingreso corecto del registro");
-            })
-    }
-
-    const addEncabezadoCompra = () => {
-        const formData = new FormData();
-        formData.append("CompraID", CompraID);
-        formData.append("MontoCompra", MontoCompra);
-        formData.append("CantidadTotal", CantidadTotal);
-        formData.append("ProveedorID", ProveedorID);
-
-        
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
-        axios.post("http://localhost:3001/Compras/create", formData)
-        .then(() => {
-            console.log("Ingreso corecto del registro");
-        })
-    }
-
-    const addCompra = () => {
-        addEncabezadoCompra();
-        /*addDetalle();
-        addInventario();
-        //Carga montos original Cantidad del producto
-        cargaOriginal();
-        ActualizarCantidad();*/
-    }
-
-    const ActualizarCantidad = () => {
-        let CantidadDisponible = cantidadOriginal + Cantidad;
-        axios.put("http://localhost:3001/Compras/update", {
-            CostoAdquisicion: CostoAdquisicion,
-            CantidadDisponible: CantidadDisponible,
+        axios.post("http://localhost:3001/Compras/createInventario", {
+            Cantidad: Cantidad,
             ProductoID: ProductoID
         }).then(() => {
-            console.log("Se acutalizo el campo")
+            alert("Registro Guardar");
         })
     }
 
+    /*
+    const updateProducto = () => {
+        console.log("Original ",CargaOriginal," Cantidad ",Cantidad);
+        let CantidadDisponible = CargaOriginal + Cantidad
+        axios.put("http://localhost:3001/Compras/update", {
+            ProductoID: ProductoID,
+            CostoAdquisicion: CostoAdquisicion,
+            CantidadDisponible: CantidadDisponible
+        }).then(() => {
+            alert("Registro Actualizado");
+        })
+    }
+    */
+    
+    const addCompra = () => {
+        addEncabezado();
+        addDetalle();
+        addInventario();
+        setGuardarGeneral(true);
+        //updateProducto();
+    }
 
-    // useEffect para generar un número aleatorio cuando se monta el componente
+    const addCompra2 = () => {
+        addDetalle();
+        addInventario();
+        //updateProducto();
+    }
+
     useEffect(() => {
         const numero = Math.floor(Math.random() * 10000); // Genera un número entre 0 y 9999
         setCompraID(numero);
         cargarProveedores();
         cargarProductos();
-        cargarDetallesCompras();
+
     }, []);
 
-
-    return (
-        <>
+  return (
+    <>
             <br></br>
             <br></br>
             <div class="inicio_Compras">
@@ -144,7 +131,7 @@ const Compras = () => {
                             <h1>Compras</h1>
                         </div>
                         <div className="col-md-2 mb-3">
-                            <button type="button" class="btn btn-outline-success">Finalizar</button>
+                            <button  type="button" class="btn btn-outline-success">Finalizar</button>
                         </div>
                     </div>
                     <div className='NumeroCompra'>
@@ -164,11 +151,19 @@ const Compras = () => {
                     <div className="row">
                         <div className="col-md-3 mb-3">
                             <h3 className="titulos">Monto Compra</h3>
-                            <input type="text" className="inputDiseño" id="montoCompra" readOnly />
+                            <input 
+                                onChange={(event) => {
+                                    setMontoCompra(event.target.value);
+                                }}
+                                value={MontoCompra} type="text" className="inputDiseño" id="montoCompra"/>
                         </div>
                         <div className="col-md-3 mb-3">
                             <h3 className="titulos">Cantidad Total</h3>
-                            <input type="text" className="inputDiseño" id="cantidadTotal" readOnly />
+                            <input 
+                            onChange={(event) => {
+                                setCantidadTotal(event.target.value);
+                            }}
+                            value={CantidadTotal} type="text" className="inputDiseño" id="cantidadTotal" />
                         </div>
                         <div className="col-md-6 mb-3">
                             <h3 className="titulos">Proveedores</h3>
@@ -196,7 +191,12 @@ const Compras = () => {
                             <h1>Productos</h1>
                         </div>
                         <div className="col-md-2 mb-3">
-                            <button type="button" class="btn btn-success" onClick={addCompra}>Guardar</button>
+                            {
+                                GuardarGeneral === true ? 
+                                    <button type="button" class="btn btn-success" onClick={addCompra2}>Guardar2</button>
+                                :   
+                                    <button type="button" class="btn btn-success" onClick={addCompra}>Guardar</button>
+                            }                           
                         </div>
                     </div>
                     <div className="row">
@@ -245,7 +245,7 @@ const Compras = () => {
                         </thead>
                         <tbody>
                             {
-                                detallesComprasList.map((val, key) => {
+                                detallesCampraList.map((val, key) => {
                                     return <tr key={val.DetalleID}>
                                         <th scope="row">{val.DetalleID}</th>
                                         <td>{val.ProductoID}</td>
@@ -262,10 +262,11 @@ const Compras = () => {
                             }
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </>
-    );
-}
+  );
+};
 
-export default Compras;
+export default NewCompra;
