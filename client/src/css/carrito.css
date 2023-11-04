@@ -36,3 +36,12 @@
     font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
     color: #555;
 }
+
+.en-stock{
+    
+    border-radius: 10px;
+    background-color: rgb(100, 191, 100);
+    color: black;
+    display: inline-block;
+    text-align: center;
+}

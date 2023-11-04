@@ -83,7 +83,7 @@ const Dashboard = () => {
                                 <img onClick={toggleCarrito} src={`http://localhost:3001/productos/imagen/${val.Imagen}`} alt="Producto" />
                             </figure>
                             <div className="info-product">
-                                <div className="stock-badge">{val.CantidadDisponible} en stock</div>
+                                <div className="stock-badge en-stock">{val.CantidadDisponible} en stock</div>
                                 <h5 >{val.NombreProducto}</h5>
                                 <h1 class="price">Q. {val.PrecioVenta}</h1>
                                 <button className="classBtn first" onClick={() => agregarProductoAlCarrito(val)}>Añadir al carrito</button>
