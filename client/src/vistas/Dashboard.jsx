@@ -55,21 +55,24 @@ const Dashboard = () => {
     return (
         <main>
             <div className="filter-container">
-                <div className="price-range-container">
-                    <h1>Filtro de busqueda</h1>
-                    <h2>Precio:</h2>
-                    <input
-                        type="range"
-                        id="min"
-                        name="min"
-                        min={50}
-                        max={10000}
-                        step={20}
-                        value={filtroPrecio.min}
-                        onChange={handleFilterChange}
-                    />
-                    <span>{filtroPrecio.min}</span>
-                </div>
+                <h1>Filtro de Busqueda</h1>
+                <h2>Precio:</h2>
+                <h4>Minimo</h4>
+                <input
+                    type="number"
+                    name="min"
+                    placeholder="Precio mínimo"
+                    value={filtroPrecio.min}
+                    onChange={handleFilterChange}
+                />
+                <h4>Maximo</h4>
+                <input
+                    type="number"
+                    name="max"
+                    placeholder="Precio máximo"
+                    value={filtroPrecio.max}
+                    onChange={handleFilterChange}
+                />
             </div>
             <div className="container-items">
 
