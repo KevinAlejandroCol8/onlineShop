@@ -75,7 +75,7 @@ const Carrito = () => {
     };
 
     const buscarDescuento = () => {
-        console.log(codigoDescuento);
+        //console.log(codigoDescuento);
         axios
             .get(`http://localhost:3001/descuentos/lista/${codigoDescuento}`)
             .then((response) => {

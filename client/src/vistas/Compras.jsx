@@ -18,6 +18,10 @@ const Compras = () => {
     const [productosList, setProductosList] = useState([]);
 
     const [detallesComprasList, setDetallesComprasList] = useState([]);
+    
+    //Almancenamiento 
+    const [cantidadOriginal, setCantidadOriginal] = useState([]);
+
 
     // Proveedores
     const cargarProveedores = () => {
@@ -40,6 +44,17 @@ const Compras = () => {
         })
     }
 
+    //Cantidad Original
+    const cargaOriginal = () => {
+        axios.get(`http://localhost:3001/Compras/producto-cantidad/${ProductoID}`)
+        .then((response) => {
+            setCantidadOriginal(response.data);
+        })
+        .catch((error) => {
+            console.error("Error al obtener la cantidad original:", error);
+        });
+    }
+
     //Segmento CRUD 
     const addDetalle = () => {
         const formData = new FormData();
@@ -49,11 +64,49 @@ const Compras = () => {
         formData.append("CompraID", CompraID);
 
         axios.post("http://localhost:3001/Compras/create-detalle", formData)
-        .then(() => {
-        cargarDetallesCompras();
-        //limpiar();
-        });
+            .then(() => {
+                cargarDetallesCompras();
+                //limpiar();
+            });
     };
+
+
+    const addInventario = () => {
+        const formData = new FormData();
+        formData.append("Cantidad",Cantidad);
+        formData.append("ProductoID",ProductoID);
+
+        axios.post("http://localhost:3001/Compras/create-inventario", formData)
+        .then(() => {
+            console.log("Ingreso corecto del registro");
+        })
+    }
+
+    const addCompra = () => {
+        addDetalle();
+        addInventario();
+        //Carga montos original Cantidad del producto
+        cargaOriginal();
+    }
+
+    const ActualizarCantidad  = () => {
+        axios.put("http://localhost:3001/productos/update", {
+          NombreProducto: NombreProducto,
+          DescripcionProducto: DescripcionProducto,
+          PrecioVenta: PrecioVenta,
+          //CostoAdquisicion: CostoAdquisicion,
+          //CantidadDisponible: CantidadDisponible,
+          Imagen: Imagen,
+          //ProveedorID: ProveedorID,
+          TipoProductoID: TipoProductoID,
+          ProductoID: ProductoID
+        }).then(() => {
+          setEditar(false);
+          getLista();
+          limpiar();
+        })
+      }
+
 
     // useEffect para generar un número aleatorio cuando se monta el componente
     useEffect(() => {
@@ -92,7 +145,7 @@ const Compras = () => {
                             />
                         </div>
                     </div>
-                    <hr className="miLineaDivisoria" />
+                    <h1 className="miLineaDivisoria"></h1>
                     <div className="row">
                         <div className="col-md-3 mb-3">
                             <h3 className="titulos">Monto Compra</h3>
@@ -122,13 +175,13 @@ const Compras = () => {
                             </select>
                         </div>
                     </div>
-                    <hr className="miLineaDivisoria" />
+                    <h2 className="miLineaDivisoria"></h2>
                     <div className="row">
                         <div className="col-md-10 mb-3">
                             <h1>Productos</h1>
                         </div>
                         <div className="col-md-2 mb-3">
-                            <button type="button" class="btn btn-success">Guardar</button>
+                            <button type="button" class="btn btn-success" onClick={addCompra}>Guardar</button>
                         </div>
                     </div>
                     <div className="row">
@@ -153,14 +206,18 @@ const Compras = () => {
                         </div>
                         <div className="col-md-3 mb-3">
                             <h3 className="titulos">Cantidad Total</h3>
-                            <input type="text" className="inputDiseño" id="cantidadTotal" readOnly />
+                            <input onChange={(event) => {
+                                setCantidad(event.target.value);
+                            }} value={Cantidad} type="text" className="inputDiseño" id="cantidadTotal" readOnly />
                         </div>
                         <div className="col-md-3 mb-3">
                             <h3 className="titulos">Cantidad Total</h3>
-                            <input type="text" className="inputDiseño" id="cantidadTotal" readOnly />
+                            <input onChange={(event) => {
+                                setPrecioCompra(event.target.value);
+                            }} value={PrecioCompra} type="text" className="inputDiseño" id="cantidadTotal" readOnly />
                         </div>
                     </div>
-                    <hr className="miLineaDivisoria" />
+                    <h2 className="miLineaDivisoria"></h2>
                     <h1>Listado Productos</h1>
                     <table className="table table-striped">
                         <thead>

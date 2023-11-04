@@ -1,6 +1,6 @@
 const Router = require("express");
 const router = Router();
-const db  = require('../../configMySQL')
+const db  = require('../../configMySQL');
 
 
 router.post("/create-encabezado",(req,res)=>{
@@ -25,8 +25,9 @@ router.post("/create-detalle",(req,res)=>{
     const Cantidad = req.body.Cantidad;
     const ProductoID = req.body.ProductoID;
     const CompraID = req.body.CompraID;
-    db.query('INSERT INTO Detalle_Compra (Cantidad,ProductoID,CompraID) values (?,?,?)',
-                                    [Cantidad,ProductoID,CompraID],
+    const PrecioCompra = req.body.PrecioCompra;
+    db.query('INSERT INTO Detalle_Compra (Cantidad,PrecioCompra,ProductoID,CompraID) values (?,?,?,?)',
+                                    [Cantidad,PrecioCompra,ProductoID,CompraID],
         (err,result) =>{
             if(err){
                 console.log("El Error",err);

@@ -126,7 +126,8 @@ CREATE TABLE InventarioTienda(
     InventarioID INT PRIMARY KEY AUTO_INCREMENT,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Cantidad INT,
-    ProductosID INT
+    ProductoID INT,
+    FOREIGN KEY (ProductoID) REFERENCES Productos(ProductoID)
 );
 
 
