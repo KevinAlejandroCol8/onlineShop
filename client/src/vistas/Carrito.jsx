@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from '../hoocks/AuthContext';
 import { useCarrito } from "../hoocks/carritoState";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -12,25 +13,27 @@ const IVA_RATE = 0.12; // Tasa de IVA del 12%
 
 const Carrito = () => {
 
-    const navigate = useNavigate();
-    //const [cantidades, setCantidades] = useState({}); // Estado para mantener las cantidades
-    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad,montoDescuento } = useCarrito();
+    //Generales
+    const { codigoUser } = useAuth();
+    
+    //Pedidos 
+    const [ PedidoID, setPedidoID ] = useState("");
 
+    const navigate = useNavigate();
+    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad,montoDescuento } = useCarrito();
     const [codigoDescuento, setCodigoDescuento] = useState('');
     const [descuentos, setDescuentos] = useState(null);
 
     
-
-    //console.log('Esto es el carrito ', carrito)
-    //console.log(JSON.stringify(carrito, null, 2));
-    //console.log('Esto es la cantidad ',cantidades2)
-    
+    console.log("Info ",carrito);
     useEffect(() => {
         const cantidadesPredeterminadas = {};
         carrito.forEach((producto) => {
             cantidadesPredeterminadas[producto.ProductoID] = 1;
         });
         //setCantidades(cantidadesPredeterminadas);
+        const numero = Math.floor(Math.random() * 10000); // Genera un número entre 0 y 9999
+        setPedidoID(numero);
     }, [carrito]);
 
     if (!carrito || carrito.length === 0) {
@@ -41,10 +44,7 @@ const Carrito = () => {
         );
     }
 
-    /*const handleCantidadChange = (productoId, cantidad) => {
-        setCantidades({ ...cantidades, [productoId]: cantidad });
-    };*/
-
+    //Calculos
     const cambiarCantidades = (productoId, cantidad2) => {
         console.log('ID producto ', productoId, 'Cantidad modificada ', cantidad2);
         //setCantidades({ ...cantidades, [productoId]: cantidad2 });
@@ -56,6 +56,7 @@ const Carrito = () => {
         return producto.PrecioVenta * cantidades2[producto.ProductoID];
     };
 
+    //Eliminar Productos
     const handleEliminarProducto = (productoId) => {
         // Llama a la función para eliminar el producto del carrito
         eliminarDelCarrito(productoId);
@@ -99,7 +100,47 @@ const Carrito = () => {
         }
     };
 
+
+    const addPedido = () => {
+        axios.post("http://localhost:3001/Pedidos/createPedido", {
+            PedidoID: PedidoID,
+            UsuarioID: codigoUser,
+            TotalPedido: ((calcularTotalSubtotal() + calcularIVA()) - calcularDescuento()).toFixed(2)
+        }).then(() => {
+            //limpiar();
+            alert("Registro Guardar");
+        })
+    }
+
+    const addDetallePedido = (detalles) => {
+        axios.post("http://localhost:3001/Pedidos/createDetalle", detalles)
+        .then(() => {
+            alert("Registro Guardado");
+        })
+        .catch((error) => {
+            console.error("Error al guardar el detalle del pedido:", error);
+        });
+    }
+    
+    const guardarDetallesPedido = () => {
+        // Mapear cada producto a la estructura que espera tu API
+        const detallesPedido = carrito.map((producto) => ({
+            PedidoID: PedidoID,
+            ProductoID: producto.ProductoID,
+            CantidadProducto: cantidades2[producto.ProductoID],
+            PrecioUnitario: producto.PrecioVenta
+        }));
+    
+        // Ahora enviar cada detalle de producto individualmente
+        // Si tu API puede manejar múltiples registros en una sola solicitud, podrías enviar el array completo.
+        detallesPedido.forEach(detalle => {
+            addDetallePedido(detalle);
+        });
+    }
+
     const envioPago = () => {
+        addPedido();
+        guardarDetallesPedido();
         montoDescuento(calcularDescuento());
         navigate("/Payment");
     };
@@ -124,10 +165,6 @@ const Carrito = () => {
                     {carrito.map((producto, index) => (
                         <tbody>
                             <tr key={producto.ProductoID}>
-                                {/*<td>
-                                    <svg class="eliminar-boton" onClick={() => handleEliminarProducto(producto.ProductoID)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
-                                    <path d={IconoEliminar} /></svg>
-                                </td>*/}
                                 <td>
                                     <svg class="eliminar-boton" onClick={() => handleEliminarProducto(producto.ProductoID)} xmlns="http://www.w3.org/2000/svg" height="2.5em" viewBox="0 0 448 512">
                                         <path d={IconoEliminar} /></svg>

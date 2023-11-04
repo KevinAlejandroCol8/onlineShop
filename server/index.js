@@ -10,6 +10,8 @@ const loginUsuarios = require("./Router/Login/creacionUsuarios");
 const Proveedores = require("./Router/Proveedores/proveedor");
 const CredencialesUser = require("./Router/Credenciales/Credenciales");
 const Compras = require("./Router/Compras/Compras");
+const Pedidos = require("./Router/Pedidos/Pedidos");
+
 
 // Configuración inicial
 app.use(express.json());
@@ -24,6 +26,8 @@ app.use('/loginUsuario', loginUsuarios);
 app.use('/Proveedores', Proveedores);
 app.use('/Credenciales', CredencialesUser);
 app.use('/Compras', Compras);
+app.use('/Pedidos', Pedidos );
+
 
 app.listen(3001,()=>{
     console.log("Corriendo en el puerto 3001")

@@ -6,6 +6,7 @@ import '../css/Compras.css'
 const inicio = 1;
 
 const NewCompra = () => {
+
     //Acciones botones
     const [GuardarGeneral, setGuardarGeneral] = useState(false)
 
@@ -221,7 +222,7 @@ const NewCompra = () => {
                         <div className="col-md-2 mb-3">
                             {
                                 GuardarGeneral === true ?
-                                    <button type="button" class="btn btn-success" onClick={addCompra2}>Guardar2</button>
+                                    <button type="button" class="btn btn-success" onClick={addCompra2}>Guardar</button>
                                     :
                                     <button type="button" class="btn btn-success" onClick={addCompra}>Guardar</button>
                             }

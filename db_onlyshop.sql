@@ -72,7 +72,7 @@ CREATE TABLE Pedidos (
 
 -- Tabla de Detalles de Pedidos
 CREATE TABLE DetallesPedidos (
-    DetalleID INT PRIMARY KEY,
+    DetalleID INT PRIMARY KEY AUTO_INCREMENT,
     PedidoID INT,
     ProductoID INT,
     CantidadProducto INT,
