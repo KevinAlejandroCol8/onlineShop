@@ -129,3 +129,18 @@ main{
         box-shadow: 0 0 40px 40px #e74c3c inset;
     }
 }
+
+/*
+.stock-badge {
+    position: absolute;
+    top: 10px;
+    right: -10px; 
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    transform: rotate(45deg); 
+    transform-origin: top right;
+    border-radius: 5px;
+    z-index: 10;
+}
+*/

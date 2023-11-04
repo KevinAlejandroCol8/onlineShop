@@ -9,7 +9,7 @@ import '../css/main_nav.css'
 import { tiendaIco, buscador, userIcon, IconoTienda, IconoAtencion } from "../hoocks/iconos";
 
 const Menu = () => {
-  const { loggedInUser, logout,codigoUser } = useAuth();
+  const { loggedInUser, logout, codigoUser } = useAuth();
 
 
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Menu = () => {
 
   const quitarProductoDelCarrito = (productoId) => {
     const nuevoCarrito = carrito.filter((producto) => {
-       return Number(producto.ProductoID) !== Number(productoId);
+      return Number(producto.ProductoID) !== Number(productoId);
     });
     eliminarDelCarrito(nuevoCarrito);
   };
@@ -145,7 +145,7 @@ const Menu = () => {
         <div className="carrito">
           <div class="col checkout__summary">
             <div class="h3 mb-3">Resumen de orden</div>
-            {carrito.map((producto,index) => (
+            {carrito.map((producto, index) => (
               <div class="card p-3 shadow rounded-3">
                 <div class="row align-items-center mb-4">
                   <div class="col-4">
@@ -157,6 +157,9 @@ const Menu = () => {
                     <div class="nombreProducto h6 mb-1">{producto.NombreProducto}</div>
                     <div class="descripcionProducto text-muted small mb-1">{producto.DescripcionProducto}</div>
                     <div class="montoProducto h5 mb-0"> Q. {producto.PrecioVenta}</div>
+                    <div className="cantidadDisponible-badge position-absolute top-0 end-0 bg-primary text-white p-2 rounded-start">
+                      {producto.CantidadDisponible} en stock
+                    </div>
                     {/* 
                     <button className="btn btn-danger" onClick={() => quitarProductoDelCarrito(producto.ProductoID)}>
                       Quitar del carrito
