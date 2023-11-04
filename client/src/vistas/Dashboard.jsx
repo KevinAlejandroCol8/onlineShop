@@ -16,7 +16,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     const getLista = () => {
-        axios.get("http://localhost:3001/productos/lista").then((response) => {
+        axios.get("http://localhost:3001/productos/listaOfical").then((response) => {
             setProductosList(response.data);
         })
     }

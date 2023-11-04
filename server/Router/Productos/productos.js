@@ -74,6 +74,18 @@ router.get("/lista",(req,res)=>{
     );
 });
 
+router.get("/listaOfical",(req,res)=>{
+    db.query('SELECT * FROM Productos WHERE CantidadDisponible > 0;',
+        (err,result) =>{
+            if(err){
+                console.log("El Error",err);
+            }else{
+                res.send(result);
+            }
+        }
+    );
+});
+
 router.put("/update",(req,res)=>{
     const ProductoID = req.body.ProductoID
     const NombreProducto = req.body.NombreProducto;

@@ -21,7 +21,6 @@ router.post("/create",(req,res)=>{
 });
 
 
-
 router.post("/createDetalle",(req,res)=>{
     const Cantidad = req.body.Cantidad;
     const ProductoID = req.body.ProductoID;
@@ -48,6 +47,22 @@ router.post("/createInventario",(req,res)=>{
                 console.log("El Error",err);
             }else{
                 res.send("Creado");
+            }
+        }
+    );
+});
+
+router.put("/update",(req,res)=>{
+    const CompraID = req.body.CompraID
+    const MontoCompra = req.body.MontoCompra;
+    const CantidadTotal = req.body.CantidadTotal;
+    const ProveedorID = req.body.ProveedorID;
+    db.query('UPDATE encabezado_compras SET MontoCompra= ?,CantidadTotal=?,ProveedorID=? WHERE CompraID = ?',[MontoCompra,CantidadTotal,ProveedorID,CompraID],
+        (err,result) =>{
+            if(err){
+                console.log("El Error",err);
+            }else{
+                res.send("Actualizado");
             }
         }
     );
