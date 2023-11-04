@@ -2,11 +2,13 @@ import React from "react";
 import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import '../css/RegisterLogin.css'
 
 
 const LoginRegister = () => {
+    const MySwal = withReactContent(Swal);
     const navigate = useNavigate();
     /*Cmapos de la base de datos*/
     const [NombreUsuario, setNombreUsuario] = useState("");
@@ -26,7 +28,11 @@ const LoginRegister = () => {
             tipoRool: tipoRool
         }).then(() => {
             limpiar();
-            alert("Registro Guardar");
+            MySwal.fire({
+                title: <p>Bienvenido</p>,
+                html: <i>Es un gusto tenerte con nosotros</i>,
+                icon: 'success'
+              });
         })
     }
 
