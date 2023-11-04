@@ -12,3 +12,27 @@
 .carrito-container.mostrar {
     right: 0; /* Muestra el carrito al desplazarlo desde la derecha */
 }
+
+.filter-container{
+
+    width: 1000px;
+    /* Ancho mayor para hacerlo cuadrado */
+    height: 200px;
+    /* Altura igual al ancho */
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* Se agregó sombra */
+    text-align: center;
+    /* Para centrar el contenido */
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+}
