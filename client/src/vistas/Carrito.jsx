@@ -18,16 +18,16 @@ const Carrito = () => {
     const MySwal = withReactContent(Swal);
     //Generales
     const { codigoUser } = useAuth();
-    
+
     //Pedidos 
-    const [ PedidoID, setPedidoID ] = useState("");
+    const [PedidoID, setPedidoID] = useState("");
 
     const navigate = useNavigate();
-    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad,montoDescuento } = useCarrito();
+    const { carrito, eliminarDelCarrito, cantidades2, actualizarCantidad, montoDescuento } = useCarrito();
     const [codigoDescuento, setCodigoDescuento] = useState('');
     const [descuentos, setDescuentos] = useState(null);
 
-    
+
     //console.log("Info ",carrito);
     useEffect(() => {
         const cantidadesPredeterminadas = {};
@@ -57,13 +57,18 @@ const Carrito = () => {
     */
     const cambiarCantidades = (productoId, cantidad2) => {
         console.log('ID producto ', productoId, 'Cantidad modificada ', cantidad2);
-        
+
         // Encuentra el producto en el carrito para obtener la cantidad disponible
         const producto = carrito.find(p => p.ProductoID === productoId);
-        
+
         if (producto) {
             if (cantidad2 > producto.CantidadDisponible) {
-                alert(`La cantidad no puede ser mayor a la disponible (${producto.CantidadDisponible} en stock).`);
+                MySwal.fire({
+                    title: <p>Alerta</p>,
+                    html: <i>La cantidad no puede ser mayor a la disponible {producto.CantidadDisponible} en stock.`</i>,
+                    icon: 'warning'
+                });
+                //alert(`La cantidad no puede ser mayor a la disponible (${producto.CantidadDisponible} en stock).`);
                 // Puedes decidir si quieres restablecer a la cantidad máxima disponible o simplemente no actualizar
                 actualizarCantidad(productoId, producto.CantidadDisponible);
             } else {
@@ -104,12 +109,12 @@ const Carrito = () => {
         axios
             .get(`http://localhost:3001/descuentos/lista/${codigoDescuento}`)
             .then((response) => {
-            // Actualizar el estado de descuentos con la respuesta de la API
+                // Actualizar el estado de descuentos con la respuesta de la API
                 setDescuentos(response.data);
-            //console.log(response.data);
+                //console.log(response.data);
             })
             .catch((error) => {
-             console.error("Error al obtener los descuentos:", error);
+                console.error("Error al obtener los descuentos:", error);
             });
         //console.log('cambios ',descuentos[0].PorcentajeDescuento)
     };
@@ -136,20 +141,24 @@ const Carrito = () => {
                 title: <p>Registro</p>,
                 html: <i>Su registro fue guardo con exito</i>,
                 icon: 'success'
-              });
+            });
         })
     }
 
     const addDetallePedido = (detalles) => {
         axios.post("http://localhost:3001/Pedidos/createDetalle", detalles)
-        .then(() => {
-            alert("Registro Guardado");
-        })
-        .catch((error) => {
-            console.error("Error al guardar el detalle del pedido:", error);
-        });
+            .then(() => {
+                MySwal.fire({
+                    title: <p>Registro</p>,
+                    html: <i>Su registro fue guardo con exito</i>,
+                    icon: 'success'
+                });
+            })
+            .catch((error) => {
+                console.error("Error al guardar el detalle del pedido:", error);
+            });
     }
-    
+
     const guardarDetallesPedido = () => {
         // Mapear cada producto a la estructura que espera tu API
         const detallesPedido = carrito.map((producto) => ({
@@ -158,7 +167,7 @@ const Carrito = () => {
             CantidadProducto: cantidades2[producto.ProductoID],
             PrecioUnitario: producto.PrecioVenta
         }));
-    
+
         // Ahora enviar cada detalle de producto individualmente
         // Si tu API puede manejar múltiples registros en una sola solicitud, podrías enviar el array completo.
         detallesPedido.forEach(detalle => {
