@@ -172,3 +172,17 @@ END;
 
 //
 DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE TRIGGER update_costo_adquisicion
+AFTER INSERT ON Detalle_Compra
+FOR EACH ROW
+BEGIN
+    UPDATE Productos
+    SET CostoAdquisicion = NEW.CostoAdquisicion
+    WHERE ProductoID = NEW.ProductoID;
+END$$
+
+DELIMITER ;

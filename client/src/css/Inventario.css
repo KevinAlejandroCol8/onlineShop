@@ -1,0 +1,113 @@
+.container_register_inventario {
+    width: 800vw; /* El ancho es el 80% del ancho de la ventana */
+    height: 700vh; /* La altura es el 70% de la altura de la ventana */
+    max-width: 1200px;
+    max-height: 780px; /* Máximas dimensiones */
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    text-align: center;
+    margin: auto;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+    display: flex;
+    flex-direction: column; /* Alinea los elementos internos verticalmente */
+    justify-content: center;
+}
+
+/* Media query para pantallas pequeñas, como dispositivos móviles */
+@media (max-width: 768px) {
+    .container_register_descuentos {
+        width: 90vw; /* Aumenta el ancho para pantallas pequeñas */
+        height: auto; /* Hace que la altura sea automática para ajustar al contenido */
+        padding: 10px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de fuente */
+        line-height: 20px; /* Ajusta el interlineado */
+    }
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .container_register_descuentos {
+        width: 95vw; /* Ocupa casi todo el ancho de la pantalla */
+        padding: 5px; /* Reduce aún más el padding */
+        font-size: 12px; /* Tamaño de fuente más pequeño para pantallas muy pequeñas */
+        border-radius: 5px; /* Menos curvatura en las esquinas para contenedores más pequeños */
+    }
+}
+
+/* Estilos generales para la tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+/* Hover Effect para las filas */
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive design para la tabla */
+@media screen and (max-width: 600px) {
+    .table thead {
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+        text-align: left;
+    }
+}

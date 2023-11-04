@@ -3,7 +3,11 @@ import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/proveedores.css'
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 const Proveedores = () => {
+    const MySwal = withReactContent(Swal);
     /*Campos de la base de datos*/
     const [ProveedorID, setProveedorID] = useState("");
 
@@ -40,6 +44,11 @@ const Proveedores = () => {
             getLista();
             limpiar();
             //alert("Empleado Registrado");
+            MySwal.fire({
+                title: <p>Registro</p>,
+                html: <i>Su registro fue guardo con exito</i>,
+                icon: 'success'
+            });
         })
     }
 

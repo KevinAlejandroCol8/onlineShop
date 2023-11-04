@@ -3,9 +3,14 @@ import { useCarrito } from "../hoocks/carritoState";
 import { useReactToPrint } from 'react-to-print';
 import { useAuth } from '../hoocks/AuthContext';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import '../css/Facturacion.css'
 
 const Facturacion = () => {
+
+    const MySwal = withReactContent(Swal);
 
     const conponentPDF = useRef();
     const fechaActual = new Date();
@@ -42,7 +47,12 @@ const Facturacion = () => {
     const generatePDF = useReactToPrint({
         content: () => conponentPDF.current,
         documentTitle: 'Userdata',
-        onAfterPrint: () => alert('PDF generado con éxito')
+        onAfterPrint: () => MySwal.fire({
+            title: <p>Reporteria</p>,
+            html: <i>Gracias por comprar con nosotros</i>,
+            icon: 'success'
+        })
+            //alert('PDF generado con éxito')
     });
 
 

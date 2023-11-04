@@ -2,9 +2,12 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import '../css/IngresoProducto.css'
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 
 const IngresoProducto = () => {
-
+  const MySwal = withReactContent(Swal);
   /*Cmapos de la base de datos*/
   const [NombreProducto, setNombreProducto] = useState("");
   const [DescripcionProducto, setDescripcionProducto] = useState("");
@@ -28,44 +31,26 @@ const IngresoProducto = () => {
 
   const [editar, setEditar] = useState(false)
 
-  /*const mostrarDatos = () =>{
-    alert(nombre);
-  }*/
 
-  /*const add = () => {
-    axios.post("http://localhost:3001/productos/create", {
-        NombreProducto: NombreProducto,
-        DescripcionProducto: DescripcionProducto,
-        PrecioVenta: PrecioVenta,
-        CostoAdquisicion: CostoAdquisicion,
-        CantidadDisponible: CantidadDisponible,
-        Imagen: Imagen,
-        DescuentoID: DescuentoID,
-        TipoProductoID: TipoProductoID
-    }).then(() => {
-        getLista();
-        limpiar();
-        //alert("Empleado Registrado");
-    })
-  }*/
-  /*Nueva Forma */
 
   const add = () => {
     const formData = new FormData();
     formData.append("NombreProducto", NombreProducto);
     formData.append("DescripcionProducto", DescripcionProducto);
     formData.append("PrecioVenta", PrecioVenta);
-    //formData.append("CostoAdquisicion", CostoAdquisicion);
-    //formData.append("CantidadDisponible", CantidadDisponible);
     formData.append("SKU", SKU);
     formData.append("Imagen", Imagen); // Aquí adjuntamos la imagen seleccionada
-    //formData.append("ProveedorID", ProveedorID);
     formData.append("TipoProductoID", TipoProductoID);
 
     axios.post("http://localhost:3001/productos/create", formData)
       .then(() => {
         getLista();
         limpiar();
+        MySwal.fire({
+          title: <p>Registro</p>,
+          html: <i>Su registro fue guardo con exito</i>,
+          icon: 'success'
+        });
       });
   };
 
@@ -152,7 +137,7 @@ const IngresoProducto = () => {
   const [SKU, setSKU] = useState('');
   const generateSKU = () => {
     // Generar un SKU aleatorio (en este caso, una cadena de 8 caracteres)
-  const randomSKU = Math.random().toString(36).substring(2, 10).toUpperCase();
+    const randomSKU = Math.random().toString(36).substring(2, 10).toUpperCase();
 
     // Actualizar el estado con el SKU generado
     setSKU(randomSKU);
@@ -167,14 +152,14 @@ const IngresoProducto = () => {
             onChange={(event) => {
               setNombreProducto(event.target.value);
             }}
-            type="text" value={NombreProducto}  placeholder="Nombre del Producto" aria-label="Nombre Producto" />
+            type="text" value={NombreProducto} placeholder="Nombre del Producto" aria-label="Nombre Producto" />
           <div className="mb-3">
             <h3 className="titulos">Descripcion del Producto</h3>
             <input
               onChange={(event) => {
                 setDescripcionProducto(event.target.value);
               }}
-              type="text" value={DescripcionProducto}   placeholder="Descripción del Producto" aria-label="Descripción Producto" />
+              type="text" value={DescripcionProducto} placeholder="Descripción del Producto" aria-label="Descripción Producto" />
           </div>
           <div className="mb-3">
             <h3 className="titulos">Precio de Venta</h3>
@@ -182,7 +167,7 @@ const IngresoProducto = () => {
               onChange={(event) => {
                 setPrecioVenta(event.target.value);
               }}
-              type="text" value={PrecioVenta}   placeholder="Precio de Venta" aria-label="Precio Venta" />
+              type="text" value={PrecioVenta} placeholder="Precio de Venta" aria-label="Precio Venta" />
           </div>
           {/*/ 
           <div className="mb-3">
@@ -216,7 +201,7 @@ const IngresoProducto = () => {
                 }}
                 type="text"
                 value={SKU}
-                
+
                 placeholder="SKU"
                 aria-label="SKU"
               />
@@ -229,8 +214,8 @@ const IngresoProducto = () => {
               onChange={(event) => {
                 setImagen(event.target.files[0]);
               }}
-              type="file"  aria-label="Imagen" />
-          </div> 
+              type="file" aria-label="Imagen" />
+          </div>
           {/* 
           <div className="mb-3">
             <h3 className="titulos">Prooveedor</h3>
@@ -279,7 +264,7 @@ const IngresoProducto = () => {
                 <button className='btn btn-warning m-2' onClick={update}>Actualizar</button>
                 <button className='btn btn-info m-2' onClick={limpiar}>Cancelar</button>
               </div>
-              : <button  onClick={add}>Guardar</button>
+              : <button onClick={add}>Guardar</button>
           }
         </div>
 
@@ -303,7 +288,7 @@ const IngresoProducto = () => {
                 return <tr key={val.ProductoID}>
                   <th scope="row">{val.ProductoID}</th>
                   <td>{val.NombreProducto}</td>
-                  <td>{val.DescripcionProducto}</td>    
+                  <td>{val.DescripcionProducto}</td>
                   <td>{val.PrecioVenta}</td>
                   {/* 
                   <td>{val.CostoAdquisicion}</td>

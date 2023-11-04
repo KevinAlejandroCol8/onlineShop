@@ -11,6 +11,7 @@ const Proveedores = require("./Router/Proveedores/proveedor");
 const CredencialesUser = require("./Router/Credenciales/Credenciales");
 const Compras = require("./Router/Compras/Compras");
 const Pedidos = require("./Router/Pedidos/Pedidos");
+const InventarioTienda = require("./Router/Inventarios/Inventarios");
 
 
 // Configuración inicial
@@ -27,6 +28,7 @@ app.use('/Proveedores', Proveedores);
 app.use('/Credenciales', CredencialesUser);
 app.use('/Compras', Compras);
 app.use('/Pedidos', Pedidos );
+app.use('/Inventario', InventarioTienda );
 
 
 app.listen(3001,()=>{

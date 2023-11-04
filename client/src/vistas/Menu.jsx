@@ -117,13 +117,13 @@ const Menu = () => {
             <li><a onClick={() => navigate("/Home")}>Inicio</a></li>
             <li><a onClick={() => navigate("/")}>Productos</a></li>
             <li><a onClick={() => navigate("/Compras")}>Compras</a></li>
+            <li><a onClick={() => navigate("/InventarioTienda")}>Inventario</a></li>
             <li><a onClick={() => navigate("/Proveedores")}>Proveedores</a></li>
             <li><a onClick={toggleMenu}>Mantenimientos</a></li>
             <ul className={`submenu ${isOpen ? "open" : ""}`}>
               <li onClick={() => navigate("/descuentos")}><a>Catalogo Descuentos</a></li>
               <li onClick={() => navigate("/tipoProductos")}><a>Catalogo Productos</a></li>
               <li onClick={() => navigate("/ingresoProduct")}><a>Productos</a></li>
-              <li onClick={() => navigate("/EmpleadosList")}><a>Empleados</a></li>
             </ul>
           </ul>
           {/* 

@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/Compras.css'
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const inicio = 1;
 
 const NewCompra = () => {
-
+    const MySwal = withReactContent(Swal);
+    const navigate = useNavigate();
     //Acciones botones
     const [GuardarGeneral, setGuardarGeneral] = useState(false)
 
@@ -84,8 +88,7 @@ const NewCompra = () => {
             CantidadTotal: CantidadTotal,
             ProveedorID: ProveedorID
         }).then(() => {
-            //limpiar();
-            //alert("Registro Guardar");
+
         })
     }
 
@@ -107,7 +110,6 @@ const NewCompra = () => {
             ProductoID: ProductoID
         }).then(() => {
             cargaProductos();
-            alert("Registro Guardar");
         })
     }
 
@@ -119,12 +121,19 @@ const NewCompra = () => {
             CantidadTotal: CantidadTotal,
             ProveedorID: ProveedorID
         }).then(() => {
-            alert("Registro Actualizado");
+            
         })
     }
 
     const actualizarEncabezado = () =>{
         updateProducto();
+        MySwal.fire({
+            title: <p>Información</p>,
+            html: <i>La compra ha sido registrada</i>,
+            icon: 'success'
+        });
+        navigate("/InventarioTienda");
+
     }
     
 
@@ -269,7 +278,7 @@ const NewCompra = () => {
                                 <th scope="col">Producto</th>
                                 <th scope="col">Precio Compra</th>
                                 <th scope="col">Cantidad</th>
-                                <th scope="col">acciones</th>
+                                {/*<th scope="col">acciones</th>*/}
                             </tr>
                         </thead>
                         <tbody>
@@ -280,12 +289,14 @@ const NewCompra = () => {
                                         <td>{val.ProductoID}</td>
                                         <td>{val.CostoAdquisicion}</td>
                                         <td>{val.Cantidad}</td>
+                                        {/*
                                         <td>
                                             <div className="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <button type="button" className="btn btn-warning">Editar</button>
                                                 <button type="button" className="btn btn-danger">Eliminar</button>
                                             </div>
                                         </td>
+                                        */}
                                     </tr>
                                 })
                             }
